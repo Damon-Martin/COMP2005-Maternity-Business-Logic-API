@@ -20,5 +20,6 @@ class AdmissionsControllerTest {
         // If: Can be parsed into a HashTable then it passes
 
         // Else: Fails (Just a normal String)
+        assertEquals(2,4);
     }
 }
