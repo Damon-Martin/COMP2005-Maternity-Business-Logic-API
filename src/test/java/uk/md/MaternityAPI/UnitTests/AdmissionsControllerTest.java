@@ -2,7 +2,11 @@ package uk.md.MaternityAPI.UnitTests;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+import uk.md.MaternityAPI.Controllers.AdmissionsController;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,13 +16,17 @@ class AdmissionsControllerTest {
     void initRepeat() {
     }
 
-    // Check if the output is JSON with Key Values
+    // Patient must be admitted before discharge
+    // Performs the check if len(returnString) != 0
     @Test
-    void dischargedQuickReturnsJSON() {
-        // Attempts to parse the Response to a HashTable using
+    void admissionBeforeDischarge() {
+        fail("Test Not Implemented");
+    }
 
-        // If: Can be parsed into a HashTable then it passes
-
-        // Else: Fails (Just a normal String)
+    // Patient must be admitted before discharge
+    // Performs the check if len(returnString) != 0
+    @Test
+    void dischargeBeforeAdmission() {
+        fail("Test Not Implemented");
     }
 }
