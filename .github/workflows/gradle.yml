@@ -31,8 +31,9 @@ jobs:
       run: ./gradlew wrapper
     
     # Installs Gradle Packages Automatically
+    # Does not run the tests
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./gradlew build -x test
     
     # Running Unit Tests with Gradle
     - name: Run Tests
