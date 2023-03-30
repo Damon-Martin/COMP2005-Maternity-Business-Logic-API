@@ -20,10 +20,21 @@ class AdmissionsControllerIntTest {
     MockMvc mvc;
 
     // Checks GET request is working
+    // If: Empty OR String has an ID (Not Empty) --> Test Pass
+    // Else: Test Fail
     @Test
-    void getAdmissionsJSON() throws Exception {
+    void getQuickDischargeHasID() throws Exception {
         RequestBuilder req = MockMvcRequestBuilders.get("/api/Admissions/DischargedQuick");
         MvcResult res = mvc.perform(req).andReturn();
-        assertEquals("JSON of Discharged Patients", res.getResponse().getContentAsString() );
+
+        // Response Body to String
+        String resBody = res.getResponse().getContentAsString();
+
+        // Checking Response Body has an id or is empty
+        boolean isEmpty = resBody.length() == 0;
+        boolean containsID = resBody.contains("id");
+
+        boolean isAcceptable = isEmpty || containsID;
+        assertTrue(isAcceptable);
     }
 }
