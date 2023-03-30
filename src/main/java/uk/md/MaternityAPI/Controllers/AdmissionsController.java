@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdmissionsController {
     @GetMapping("api/Admissions/DischargedQuick")
     public String dischargedQuick() {
-        return ("");
+        return ("JSON of Discharged Patients");
     }
 }
