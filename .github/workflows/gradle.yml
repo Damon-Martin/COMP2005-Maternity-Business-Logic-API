@@ -41,7 +41,7 @@ jobs:
 
     # How Much of the Code is Covered By Tests
     - name: JaCoCo Code Coverage
-      run: ./gradlew test jacocoTestReport
+      run: ./gradlew jacocoTestReport
 
     # Displaying The Test Code Coverage on Github
     - name: Generate Code Coverage Badge
