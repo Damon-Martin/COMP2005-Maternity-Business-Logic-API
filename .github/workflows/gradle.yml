@@ -38,17 +38,3 @@ jobs:
     # Running Tests
     - name: Unit / Integration Tests
       run: ./gradlew test
-
-    # How Much of the Code is Covered By Tests
-    - name: JaCoCo Code Coverage
-      run: ./gradlew jacocoTestReport
-
-    # Displaying The Test Code Coverage on Github
-    - name: Generate Code Coverage Badge
-      uses: cicirello/jacoco-badge-generator@v2
-      with:
-        generate-branches-badge: true
-        jacoco-csv-file: build/reports/jacoco/test/jacocoTestReport.csv
-      
-      
-      
