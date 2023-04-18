@@ -34,13 +34,16 @@ jobs:
     # Does not run the tests
     - name: Build with Gradle
       run: ./gradlew build -x test
-    
+
+    # Running Tests
     - name: Unit / Integration Tests
       run: ./gradlew test
-    
+
+    # How Much of the Code is Covered By Tests
     - name: JaCoCo Code Coverage
       run: ./gradlew test jacocoTestReport
-      
+
+    # Displaying The Test Code Coverage on Github
     - name: Generate Code Coverage Badge
       uses: cicirello/jacoco-badge-generator@v2
       with:
