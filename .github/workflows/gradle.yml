@@ -30,11 +30,6 @@ jobs:
     - name: Validate Gradle Wrapper
       run: ./gradlew wrapper
     
-    # Installs Gradle Packages Automatically
-    # Does not run the tests
-    - name: Build with Gradle
-      run: ./gradlew build -x test
-    
     - name: Unit / Integration Tests
       run: ./gradlew test
     
