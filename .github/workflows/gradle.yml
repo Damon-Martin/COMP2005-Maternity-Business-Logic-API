@@ -35,6 +35,11 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build -x test
     
-    # Running Unit Tests with Gradle
-    - name: Run Tests
+    - name: Unit / Integration Tests with JaCoCo coverage
       run: ./gradlew test
+
+    - name: Uploading Code Coverage Report
+      uses: actions/upload-artifact@v2
+      with:
+        name: coverage
+        path: build/reports/jacoco/test
