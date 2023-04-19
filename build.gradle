@@ -28,10 +28,8 @@ tasks.named('test') {
 
 jacocoTestReport {
 	reports {
-		xml.enabled true
-		csv.enabled true
 		html.enabled true
+		xml.enabled false
+		csv.enabled false
 	}
 }
-
-check.dependsOn jacocoTestReport

@@ -9,7 +9,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -22,7 +21,7 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
     
-    # Granting Permisions: Required for Gradle to Work
+    # Granting Permissions: Required for Gradle to Work
     - name: Granting execute permission for gradlew
       run: chmod +x gradlew
     
@@ -38,3 +37,10 @@ jobs:
     # Running Tests
     - name: Unit / Integration Tests
       run: ./gradlew test
+
+    # Archive/Saving the Reports to GitHub
+    - name: Archive/Saving Jacoco Code Coverage Report
+      uses: actions/upload-artifact@v2
+      with:
+        name: jacoco-report
+        path: build/reports/jacoco/test/html
