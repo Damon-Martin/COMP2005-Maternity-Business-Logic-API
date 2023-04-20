@@ -21,11 +21,15 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
     
+    # Downloading gradle version: Spring boot 2.7.0 is incompatible with gradle 8.0+
+    - name: Selecting Gradle Version
+      run:
+        ./gradlew wrapper --gradle-version=7.6.1
+    
     # Granting Permissions: Required for Gradle to Work
     - name: Granting execute permission for gradlew
-      run: | 
-         ./gradlew wrapper --gradle-version=7.6.1
-         chmod +x gradlew
+      run:
+        chmod +x gradlew
     
     # Build the Project
     # Does not run the tests
