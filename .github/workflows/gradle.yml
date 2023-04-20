@@ -23,31 +23,19 @@ jobs:
     
     # Granting Permissions: Required for Gradle to Work
     - name: Granting execute permission for gradlew
-      run: chmod +x gradlew
-    
-    # Downloading Gradle Version 7.6.1
-    - name: Download and use Gradle
-      uses: gradle/wrapper-action@v1
-      with:
-        gradle-version: '7.6.1'
-        distribution-type: 'bin'
-    
-    # Validating Gradle Wrapper
-    - name: Validate Gradle Wrapper
-      run: ./gradlew wrapper --gradle-version=7.6.1
+      run: | 
+           ./gradlew wrapper --gradle-version=7.6.1
+           chmod +x gradlew
     
     # Build the Project
     # Does not run the tests
     - name: Build with Gradle
-      run: ./gradlew build -x test
+      run: | 
+           ./gradlew wrapper --gradle-version=7.6.1
+           ./gradlew build -x test
 
     # Running Tests
     - name: Unit / Integration Tests
-      run: ./gradlew test
-
-    # Archive/Saving the Reports to GitHub
-    - name: Archive/Saving Jacoco Code Coverage Report
-      uses: actions/upload-artifact@v2
-      with:
-        name: jacoco-report
-        path: build/reports/jacoco/test/html
+      run: | 
+           ./gradlew wrapper --gradle-version=7.6.1
+           ./gradlew test
