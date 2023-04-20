@@ -24,18 +24,16 @@ jobs:
     # Granting Permissions: Required for Gradle to Work
     - name: Granting execute permission for gradlew
       run: | 
-           ./gradlew wrapper --gradle-version=7.6.1
-           chmod +x gradlew
+         ./gradlew wrapper --gradle-version=7.6.1
+         chmod +x gradlew
     
     # Build the Project
     # Does not run the tests
     - name: Build with Gradle
-      run: | 
-           ./gradlew wrapper --gradle-version=7.6.1
-           ./gradlew build -x test
+      run:
+        ./gradlew build -x test
 
     # Running Tests
     - name: Unit / Integration Tests
-      run: | 
-           ./gradlew wrapper --gradle-version=7.6.1
-           ./gradlew test
+      run:
+         ./gradlew test
