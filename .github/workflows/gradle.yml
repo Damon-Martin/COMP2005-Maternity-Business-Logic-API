@@ -21,13 +21,11 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
     
-    # Granting Permissions: Required for Gradle to Work
-    - name: Granting execute permission for gradlew
-      run: chmod +x gradlew
-    
-    # Validating Gradle Wrapper
-    - name: Validate Gradle Wrapper
-      run: ./gradlew wrapper
+    - name: Download and use Gradle
+      uses: gradle/wrapper-action@v2
+      with:
+        gradle-version: '7.6.1'
+        distribution-type: 'bin'
     
     # Installs Gradle Packages Automatically
     # Does not run the tests
@@ -37,10 +35,3 @@ jobs:
     # Running Tests
     - name: Unit / Integration Tests
       run: ./gradlew test
-
-    # Archive/Saving the Reports to GitHub
-    - name: Archive/Saving Jacoco Code Coverage Report
-      uses: actions/upload-artifact@v2
-      with:
-        name: jacoco-report
-        path: build/reports/jacoco/test/html
