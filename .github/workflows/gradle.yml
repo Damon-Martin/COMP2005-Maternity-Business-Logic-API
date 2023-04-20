@@ -25,11 +25,18 @@ jobs:
     - name: Granting execute permission for gradlew
       run: chmod +x gradlew
     
+    # Downloading Gradle Version 7.6.1
+    - name: Download and use Gradle
+      uses: gradle/wrapper-action@v1
+      with:
+        gradle-version: '7.6.1'
+        distribution-type: 'bin'
+    
     # Validating Gradle Wrapper
     - name: Validate Gradle Wrapper
       run: ./gradlew wrapper --gradle-version=7.6.1
     
-    # Installs Gradle Packages Automatically
+    # Build the Project
     # Does not run the tests
     - name: Build with Gradle
       run: ./gradlew build -x test
