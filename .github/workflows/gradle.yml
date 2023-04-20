@@ -27,7 +27,7 @@ jobs:
     
     # Validating Gradle Wrapper
     - name: Validate Gradle Wrapper
-      run: ./gradlew wrapper
+      run: ./gradlew wrapper --gradle-version=7.6.1
     
     # Installs Gradle Packages Automatically
     # Does not run the tests
