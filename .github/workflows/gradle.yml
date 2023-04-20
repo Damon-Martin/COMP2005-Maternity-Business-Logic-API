@@ -21,11 +21,10 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
     
-    - name: Download and use Gradle
-      uses: gradle/wrapper-action@v2
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2
       with:
         gradle-version: '7.6.1'
-        distribution-type: 'bin'
     
     # Installs Gradle Packages Automatically
     # Does not run the tests
