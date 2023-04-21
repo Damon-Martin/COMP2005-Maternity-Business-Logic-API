@@ -1,4 +1,4 @@
-package uk.md.MaternityAPI.Controllers;
+package uk.md.MaternityCalculationsAPI.Controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

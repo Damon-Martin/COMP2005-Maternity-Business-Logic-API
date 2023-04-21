@@ -1,4 +1,4 @@
-package uk.md.MaternityAPI.Config;
+package uk.md.MaternityCalculationsAPI.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,7 @@ public class SpringfoxConfig {
     public Docket productApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("uk.md.MaternityAPI"))
+                .apis(RequestHandlerSelectors.basePackage("uk.md.MaternityCalculationsAPI"))
                 .build();
     }
 }
