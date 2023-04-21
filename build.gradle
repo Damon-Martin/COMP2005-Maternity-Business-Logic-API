@@ -21,8 +21,8 @@ dependencies {
 	testImplementation 'org.mockito:mockito-core:5.2.0'
 
 	// Springfox: Swagger
-	implementation "io.springfox:springfox-swagger2:2.9.1"
-	implementation "io.springfox:springfox-swagger-ui:2.9.1"
+	implementation "io.springfox:springfox-boot-starter:3.0.0"
+	implementation "io.springfox:springfox-swagger-ui:3.0.0"
 }
 
 tasks.named('test') {
@@ -33,7 +33,7 @@ tasks.named('test') {
 jacocoTestReport {
 	reports {
 		html.enabled true
-		xml.enabled false
-		csv.enabled false
+		xml.enabled true
+		csv.enabled true
 	}
 }
