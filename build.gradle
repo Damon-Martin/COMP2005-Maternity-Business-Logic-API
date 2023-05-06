@@ -13,6 +13,9 @@ bootJar {
 	enabled = true
 	mainClass = 'uk.md.MaternityCalculationsAPI.Main'
 
+	archiveFileName = 'MaternityCalculations'+ '.jar'
+	destinationDirectory = file('build/libs')
+
 	manifest {
 		attributes(
 				'Main-Class': 'org.springframework.boot.loader.JarLauncher',
