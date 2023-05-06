@@ -9,12 +9,9 @@ group = 'uk.md'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
-jar {
-	enabled = true
-}
-
 bootJar {
 	enabled = true
+	mainClass = 'uk.md.MaternityCalculationsAPI.Main'
 }
 
 repositories {
