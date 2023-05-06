@@ -3,6 +3,7 @@ plugins {
 	id 'org.springframework.boot' version '2.7.10'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 	id 'jacoco'
+	id 'com.palantir.docker' version '0.22.1'
 }
 
 group = 'uk.md'
@@ -36,4 +37,11 @@ jacocoTestReport {
 		xml.required =  true
 		csv.required = true
 	}
+}
+
+docker {
+	name "MaternityCalculationsAPI"
+	dockerfile file('src/docker/Dockerfile')
+	copySpec.from(jar).rename(".*","app.jar")
+	buildArgs(['JAR_FILE': "app.jar"])
 }
