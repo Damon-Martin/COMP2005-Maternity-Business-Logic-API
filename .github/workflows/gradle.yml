@@ -69,6 +69,7 @@ jobs:
         name: Build & Push Docker Image Automatically
         with:
           image: mdamon957/maternity_business_api_comp2005
+          dockerfile: src/docker/Dockerfile
           registry: docker.io
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
