@@ -10,17 +10,18 @@ https://tasks.office.com/live.plymouth.ac.uk/en-GB/Home/Planner#/plantaskboard?g
 ### http://localhost:8080/swagger-ui/
 
 ## How To Use Application
-1. Ensure Java 11 is used for Running Application & Gradle is running on Java 11
-2. Run Application or Run Tests
+### Docker Hub Page: https://hub.docker.com/r/mdamon957/maternity_business_api_comp2005/tags
+### 1. Run Docker Command
+    docker run -p 8080:8080 mdamon957/maternity_business_api_comp2005:undefined
+### 2. View Swagger/Use API
 
 ## How To View Code Coverage Reports
-1. Run all Tests
 2. For CSV/XML Code Coverage Reports: Navigate to ./build/reports/jacoco/
 3. For HTML Code Coverage Reports: Navigate to ./build/reports/jacoco/html
 4. Then press index.html
 
 
-## References
+## References (Insert Later)
 
 Jacoco
 Springfox
