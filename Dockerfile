@@ -7,4 +7,4 @@ COPY build/libs/ /app/
 
 # Running the JAR File
 EXPOSE 8080
-CMD ["java", "-jar", "MaternityCalculations.jar"]
+CMD ["java", "-jar", "MaternityCalculationsAPI-0.0.1-SNAPSHOT.jar"]

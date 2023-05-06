@@ -9,20 +9,7 @@ group = 'uk.md'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
-bootJar {
-	enabled = true
-	mainClass = 'uk.md.MaternityCalculationsAPI.Main'
-
-	archiveFileName = 'MaternityCalculations'+ '.jar'
-	destinationDirectory = file('build/libs')
-
-	manifest {
-		attributes(
-				'Main-Class': 'org.springframework.boot.loader.JarLauncher',
-				'Start-Class': 'uk.md.MaternityCalculationsAPI.Main'
-		)
-	}
-}
+bootRun {}
 
 repositories {
 	mavenCentral()
