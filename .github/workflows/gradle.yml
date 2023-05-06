@@ -8,7 +8,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  Testing:
     runs-on: ubuntu-latest
 
     steps:
@@ -37,3 +37,39 @@ jobs:
     # Running Tests
     - name: Unit / Integration Tests
       run: ./gradlew test
+
+
+
+  Deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      # Initialises JDK 11
+      - name: Initialising JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      
+      # Granting Permissions: Required for Gradle to Work
+      - name: Granting execute permission for gradlew
+        run: chmod +x gradlew
+
+      # Validating Gradle Wrapper
+      - name: Validate Gradle Wrapper
+        run: ./gradlew wrapper
+
+      # Installs Gradle Packages Automatically
+      # Does not run the tests
+      - name: Build with Gradle
+        run: ./gradlew build -x test
+      
+      - uses: mr-smithers-excellent/docker-build-push@v3
+        name: Build & Push Docker Image Automatically
+        with:
+          image: mdamon957/maternity_business_api_comp2005
+          registry: docker.io
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+    
