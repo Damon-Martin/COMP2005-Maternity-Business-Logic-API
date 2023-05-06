@@ -18,7 +18,7 @@ public class AdmissionsController {
     @GetMapping("DischargedQuick")
     @ResponseStatus(HttpStatus.OK)
     public String DischargedQuick() {
-        return null;
+        return "test_String";
     }
 
     @GetMapping("AvgDurationByStaff")
