@@ -14,8 +14,6 @@ public class Admission {
     // IDs to Map to the Patient and the id
     public Integer id;
     public Integer patientID;
-
-    // Instant for Dates: Instant.Parse(stringDate) || Instant.toString()
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     public LocalDateTime admissionDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
