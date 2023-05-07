@@ -11,8 +11,8 @@ https://tasks.office.com/live.plymouth.ac.uk/en-GB/Home/Planner#/plantaskboard?g
 
 ## How To Use Application
 ### Docker Hub Page: https://hub.docker.com/r/mdamon957/maternity_business_api_comp2005/tags
-### 1. Run Docker Command
-    docker run -p 8080:8080 mdamon957/maternity_business_api_comp2005:undefined
+### 1. Run Docker Command (Will automatically install via Internet if not found locally)
+    docker run --name MaternityCalculations -p 8080:8080 mdamon957/maternity_business_api_comp2005:undefined
 ### 2. View Swagger/Use API
 
 ## How To View Code Coverage Reports
