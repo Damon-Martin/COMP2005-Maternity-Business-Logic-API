@@ -3,17 +3,33 @@
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
+import springfox.documentation.service.Contact;
 @Configuration
-<span class="nc" id="L10">public class SpringfoxConfig {</span>
+<span class="nc" id="L12">public class SpringfoxConfig {</span>
     @Bean
     public Docket productApi() {
-<span class="nc" id="L13">        return new Docket(DocumentationType.SWAGGER_2)</span>
-<span class="nc" id="L14">                .select()</span>
-<span class="nc" id="L15">                .apis(RequestHandlerSelectors.basePackage(&quot;uk.md.MaternityCalculationsAPI&quot;))</span>
-<span class="nc" id="L16">                .build();</span>
+<span class="nc" id="L15">        return new Docket(DocumentationType.SWAGGER_2)</span>
+<span class="nc" id="L16">                .select()</span>
+<span class="nc" id="L17">                .apis(RequestHandlerSelectors.basePackage(&quot;uk.md.MaternityCalculationsAPI&quot;))</span>
+<span class="nc" id="L18">                .build()</span>
+<span class="nc" id="L19">                .apiInfo(metaInfo());</span>
+    }
+
+    private ApiInfo metaInfo(){
+<span class="nc" id="L23">        ApiInfo apiInfo = new ApiInfo(</span>
+                &quot;Maternity Calculations API&quot;,
+                &quot;This API performs business logic based on the Maternity API for further data processing&quot;,
+                &quot;1.0&quot;,
+                null, null,
+                null,
+                null
+        );
+
+<span class="nc" id="L32">        return apiInfo;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
