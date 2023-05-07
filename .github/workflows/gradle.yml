@@ -38,8 +38,12 @@ jobs:
     - name: Unit / Integration Tests
       run: ./gradlew test
       
+    # Jacoco: Code Coverage
+    - name: Run Test Coverage
+      run: ./gradlew jacocoTestReport
+    
     # Jacoco: Code Coverage Badge
-    - name: Adding Code Coverage Badge to Git
+    - name: Generate JaCoCo Badge
       uses: cicirello/jacoco-badge-generator@v2
       with:
         generate-branches-badge: true
