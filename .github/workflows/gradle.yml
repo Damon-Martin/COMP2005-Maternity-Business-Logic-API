@@ -37,20 +37,7 @@ jobs:
     # Running Tests
     - name: Unit / Integration Tests
       run: ./gradlew test
-    
-    # Code Coverage badge
-    - name: Generate JaCoCo Badge
-      uses: cicirello/jacoco-badge-generator@v2
-      with:
-        jacoco-csv-file: build/reports/jacoco/test/jacocoTestReport.csv
-        badges-directory: .github/badges
-        generate-coverage-badge: true
-        coverage-badge-filename: jacoco.svg
-        coverage-label: coverage
-        branches-label: branches
-        colors: '#4c1 #97ca00 #a4a61d #dfb317 #fe7d37 #e05d44'
-        intervals: 100 90 80 70 60 0
-        on-missing-report: fail
+      
 
   Deployment:
     runs-on: ubuntu-latest
