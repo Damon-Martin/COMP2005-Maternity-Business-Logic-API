@@ -37,6 +37,10 @@ jobs:
     # Running Tests
     - name: Unit / Integration Tests
       run: ./gradlew test
+    
+    # Code Coverage badge
+    - name: jacoco-badge-generator
+      uses: cicirello/jacoco-badge-generator@v2.8.1
 
 
 
