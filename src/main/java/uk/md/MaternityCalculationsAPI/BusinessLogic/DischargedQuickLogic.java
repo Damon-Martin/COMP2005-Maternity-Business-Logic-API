@@ -6,7 +6,7 @@ public class DischargedQuickLogic {
 
 
     // Checks how many days have passed
-    public Integer calculateDateSubtraction(Date start, Date end){
+    public Integer calculateDaysInHospital(Date start, Date end){
         return null;
     }
 

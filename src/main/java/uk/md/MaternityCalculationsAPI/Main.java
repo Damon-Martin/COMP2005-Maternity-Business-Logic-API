@@ -8,6 +8,7 @@ import uk.md.MaternityCalculationsAPI.Models.Entities.Admission;
 import uk.md.MaternityCalculationsAPI.Models.Entities.Patient;
 
 import java.io.IOException;
+import java.net.http.HttpResponse;
 import java.util.List;
 
 @SpringBootApplication

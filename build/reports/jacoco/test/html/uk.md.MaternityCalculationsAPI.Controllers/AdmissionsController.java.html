@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(&quot;api/&quot;)
 @Api(value = &quot;Responsible for all business logic calculations&quot;)
-<span class="fc" id="L16">public class AdmissionsController {</span>
+<span class="nc" id="L16">public class AdmissionsController {</span>
 
     @GetMapping(&quot;PatientsSeenByStaff&quot;)
     @ApiOperation(value = &quot;Based on EmployeeID: Returns a list unique patient IDs that have visited the staff&quot;)
     public String PatientsSeenByStaff() {
-<span class="fc" id="L21">        return null;</span>
+<span class="nc" id="L21">        return null;</span>
     }
 
     @GetMapping(&quot;DischargedQuick&quot;)
@@ -30,13 +30,13 @@ import org.springframework.web.bind.annotation.RestController;
                     @ApiResponse(code = 200, message = &quot;Success: List of Patients discharged within 3 days&quot;)
             })
     public String DischargedQuick() {
-<span class="fc" id="L33">        return &quot;test_String&quot;;</span>
+<span class="nc" id="L33">        return &quot;test_String&quot;;</span>
     }
 
     @GetMapping(&quot;AvgDurationByStaff&quot;)
     @ApiOperation(value = &quot;Based on EmployeeID, Returns the mean calculated avg duration of recovery time/stay of all their patients&quot;)
     public String AvgDurationByStaff() {
-<span class="fc" id="L39">        return null;</span>
+<span class="nc" id="L39">        return null;</span>
     }
 
     // Provide Week: Returns the busiest day
@@ -44,7 +44,7 @@ import org.springframework.web.bind.annotation.RestController;
     @ApiOperation(value = &quot;Returns the calculated avg busiest day of the week&quot;,
             notes = &quot;Based on the Maternity '/Admissions' Endpoint: Loops through the List and Calculates the frequency of days in a hash table (e.g 'Mon: 4, Tues:2, Wed: 10...'). Then Returns the busiest day.&quot;)
     public String BusiestDayOfWeek() {
-<span class="fc" id="L47">        return null;</span>
+<span class="nc" id="L47">        return null;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
