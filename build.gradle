@@ -23,8 +23,13 @@ dependencies {
 	testImplementation 'org.mockito:mockito-core:5.2.0'
 
 	// Springfox: Swagger
-	implementation "io.springfox:springfox-boot-starter:3.0.0"
-	implementation "io.springfox:springfox-swagger-ui:3.0.0"
+	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+
+	// Jackson: JSON String Parsing
+	implementation 'com.fasterxml.jackson.core:jackson-core:2.12.4'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.7.1'
+	implementation 'com.fasterxml.jackson.core:jackson-annotations:2.12.4'
 }
 
 tasks.named('test') {
