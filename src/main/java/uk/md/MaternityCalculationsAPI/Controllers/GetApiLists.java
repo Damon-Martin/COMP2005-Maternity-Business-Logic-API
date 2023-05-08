@@ -32,15 +32,19 @@ public class GetApiLists {
                 .build();
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        String rawJSON = response.body();
+        if (response != null && response.statusCode() == 200) {
+            String rawJSON = response.body();
 
-        // Mapping to the Deserialized Object
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(new JavaTimeModule());
+            // Mapping to the Deserialized Object
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JavaTimeModule());
 
-        admissions = mapper.readValue(rawJSON, new TypeReference<List<Admission>>() {});
+            admissions = mapper.readValue(rawJSON, new TypeReference<List<Admission>>() {
+            });
 
-        return admissions;
+            return admissions;
+        }
+        return null;
     }
 
     // If it's Empty we would have an Empty Array. Therefore, can't be null.
@@ -55,13 +59,18 @@ public class GetApiLists {
                 .build();
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        String rawJSON = response.body();
+        if (response != null && response.statusCode() == 200) {
+            String rawJSON = response.body();
 
-        // Mapping to the Deserialized Object
-        ObjectMapper mapper = new ObjectMapper();
-        employees = mapper.readValue(rawJSON, new TypeReference<List<Employee>>() {});
+            // Mapping to the Deserialized Object
+            ObjectMapper mapper = new ObjectMapper();
+            employees = mapper.readValue(rawJSON, new TypeReference<List<Employee>>() {
+            });
 
-        return employees;
+            return employees;
+        }
+        // Bad Request: If there were no items in the array we would get ''. An Empty Array.
+        return null;
     }
 
     public List<Allocation> getAllocationsList() throws IOException, InterruptedException {
@@ -75,15 +84,20 @@ public class GetApiLists {
                 .build();
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        String rawJSON = response.body();
+        if (response != null && response.statusCode() == 200) {
+            String rawJSON = response.body();
 
-        // Mapping to the Deserialized Object
-        // Mapping to the Deserialized Object
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(new JavaTimeModule());
-        allocations = mapper.readValue(rawJSON, new TypeReference<List<Allocation>>() {});
+            // Mapping to the Deserialized Object
+            // Mapping to the Deserialized Object
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JavaTimeModule());
+            allocations = mapper.readValue(rawJSON, new TypeReference<List<Allocation>>() {
+            });
 
-        return allocations;
+            return allocations;
+        }
+
+        return null;
     }
 
     // If it's Empty we would have an Empty Array. Therefore, can't be null.
@@ -98,13 +112,18 @@ public class GetApiLists {
                 .build();
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        String rawJSON = response.body();
+        if (response != null && response.statusCode() == 200) {
+            String rawJSON = response.body();
 
-        // Mapping to the Deserialized Object
-        ObjectMapper mapper = new ObjectMapper();
-        patients = mapper.readValue(rawJSON, new TypeReference<List<Patient>>() {});
+            // Mapping to the Deserialized Object
+            ObjectMapper mapper = new ObjectMapper();
+            patients = mapper.readValue(rawJSON, new TypeReference<List<Patient>>() {
+            });
 
-        return patients;
+            return patients;
+        }
+
+        return null;
     }
 }
 
