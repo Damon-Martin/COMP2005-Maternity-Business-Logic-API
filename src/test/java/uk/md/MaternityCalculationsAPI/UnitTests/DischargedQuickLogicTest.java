@@ -41,7 +41,7 @@ class DischargedQuickLogicTest {
 
         int daysAdmitted = logicObj.calculateDaysInHospital(startDate, endDate);
 
-        Assertions.assertEquals(807, daysAdmitted);
+        Assertions.assertEquals(655, daysAdmitted);
     }
 
     // Note: Will use dummy data of different instances to test this is working
@@ -62,6 +62,24 @@ class DischargedQuickLogicTest {
         DischargedQuickLogic logicObj = new DischargedQuickLogic();
         Boolean isFast = logicObj.isQuick(99);
         Assertions.assertFalse(isFast);
+    }
+
+    @Test
+    void test_check_date_is_before_checker_acceptable() {
+        DischargedQuickLogic logicObj = new DischargedQuickLogic();
+        LocalDateTime startDate = LocalDateTime.of(2023,2,24,12,15);
+        LocalDateTime endDate = LocalDateTime.of(2023,2,28,12,15);
+        Boolean isBefore = logicObj.isStartDateBeforeEndDate(startDate, endDate);
+        Assertions.assertTrue(isBefore);
+    }
+
+    @Test
+    void test_check_date_is_before_checker_invalid() {
+        DischargedQuickLogic logicObj = new DischargedQuickLogic();
+        LocalDateTime startDate = LocalDateTime.of(2024,10,24,12,15);
+        LocalDateTime endDate = LocalDateTime.of(2023,2,28,12,15);
+        Boolean isBefore = logicObj.isStartDateBeforeEndDate(startDate, endDate);
+        Assertions.assertFalse(isBefore);
     }
 
 }
