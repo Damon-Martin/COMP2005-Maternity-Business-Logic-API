@@ -1,12 +1,18 @@
 package uk.md.MaternityCalculationsAPI.BusinessLogic;
 
+import uk.md.MaternityCalculationsAPI.Models.DischargedQuick;
+import uk.md.MaternityCalculationsAPI.Models.Entities.Admission;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class DischargedQuickLogic {
 
 
     // Checks how many days have passed
-    public Integer calculateDaysInHospital(Date start, Date end){
+    public Integer calculateDaysInHospital(LocalDateTime start, LocalDateTime end){
         return null;
     }
 
@@ -16,7 +22,20 @@ public class DischargedQuickLogic {
     }
 
     // Checks if the JSON Admission Data is Valid Data
-    public Boolean isStartDateBeforeEndDate(Date start, Date end){
+    public Boolean isStartDateBeforeEndDate(LocalDateTime start, LocalDateTime end){
         return false;
+    }
+
+    public List<DischargedQuick> calculateDischargedQuick(List<Admission> allAdmissions) {
+        List<DischargedQuick> dischargedQuickList = new ArrayList<DischargedQuick>();
+        allAdmissions.forEach(Admission -> {
+            // Perform Calculations & Build Object
+
+            // Check start is before End Date
+
+            //calculateDaysInHospital(Admission.admissionDate, Admission.dischargeDate);
+
+        });
+        return null;
     }
 }
