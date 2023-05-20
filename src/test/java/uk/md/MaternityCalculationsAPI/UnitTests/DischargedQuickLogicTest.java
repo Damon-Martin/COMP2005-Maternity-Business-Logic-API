@@ -49,4 +49,19 @@ class DischargedQuickLogicTest {
     void test_if_admitted_before_discharged_is_ignored_in_return_list() {
         fail("Test Not Implemented");
     }
+
+    @Test
+    void test_is_quick_acceptable(){
+        DischargedQuickLogic logicObj = new DischargedQuickLogic();
+        Boolean isFast = logicObj.isQuick(2);
+        Assertions.assertTrue(isFast);
+    }
+
+    @Test
+    void test_is_quick_invalid(){
+        DischargedQuickLogic logicObj = new DischargedQuickLogic();
+        Boolean isFast = logicObj.isQuick(99);
+        Assertions.assertFalse(isFast);
+    }
+
 }

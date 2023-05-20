@@ -26,8 +26,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 class AdmissionsControllerIntTest {
     // Just Checks if there is a body
+    // Even an Empty List is "[]" which is not null
     @Test
-    public void test_api_to_api_admissions_list(){
+    void test_api_to_api_admissions_list_body_not_null(){
         fail("Test Not Implemented");
     }
 }
