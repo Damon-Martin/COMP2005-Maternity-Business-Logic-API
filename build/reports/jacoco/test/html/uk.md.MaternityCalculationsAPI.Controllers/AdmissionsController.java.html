@@ -4,21 +4,32 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import uk.md.MaternityCalculationsAPI.BusinessLogic.DischargedQuickLogic;
+import uk.md.MaternityCalculationsAPI.Models.DischargedQuick;
+import uk.md.MaternityCalculationsAPI.Models.Entities.Admission;
+
+import java.io.IOException;
+import java.net.http.HttpResponse;
+import java.util.List;
 
 @RestController
 @RequestMapping(&quot;api/&quot;)
 @Api(value = &quot;Responsible for all business logic calculations&quot;)
-<span class="fc" id="L16">public class AdmissionsController {</span>
+<span class="nc" id="L26">public class AdmissionsController {</span>
+<span class="nc" id="L27">    private GetApiLists _httpHandler = new GetApiLists();</span>
 
     @GetMapping(&quot;PatientsSeenByStaff&quot;)
     @ApiOperation(value = &quot;Based on EmployeeID: Returns a list unique patient IDs that have visited the staff&quot;)
     public String PatientsSeenByStaff() {
-<span class="nc" id="L21">        return null;</span>
+<span class="nc" id="L32">        return null;</span>
     }
 
     @GetMapping(&quot;DischargedQuick&quot;)
@@ -29,14 +40,32 @@ import org.springframework.web.bind.annotation.RestController;
                     @ApiResponse(code = 500, message = &quot;Bad Request: Error Calculating Quick Discharge Patients List&quot;),
                     @ApiResponse(code = 200, message = &quot;Success: List of Patients discharged within 3 days&quot;)
             })
-    public String DischargedQuick() {
-<span class="nc" id="L33">        return &quot;test_String&quot;;</span>
+    public ResponseEntity&lt;List&lt;DischargedQuick&gt;&gt; DischargedQuick() throws IOException, InterruptedException {
+<span class="nc" id="L44">        HttpResponse&lt;String&gt; res = _httpHandler.getAdmissionsList();</span>
+
+        // All Responses are JSON
+<span class="nc" id="L47">        HttpHeaders headers = new HttpHeaders();</span>
+<span class="nc" id="L48">        headers.setContentType(MediaType.APPLICATION_JSON);</span>
+
+        // Checking if Successful or Error
+<span class="nc bnc" id="L51" title="All 2 branches missed.">        if (res.statusCode() == 200) {</span>
+<span class="nc" id="L52">            List&lt;Admission&gt; allAdmissions = _httpHandler.parseAdmissionList(res);</span>
+<span class="nc" id="L53">            DischargedQuickLogic logicObj = new DischargedQuickLogic();</span>
+
+<span class="nc" id="L55">            List&lt;DischargedQuick&gt; allDischargedQuick = logicObj.calculateDischargedQuick(allAdmissions);</span>
+
+<span class="nc" id="L57">            return new ResponseEntity&lt;&gt;(allDischargedQuick, headers, HttpStatus.OK);</span>
+        }
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        else if (res.statusCode() == 404) {</span>
+<span class="nc" id="L60">            return new ResponseEntity&lt;&gt;(null, headers, HttpStatus.NOT_FOUND);</span>
+        }
+<span class="nc" id="L62">        return new ResponseEntity&lt;&gt;(null, headers, HttpStatus.BAD_REQUEST);</span>
     }
 
     @GetMapping(&quot;AvgDurationByStaff&quot;)
     @ApiOperation(value = &quot;Based on EmployeeID, Returns the mean calculated avg duration of recovery time/stay of all their patients&quot;)
     public String AvgDurationByStaff() {
-<span class="nc" id="L39">        return null;</span>
+<span class="nc" id="L68">        return null;</span>
     }
 
     // Provide Week: Returns the busiest day
@@ -44,7 +73,7 @@ import org.springframework.web.bind.annotation.RestController;
     @ApiOperation(value = &quot;Returns the calculated avg busiest day of the week&quot;,
             notes = &quot;Based on the Maternity '/Admissions' Endpoint: Loops through the List and Calculates the frequency of days in a hash table (e.g 'Mon: 4, Tues:2, Wed: 10...'). Then Returns the busiest day.&quot;)
     public String BusiestDayOfWeek() {
-<span class="nc" id="L47">        return null;</span>
+<span class="nc" id="L76">        return null;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
