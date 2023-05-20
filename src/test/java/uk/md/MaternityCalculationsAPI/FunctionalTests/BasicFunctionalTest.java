@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(AdmissionsController.class)
-class FunctionalTest {
+class BasicFunctionalTest {
     @Autowired
     MockMvc mvc;
 

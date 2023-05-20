@@ -2,27 +2,13 @@
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import uk.md.MaternityCalculationsAPI.Controllers.GetApiLists;
-import uk.md.MaternityCalculationsAPI.Models.Entities.Admission;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @SpringBootApplication
-<span class="nc" id="L13">public class Main {</span>
+<span class="fc" id="L7">public class Main {</span>
 	// Swagger: http://localhost:8080/swagger-ui/
 	// Port 8080: Set in Application Properties
-	public static void main(String[] args) throws IOException, InterruptedException {
-		//SpringApplication.run(Main.class, args);
-
-<span class="nc" id="L19">		GetApiLists temp = new GetApiLists();</span>
-
-<span class="nc" id="L21">		List&lt;Admission&gt; admissionList = temp.parseAdmissionList( temp.getAdmissionsList() );</span>
-
-<span class="nc" id="L23">		admissionList.forEach(item -&gt; {</span>
-<span class="nc" id="L24">			System.out.println(item);</span>
-<span class="nc" id="L25">		});</span>
-<span class="nc" id="L26">	}</span>
+	public static void main(String[] args) {
+<span class="nc" id="L11">		SpringApplication.run(Main.class, args);</span>
+<span class="nc" id="L12">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
