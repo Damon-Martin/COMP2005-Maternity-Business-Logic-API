@@ -1,4 +1,4 @@
-package uk.md.MaternityCalculationsAPI.IntegrationTests;
+package uk.md.MaternityCalculationsAPI.FunctionalTests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -10,24 +10,35 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.util.Assert;
 import uk.md.MaternityCalculationsAPI.Controllers.AdmissionsController;
-
 import static org.junit.jupiter.api.Assertions.fail;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(AdmissionsController.class)
+class DischargedQuicklyFunctionalTests {
+    @Autowired
+    MockMvc mvc;
 
-/*
- * These Integration Tests: Check how the communication between the API to the other API and if they integrate
- * For Int Tests: I am not interested if it's doing what's expected. I just want to see if this Micro-Service connects
- *                to the other Micro-Service
- */
-class AdmissionsControllerIntTest {
-    // Just Checks if there is a body
+    // Checks GET request is working
+    // If: Empty OR String has an ID (Not Empty) --> Test Pass
+    // Else: Test Fail
+    // AdmissionID is optional
+    // "[{PatientID, AdmissionID, PatientFName, PatientSurname},{}...]"
     @Test
-    public void test_api_to_api_admissions_list(){
-        fail("Test Not Implemented");
+    void test_quick_discharge_is_correct_json_format() throws Exception {
+        RequestBuilder req = MockMvcRequestBuilders.get("/api/DischargedQuick");
+
+
+        fail("Not Yet Implemented");
+    }
+
+    @Test
+    void test_quick_discharge_blocks_invalid_date_orders() throws Exception {
+        RequestBuilder req = MockMvcRequestBuilders.get("/api/DischargedQuick");
+
+
+        fail("Not Yet Implemented");
     }
 }

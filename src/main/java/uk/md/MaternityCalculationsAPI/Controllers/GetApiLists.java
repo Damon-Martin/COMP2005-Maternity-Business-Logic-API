@@ -1,5 +1,6 @@
 package uk.md.MaternityCalculationsAPI.Controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -13,6 +14,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 // Intended to Perform Get Requests and return Expected JSON
@@ -21,8 +23,7 @@ public class GetApiLists {
 
 
     // Physically can't have an empty string. If the List is empty the res body will be '[]'
-    public List<Admission> getAdmissionsList() throws IOException, InterruptedException {
-        List<Admission> admissions;
+    public HttpResponse<String> getAdmissionsList() throws IOException, InterruptedException {
         HttpClient httpClient = HttpClient.newBuilder().build();
 
         // Making Request & Performing GET Req
@@ -30,10 +31,17 @@ public class GetApiLists {
                 .uri(URI.create("https://web.socem.plymouth.ac.uk/COMP2005/api/Admissions"))
                 .GET()
                 .build();
-        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        if (response != null && response.statusCode() == 200) {
-            String rawJSON = response.body();
+        // Returning the HttpResponse: Contains Body + Header
+        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+    }
+
+    // Unit Test JsonProcessing Exception
+    public List<Admission> parseAdmissionList(HttpResponse<String> res) throws JsonProcessingException {
+
+        List<Admission> admissions = new ArrayList<Admission>();
+        if (res != null && res.statusCode() == 200) {
+            String rawJSON = res.body();
 
             // Mapping to the Deserialized Object
             ObjectMapper mapper = new ObjectMapper();
@@ -41,15 +49,11 @@ public class GetApiLists {
 
             admissions = mapper.readValue(rawJSON, new TypeReference<List<Admission>>() {
             });
-
-            return admissions;
         }
-        return null;
+        return admissions;
     }
 
-    // If it's Empty we would have an Empty Array. Therefore, can't be null.
-    public List<Employee> getEmployeesList() throws IOException, InterruptedException {
-        List<Employee> employees;
+    public HttpResponse<String> getEmployeesList() throws IOException, InterruptedException {
         HttpClient httpClient = HttpClient.newBuilder().build();
 
         // Making Request & Performing GET Req
@@ -57,23 +61,24 @@ public class GetApiLists {
                 .uri(URI.create("https://web.socem.plymouth.ac.uk/COMP2005/api/Employees"))
                 .GET()
                 .build();
-        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        if (response != null && response.statusCode() == 200) {
-            String rawJSON = response.body();
+        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+    }
+
+    public List<Employee> parseEmployeeList(HttpResponse<String> res) throws JsonProcessingException {
+        List<Employee> employees = new ArrayList<Employee>();
+        if (res != null && res.statusCode() == 200) {
+            String rawJSON = res.body();
 
             // Mapping to the Deserialized Object
             ObjectMapper mapper = new ObjectMapper();
             employees = mapper.readValue(rawJSON, new TypeReference<List<Employee>>() {
             });
-
-            return employees;
         }
-        // Bad Request: If there were no items in the array we would get ''. An Empty Array.
-        return null;
+        return employees;
     }
 
-    public List<Allocation> getAllocationsList() throws IOException, InterruptedException {
+    public HttpResponse<String> getAllocationsList() throws IOException, InterruptedException {
         List<Allocation> allocations;
         HttpClient httpClient = HttpClient.newBuilder().build();
 
@@ -82,27 +87,25 @@ public class GetApiLists {
                 .uri(URI.create("https://web.socem.plymouth.ac.uk/COMP2005/api/Allocations"))
                 .GET()
                 .build();
-        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        if (response != null && response.statusCode() == 200) {
-            String rawJSON = response.body();
+        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+    }
 
-            // Mapping to the Deserialized Object
+    public List<Allocation> parseAllocationList(HttpResponse<String> res) throws JsonProcessingException {
+        List<Allocation> allocations = new ArrayList<Allocation>();
+        if (res != null && res.statusCode() == 200) {
+            String rawJSON = res.body();
+
             // Mapping to the Deserialized Object
             ObjectMapper mapper = new ObjectMapper();
             mapper.registerModule(new JavaTimeModule());
             allocations = mapper.readValue(rawJSON, new TypeReference<List<Allocation>>() {
             });
-
-            return allocations;
         }
-
-        return null;
+        return allocations;
     }
-
     // If it's Empty we would have an Empty Array. Therefore, can't be null.
-    public List<Patient> getPatientsList() throws IOException, InterruptedException {
-        List<Patient> patients;
+    public HttpResponse<String> getPatientsList() throws IOException, InterruptedException {
         HttpClient httpClient = HttpClient.newBuilder().build();
 
         // Making Request & Performing GET Req
@@ -110,20 +113,21 @@ public class GetApiLists {
                 .uri(URI.create("https://web.socem.plymouth.ac.uk/COMP2005/api/Patients"))
                 .GET()
                 .build();
-        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-        if (response != null && response.statusCode() == 200) {
-            String rawJSON = response.body();
+        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+    }
+
+    public List<Patient> parsePatientsList(HttpResponse<String> res) throws JsonProcessingException {
+        List<Patient> patients = new ArrayList<Patient>();
+        if (res != null && res.statusCode() == 200) {
+            String rawJSON = res.body();
 
             // Mapping to the Deserialized Object
             ObjectMapper mapper = new ObjectMapper();
             patients = mapper.readValue(rawJSON, new TypeReference<List<Patient>>() {
             });
-
-            return patients;
         }
-
-        return null;
+        return patients;
     }
 }
 

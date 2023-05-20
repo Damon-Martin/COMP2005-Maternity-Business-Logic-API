@@ -10,10 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+import java.net.http.HttpResponse;
+
 @RestController
 @RequestMapping("api/")
 @Api(value = "Responsible for all business logic calculations")
 public class AdmissionsController {
+    private GetApiLists _httpHandler = new GetApiLists();
 
     @GetMapping("PatientsSeenByStaff")
     @ApiOperation(value = "Based on EmployeeID: Returns a list unique patient IDs that have visited the staff")
@@ -29,8 +33,17 @@ public class AdmissionsController {
                     @ApiResponse(code = 500, message = "Bad Request: Error Calculating Quick Discharge Patients List"),
                     @ApiResponse(code = 200, message = "Success: List of Patients discharged within 3 days")
             })
-    public String DischargedQuick() {
-        return "test_String";
+    public String DischargedQuick() throws IOException, InterruptedException {
+        HttpResponse<String> res = _httpHandler.getEmployeesList();
+
+        // Checking if Successful or Error
+        if (res.statusCode() == 200) {
+            return "Contacted";
+        }
+        else if (res.statusCode() == 404) {
+            return "Not Found";
+        }
+        return "Error: Failed Contacting Maternity API";
     }
 
     @GetMapping("AvgDurationByStaff")
