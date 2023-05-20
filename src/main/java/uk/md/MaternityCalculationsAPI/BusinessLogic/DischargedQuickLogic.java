@@ -4,6 +4,7 @@ import uk.md.MaternityCalculationsAPI.Models.DischargedQuick;
 import uk.md.MaternityCalculationsAPI.Models.Entities.Admission;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,8 +13,9 @@ public class DischargedQuickLogic {
 
 
     // Checks how many days have passed
-    public Integer calculateDaysInHospital(LocalDateTime start, LocalDateTime end){
-        return null;
+    public Integer calculateDaysInHospital(LocalDateTime startDate, LocalDateTime endDate){
+        long daysPassedLong = ChronoUnit.DAYS.between(startDate.toLocalDate(), endDate.toLocalDate());
+        return (int) daysPassedLong;
     }
 
     // Checks if the Days are Less than or Equal to 3 days

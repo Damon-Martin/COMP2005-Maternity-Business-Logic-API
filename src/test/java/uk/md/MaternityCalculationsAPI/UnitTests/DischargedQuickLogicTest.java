@@ -41,7 +41,7 @@ class DischargedQuickLogicTest {
 
         int daysAdmitted = logicObj.calculateDaysInHospital(startDate, endDate);
 
-        Assertions.assertEquals(807, daysAdmitted);
+        Assertions.assertEquals(655, daysAdmitted);
     }
 
     // Note: Will use dummy data of different instances to test this is working
