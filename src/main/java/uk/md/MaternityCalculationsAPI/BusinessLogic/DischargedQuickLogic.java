@@ -1,8 +1,12 @@
 package uk.md.MaternityCalculationsAPI.BusinessLogic;
 
+import uk.md.MaternityCalculationsAPI.Controllers.GetApiEntities;
 import uk.md.MaternityCalculationsAPI.Models.DischargedQuick;
 import uk.md.MaternityCalculationsAPI.Models.Entities.Admission;
+import uk.md.MaternityCalculationsAPI.Models.Entities.Patient;
 
+import java.io.IOException;
+import java.net.http.HttpResponse;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -28,7 +32,9 @@ public class DischargedQuickLogic {
         return startDate.isBefore(endDate);
     }
 
-    public List<DischargedQuick> calculateDischargedQuick(List<Admission> allAdmissions) {
+    // We can mock allAdmissions for Testing
+    // This is a Component: It combines multiple Units together
+    public List<DischargedQuick> calculateDischargedQuick(List<Admission> allAdmissions)  {
         List<DischargedQuick> dischargedQuickList = new ArrayList<DischargedQuick>();
         allAdmissions.forEach(Admission -> {
             LocalDateTime currentStartDate = Admission.getAdmissionDate();
@@ -42,7 +48,18 @@ public class DischargedQuickLogic {
                 DischargedQuick fastPatientCase = new DischargedQuick();
                 fastPatientCase.setPatientID(Admission.getPatientID());
                 fastPatientCase.setAdmissionID(Admission.getId());
+
                 // Fetch Patient Name
+                GetApiEntities EntityHandler = new GetApiEntities();
+                try {
+                    HttpResponse<String> res = EntityHandler.getPatientById(fastPatientCase.getPatientID());
+                    Patient currentPatient = EntityHandler.parsePatientById(res);
+
+                    fastPatientCase.setForename(currentPatient.getForename());
+                    fastPatientCase.setSurname(currentPatient.getSurname());
+                } catch (IOException | InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
 
                 // Adding To List
                 dischargedQuickList.add(fastPatientCase);
