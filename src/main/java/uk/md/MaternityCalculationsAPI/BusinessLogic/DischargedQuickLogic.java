@@ -22,8 +22,8 @@ public class DischargedQuickLogic {
     }
 
     // Checks if the JSON Admission Data is Valid Data
-    public Boolean isStartDateBeforeEndDate(LocalDateTime start, LocalDateTime end){
-        return false;
+    public Boolean isStartDateBeforeEndDate(LocalDateTime startDate, LocalDateTime endDate){
+        return startDate.isBefore(endDate);
     }
 
     public List<DischargedQuick> calculateDischargedQuick(List<Admission> allAdmissions) {

@@ -1,5 +1,5 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-MaternityCalculationsAPI,uk.md.MaternityCalculationsAPI.BusinessLogic,DischargedQuickLogic,22,5,2,0,6,2,5,2,4,2
+MaternityCalculationsAPI,uk.md.MaternityCalculationsAPI.BusinessLogic,DischargedQuickLogic,10,19,0,2,4,4,2,5,2,4
 MaternityCalculationsAPI,uk.md.MaternityCalculationsAPI.Models,DischargedQuick,31,0,0,0,13,0,9,0,9,0
 MaternityCalculationsAPI,uk.md.MaternityCalculationsAPI,Main,8,0,0,0,3,0,2,0,2,0
 MaternityCalculationsAPI,uk.md.MaternityCalculationsAPI.Config,SpringfoxConfig,29,0,0,0,8,0,3,0,3,0
