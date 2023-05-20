@@ -31,13 +31,23 @@ public class DischargedQuickLogic {
     public List<DischargedQuick> calculateDischargedQuick(List<Admission> allAdmissions) {
         List<DischargedQuick> dischargedQuickList = new ArrayList<DischargedQuick>();
         allAdmissions.forEach(Admission -> {
-            // Perform Calculations & Build Object
+            LocalDateTime currentStartDate = Admission.getAdmissionDate();
+            LocalDateTime currentEndDate = Admission.getDischargeDate();
+
+            Integer daysAdmitted = calculateDaysInHospital(currentStartDate, currentEndDate);
 
             // Check start is before End Date
+            if (isQuick(daysAdmitted) && isStartDateBeforeEndDate(currentStartDate, currentEndDate)) {
+                // Perform Calculations & Build Object
+                DischargedQuick fastPatientCase = new DischargedQuick();
+                fastPatientCase.setPatientID(Admission.getPatientID());
+                fastPatientCase.setAdmissionID(Admission.getId());
+                // Fetch Patient Name
 
-            //calculateDaysInHospital(Admission.admissionDate, Admission.dischargeDate);
-
+                // Adding To List
+                dischargedQuickList.add(fastPatientCase);
+            }
         });
-        return null;
+        return dischargedQuickList;
     }
 }

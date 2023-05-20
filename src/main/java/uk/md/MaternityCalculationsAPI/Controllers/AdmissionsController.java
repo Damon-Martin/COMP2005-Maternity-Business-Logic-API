@@ -51,7 +51,7 @@ public class AdmissionsController {
         if (res.statusCode() == 200) {
             List<Admission> allAdmissions = _httpHandler.parseAdmissionList(res);
             DischargedQuickLogic logicObj = new DischargedQuickLogic();
-
+            
             List<DischargedQuick> allDischargedQuick = logicObj.calculateDischargedQuick(allAdmissions);
 
             return new ResponseEntity<>(allDischargedQuick, headers, HttpStatus.OK);
