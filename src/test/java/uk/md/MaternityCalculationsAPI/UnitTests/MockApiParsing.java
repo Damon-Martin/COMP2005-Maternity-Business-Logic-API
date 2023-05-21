@@ -1,5 +1,6 @@
 package uk.md.MaternityCalculationsAPI.UnitTests;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -48,6 +49,51 @@ public class MockApiParsing {
 
         // Assertions
         Assertions.assertNotNull(allAdmissions);
+    }
+
+    // Checks if not null & len is 0
+    @Test
+    void test_get_admissions_parsing_acceptable_empty_and_len_zero() throws IOException, InterruptedException {
+        // Arrange
+        // Creating Dummy Data: Using CSV files for raw JSON Bodies
+        HttpResponse<String> dummyHttpResponse = mock(HttpResponse.class);
+
+        // Stubbing out get Employee List to return the dummy data
+        when(dummyHttpResponse.statusCode()).thenReturn(200);
+        when(dummyHttpResponse.body()).thenReturn("[]");
+        HttpHeaders headers = HttpHeaders.of(Map.of("Content-Type", List.of("application/json")), (s, s2) -> true);
+        Mockito.when(dummyHttpResponse.headers()).thenReturn(headers);
+
+        // Act
+        // Testing the Parsing using the dummy response
+        GetApiLists listHttpHandler = new GetApiLists();
+        List<Admission> allAdmissions = listHttpHandler.parseAdmissionList(dummyHttpResponse);
+
+        // Assertions
+        Assertions.assertNotNull(allAdmissions);
+        Assertions.assertEquals(0, allAdmissions.size());
+    }
+
+    @Test
+    void test_get_admissions_parsing_invalid_data_throws_json_parsing_error() {
+
+        Assertions.assertThrows(JsonProcessingException.class, () -> {
+            // Arrange
+            // Creating Dummy Data: Using CSV files for raw JSON Bodies
+            HttpResponse<String> dummyHttpResponse = mock(HttpResponse.class);
+
+            // Stubbing out get Employee List to return the dummy data
+            when(dummyHttpResponse.statusCode()).thenReturn(200);
+            when(dummyHttpResponse.body()).thenReturn("[  { \"id\": 3, \"admissionDate\": 10, \"dischargeDate\": 10, \"patientID\": 10 } ] ,{ \"id\": 3, \"admissionDate\": 10, \"dischargeDate\": 10, \"patientID\": 10 } ]");
+            HttpHeaders headers = HttpHeaders.of(Map.of("Content-Type", List.of("application/json")), (s, s2) -> true);
+            Mockito.when(dummyHttpResponse.headers()).thenReturn(headers);
+
+
+            // Act
+            // Testing the Parsing using the dummy response
+            GetApiLists listHttpHandler = new GetApiLists();
+            listHttpHandler.parseAdmissionList(dummyHttpResponse);
+        });
     }
     
 }
