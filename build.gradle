@@ -26,10 +26,13 @@ dependencies {
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
 
-	// Jackson: JSON String Parsing
+	// Jackson: JSON String Parsing (Good for Dates)
 	implementation 'com.fasterxml.jackson.core:jackson-core:2.12.4'
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.7.1'
 	implementation 'com.fasterxml.jackson.core:jackson-annotations:2.12.4'
+
+	// Gson: Json String Parsing (Simpler than Jackson)
+	implementation 'com.google.code.gson:gson:2.8.9'
 }
 
 tasks.named('test') {
