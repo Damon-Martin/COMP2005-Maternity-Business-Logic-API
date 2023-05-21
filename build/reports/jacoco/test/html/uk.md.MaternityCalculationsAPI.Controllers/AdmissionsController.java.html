@@ -51,7 +51,7 @@ import java.util.List;
 <span class="nc bnc" id="L51" title="All 2 branches missed.">        if (res.statusCode() == 200) {</span>
 <span class="nc" id="L52">            List&lt;Admission&gt; allAdmissions = _httpHandler.parseAdmissionList(res);</span>
 <span class="nc" id="L53">            DischargedQuickLogic logicObj = new DischargedQuickLogic();</span>
-
+            
 <span class="nc" id="L55">            List&lt;DischargedQuick&gt; allDischargedQuick = logicObj.calculateDischargedQuick(allAdmissions);</span>
 
 <span class="nc" id="L57">            return new ResponseEntity&lt;&gt;(allDischargedQuick, headers, HttpStatus.OK);</span>
