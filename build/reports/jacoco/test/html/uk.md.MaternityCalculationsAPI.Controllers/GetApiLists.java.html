@@ -19,38 +19,38 @@ import java.util.List;
 
 // Intended to Perform Get Requests and return Expected JSON
 // Can Be Mocked
-<span class="fc" id="L22">public class GetApiLists {</span>
+<span class="nc" id="L22">public class GetApiLists {</span>
 
 
     // Physically can't have an empty string. If the List is empty the res body will be '[]'
     public HttpResponse&lt;String&gt; getAdmissionsList() throws IOException, InterruptedException {
-<span class="fc" id="L27">        HttpClient httpClient = HttpClient.newBuilder().build();</span>
+<span class="nc" id="L27">        HttpClient httpClient = HttpClient.newBuilder().build();</span>
 
         // Making Request &amp; Performing GET Req
-<span class="fc" id="L30">        HttpRequest request = HttpRequest.newBuilder()</span>
-<span class="fc" id="L31">                .uri(URI.create(&quot;https://web.socem.plymouth.ac.uk/COMP2005/api/Admissions&quot;))</span>
-<span class="fc" id="L32">                .GET()</span>
-<span class="fc" id="L33">                .build();</span>
+<span class="nc" id="L30">        HttpRequest request = HttpRequest.newBuilder()</span>
+<span class="nc" id="L31">                .uri(URI.create(&quot;https://web.socem.plymouth.ac.uk/COMP2005/api/Admissions&quot;))</span>
+<span class="nc" id="L32">                .GET()</span>
+<span class="nc" id="L33">                .build();</span>
 
         // Returning the HttpResponse: Contains Body + Header
-<span class="fc" id="L36">        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());</span>
+<span class="nc" id="L36">        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());</span>
     }
 
     // Unit Test JsonProcessing Exception
     public List&lt;Admission&gt; parseAdmissionList(HttpResponse&lt;String&gt; res) throws JsonProcessingException {
 
-<span class="fc" id="L42">        List&lt;Admission&gt; admissions = new ArrayList&lt;Admission&gt;();</span>
-<span class="pc bpc" id="L43" title="2 of 4 branches missed.">        if (res != null &amp;&amp; res.statusCode() == 200) {</span>
-<span class="fc" id="L44">            String rawJSON = res.body();</span>
+<span class="nc" id="L42">        List&lt;Admission&gt; admissions = new ArrayList&lt;Admission&gt;();</span>
+<span class="nc bnc" id="L43" title="All 4 branches missed.">        if (res != null &amp;&amp; res.statusCode() == 200) {</span>
+<span class="nc" id="L44">            String rawJSON = res.body();</span>
 
             // Mapping to the Deserialized Object
-<span class="fc" id="L47">            ObjectMapper mapper = new ObjectMapper();</span>
-<span class="fc" id="L48">            mapper.registerModule(new JavaTimeModule());</span>
+<span class="nc" id="L47">            ObjectMapper mapper = new ObjectMapper();</span>
+<span class="nc" id="L48">            mapper.registerModule(new JavaTimeModule());</span>
 
-<span class="fc" id="L50">            admissions = mapper.readValue(rawJSON, new TypeReference&lt;List&lt;Admission&gt;&gt;() {</span>
+<span class="nc" id="L50">            admissions = mapper.readValue(rawJSON, new TypeReference&lt;List&lt;Admission&gt;&gt;() {</span>
             });
         }
-<span class="fc" id="L53">        return admissions;</span>
+<span class="nc" id="L53">        return admissions;</span>
     }
 
     public HttpResponse&lt;String&gt; getEmployeesList() throws IOException, InterruptedException {
