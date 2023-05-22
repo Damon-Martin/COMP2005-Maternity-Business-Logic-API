@@ -15,4 +15,4 @@ MaternityCalculationsAPI,uk.md.MaternityCalculationsAPI.Controllers,GetApiLists.
 MaternityCalculationsAPI,uk.md.MaternityCalculationsAPI.Controllers,GetApiEntities.new TypeReference() {...},0,6,0,0,0,1,0,1,0,1
 MaternityCalculationsAPI,uk.md.MaternityCalculationsAPI.Controllers,GetApiEntities,0,48,2,2,0,13,2,3,0,3
 MaternityCalculationsAPI,uk.md.MaternityCalculationsAPI.Controllers,GetApiLists,138,53,14,2,37,14,14,3,6,3
-MaternityCalculationsAPI,uk.md.MaternityCalculationsAPI.Controllers,AdmissionsController,36,80,6,2,6,19,4,5,0,5
+MaternityCalculationsAPI,uk.md.MaternityCalculationsAPI.Controllers,AdmissionsController,38,78,6,2,7,18,5,4,1,4
