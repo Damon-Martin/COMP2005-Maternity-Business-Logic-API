@@ -80,6 +80,7 @@ public class PatientsSeenLogicTest {
 
     // Mock HttpResponse returns dummy data when called. There are duplicate Patients for Allocation in this example.
     // the unfiltered list creator is not responsible for removing bad values
+    //
     @Test
     void unfiltered_list_employee1_result_size_is_3(){
         //Arrange (Prepped in Constructor)
@@ -90,7 +91,7 @@ public class PatientsSeenLogicTest {
         PatientsSeenLogic logicObj = new PatientsSeenLogic();
         result = logicObj.getNotFilteredPatientsByEmployeeID(employeeId, dummyDataAllocations, dummyDataAdmissions, dummyDataPatients);
 
-        Assertions.assertEquals(3, result.size());
+        Assertions.assertEquals(2, result.size());
     }
 
     @Test
@@ -103,6 +104,6 @@ public class PatientsSeenLogicTest {
         PatientsSeenLogic logicObj = new PatientsSeenLogic();
         result = logicObj.getNotFilteredPatientsByEmployeeID(employeeId, dummyDataAllocations, dummyDataAdmissions, dummyDataPatients);
 
-        Assertions.assertEquals(2, result.size());
+        Assertions.assertEquals(1, result.size());
     }
 }

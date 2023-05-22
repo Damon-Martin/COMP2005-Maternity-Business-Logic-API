@@ -11,6 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uk.md.MaternityCalculationsAPI.BusinessLogic.BusiestDayLogic;
 import uk.md.MaternityCalculationsAPI.BusinessLogic.DischargedQuickLogic;
+import uk.md.MaternityCalculationsAPI.BusinessLogic.PatientsSeenLogic;
+import uk.md.MaternityCalculationsAPI.Models.Entities.Allocation;
+import uk.md.MaternityCalculationsAPI.Models.Entities.Patient;
 import uk.md.MaternityCalculationsAPI.Models.PatientCustom;
 import uk.md.MaternityCalculationsAPI.Models.Entities.Admission;
 
@@ -26,8 +29,30 @@ public class AdmissionsController {
 
     @GetMapping("PatientsSeen/{id}")
     @ApiOperation(value = "Based on EmployeeID: Returns a list unique patients that have visited the staff (Model same as Discharged Quickly). Each Allocation in Allocations, loops through and matches EmployeeID. If it is found it will get Admission by ID and look at PatientID. If the Patient is unique add to List of Model.")
-    public String PatientsSeenByStaff(@RequestParam("id") int EmployeeID) {
-        return null;
+    public ResponseEntity<List<PatientCustom>> PatientsSeenByStaff(@RequestParam("id") int EmployeeID) throws IOException, InterruptedException {
+        PatientsSeenLogic logicObj = new PatientsSeenLogic();
+
+        // All Responses are JSON
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpResponse<String> patentsRes = _httpHandler.getPatientsList();
+        HttpResponse<String> admissionsRes = _httpHandler.getAdmissionsList();
+        HttpResponse<String> allocationsRes = _httpHandler.getAllocationsList();
+
+        if (patentsRes.statusCode() == 200 && admissionsRes.statusCode() == 200 && allocationsRes.statusCode() == 200 && admissionsRes.statusCode() == 200) {
+
+            List<Allocation> allAllocations = _httpHandler.parseAllocationList(allocationsRes);
+            List<Admission> allAdmissions = _httpHandler.parseAdmissionList(admissionsRes);
+            List<Patient> allPatients = _httpHandler.parsePatientsList(patentsRes);
+
+            List<PatientCustom> filteredPatients =logicObj.getFilteredPatientsByEmployeeID(EmployeeID, allAllocations, allAdmissions, allPatients);
+
+            return new ResponseEntity<>(filteredPatients, headers, HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<>(null, headers, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("DischargedQuick")

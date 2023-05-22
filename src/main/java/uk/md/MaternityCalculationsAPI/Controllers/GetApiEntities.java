@@ -3,6 +3,8 @@ package uk.md.MaternityCalculationsAPI.Controllers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import uk.md.MaternityCalculationsAPI.Models.Entities.Admission;
 import uk.md.MaternityCalculationsAPI.Models.Entities.Patient;
 
 import java.io.IOException;
@@ -38,5 +40,31 @@ public class GetApiEntities {
             });
         }
         return patients;
+    }
+
+    public HttpResponse<String> getAdmissionById(Integer id) throws IOException, InterruptedException {
+        HttpClient httpClient = HttpClient.newBuilder().build();
+
+        // Making Request & Performing GET Req
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://web.socem.plymouth.ac.uk/COMP2005/api/Admissions/" + id))
+                .GET()
+                .build();
+
+        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+    }
+
+    public Admission parseAdmission(HttpResponse<String> res) throws JsonProcessingException {
+        Admission admission = new Admission();
+        if (res != null && res.statusCode() == 200) {
+            String rawJSON = res.body();
+
+            // Mapping to the Deserialized Object
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JavaTimeModule());
+            admission = mapper.readValue(rawJSON, new TypeReference<Admission>() {
+            });
+        }
+        return admission;
     }
 }
