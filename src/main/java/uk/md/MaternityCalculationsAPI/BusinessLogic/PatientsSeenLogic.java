@@ -27,12 +27,9 @@ public class PatientsSeenLogic {
         // We have all data needed
 
         // Get Unfiltered List
-        List<PatientCustom> unfilteredList = getFilteredPatientsByEmployeeID(EmployeeID, allAllocations, allAdmissions, allPatients);
+        List<PatientCustom> unfilteredList = getNotFilteredPatientsByEmployeeID(EmployeeID, allAllocations, allAdmissions, allPatients);
 
         // Filter Patients to be unique
-        List<PatientCustom> filtered = filter(unfilteredList);
-
-
-        return null;
+        return filter(unfilteredList);
     }
 }
