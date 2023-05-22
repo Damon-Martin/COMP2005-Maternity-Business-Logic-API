@@ -46,8 +46,10 @@ public class PatientsSeenLogicTest {
         String rawAdmissionJson = "[ { \"id\": 1, \"admissionDate\": \"2020-11-28T16:45:00\", \"dischargeDate\": \"2020-11-28T23:56:00\", \"patientID\": 1 }, { \"id\": 2, \"admissionDate\": \"2020-12-07T22:14:00\", \"dischargeDate\": \"2021-01-05T19:15:05\", \"patientID\": 1 }, { \"id\": 3, \"admissionDate\": \"2020-09-23T21:50:00\", \"dischargeDate\": \"2020-09-27T09:56:00\", \"patientID\": 2 }, { \"id\": 4, \"admissionDate\": \"2021-09-23T21:50:00\", \"dischargeDate\": \"2021-09-27T09:56:00\", \"patientID\": 1 }, { \"id\": 5, \"admissionDate\": \"2023-09-23T21:50:00\", \"dischargeDate\": \"2023-09-27T09:56:00\", \"patientID\": 3 } ]";
 
         // Allocations: Employees to Admissions
-        String rawAllocationsJson = "";
-        // Parsing & saving
+        String rawAllocationsJson = "[ { \"id\": 1, \"admissionID\": 1, \"employeeID\": 1, \"startTime\": \"2020-11-28T16:45:00\", \"endTime\": \"2020-11-28T23:56:00\"} ,  { \"id\": 2, \"admissionID\": 2, \"employeeID\": 1, \"startTime\": \"2020-12-07T22:14:00\", \"endTime\": \"2021-01-05T19:15:05\"}, { \"id\": 3, \"admissionID\": 3, \"employeeID\": 2, \"startTime\": \"2020-09-23T21:50:00\", \"endTime\": \"2020-09-27T09:56:00\"} , { \"id\": 5, \"admissionID\": 5, \"employeeID\": 2, \"startTime\": \"2023-09-23T21:50:00\", \"endTime\": \"2023-09-27T09:56:00\"} ]";
+
+        // Parsing & Saving using mock HttpRequests
+        
 
     }
 
