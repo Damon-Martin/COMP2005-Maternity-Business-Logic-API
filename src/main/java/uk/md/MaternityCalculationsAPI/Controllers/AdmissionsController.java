@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import uk.md.MaternityCalculationsAPI.BusinessLogic.BusiestDayLogic;
 import uk.md.MaternityCalculationsAPI.BusinessLogic.DischargedQuickLogic;
 import uk.md.MaternityCalculationsAPI.Models.DischargedQuick;
 import uk.md.MaternityCalculationsAPI.Models.Entities.Admission;
 
 import java.io.IOException;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -68,11 +70,16 @@ public class AdmissionsController {
         return null;
     }
 
-    // Provide Week: Returns the busiest day
+    // Provide Week: Returns the busiest day based on Mode
+    // Single Busiest Day: ["Monday"] (If Monday is busiest)
+    // If the busiest days are equal: Return Both Days
+    // ["Monday", "Wednesday"] (If Mon & Wed are Both Busiest & Equal)
     @GetMapping("BusiestDayOfWeek")
     @ApiOperation(value = "Returns the calculated avg busiest day of the week",
-            notes = "Based on the Maternity '/Admissions' Endpoint: Loops through the List and Calculates the frequency of days in a hash table (e.g 'Mon: 4, Tues:2, Wed: 10...'). Then Returns the busiest day.")
-    public String BusiestDayOfWeek() {
-        return null;
+            notes = "Based on the Maternity '/Admissions' Endpoint: Loops through the List and Calculates the frequency of days in a hash table (e.g 'Mon: 4, Tues:2, Wed: 10...'). Then Returns the busiest day or days. Example Responses ['Monday'] if only Mon is Busiest or ['Wednesday','Thursday'] if Wed & Thus are equal & Busiest")
+    public List<String> BusiestDayOfWeek() {
+        // Run Busiest Day Logic
+        BusiestDayLogic logicObj = new BusiestDayLogic();
+        return logicObj.calculateBusiestDay();
     }
 }
