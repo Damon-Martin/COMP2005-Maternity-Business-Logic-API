@@ -33,10 +33,35 @@ public class BusiestDayLogic {
 
 
     // Merges all testable functions for ease of use
-    public List<String> calculateBusiestDay(List<Admission> allAllocations) {
+    public List<String> calculateBusiestDay(List<Admission> allAdmissionsBeforeFilter) {
         List<String> busiestDay = new ArrayList<String>();
 
+        // Filter Bad Date Orders
+        List<Admission> allAdmissions = new ArrayList<Admission>();
+        allAdmissionsBeforeFilter.forEach( admission -> {
+            DischargedQuickLogic logicObj = new DischargedQuickLogic();
+            Boolean datesOrder = logicObj.isStartDateBeforeEndDate(admission.admissionDate, admission.dischargeDate);
+            if (datesOrder) {
+                allAdmissions.add(admission);
+            }
+        });
+
         // All Logic here
+        Map<String, Integer> weekdayFrequency = calculateFrequencyOfDays(allAdmissions);
+
+        // Look for the max frequency in the map
+        // if there are multiple with that value. Then return all.
+
+        final Integer[] maxFreq = {0}; // Holds a single Integer: Work around for lambda expression
+        weekdayFrequency.forEach((weekday, freq) -> {
+            if (freq > maxFreq[0]) {
+                maxFreq[0] = freq;
+                busiestDay.clear();
+                busiestDay.add(weekday);
+            } else if (freq.equals(maxFreq[0])) {
+                busiestDay.add(weekday);
+            }
+        });
 
         return busiestDay;
     }
