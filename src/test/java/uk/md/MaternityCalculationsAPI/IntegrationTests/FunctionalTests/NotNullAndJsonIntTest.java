@@ -43,14 +43,14 @@ class NotNullAndJsonIntTest {
 
     @Test
     void test_patients_seen_by_staff_IsHttpSuccess() throws Exception {
-        RequestBuilder req = MockMvcRequestBuilders.get("/api/PatientsSeenByStaff");
+        RequestBuilder req = MockMvcRequestBuilders.get("/api/PatientsSeen/4");
 
         MvcResult res = this.mvc.perform(req).andExpect(status().isOk()).andReturn();
     }
 
     @Test
     void test_patients_seen_by_staff_is_JSON() throws Exception {
-        RequestBuilder req = MockMvcRequestBuilders.get("/api/PatientsSeenByStaff");
+        RequestBuilder req = MockMvcRequestBuilders.get("/api/PatientsSeen/4");
 
         MvcResult res = this.mvc.perform(req).andReturn();
 

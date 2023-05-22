@@ -8,10 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import uk.md.MaternityCalculationsAPI.BusinessLogic.BusiestDayLogic;
 import uk.md.MaternityCalculationsAPI.BusinessLogic.DischargedQuickLogic;
 import uk.md.MaternityCalculationsAPI.Models.DischargedQuick;
@@ -26,11 +23,11 @@ import java.util.List;
 @RequestMapping("api/")
 @Api(value = "Responsible for all business logic calculations")
 public class AdmissionsController {
-    private GetApiLists _httpHandler = new GetApiLists();
+    private final GetApiLists _httpHandler = new GetApiLists();
 
-    @GetMapping("PatientsSeenByStaff")
-    @ApiOperation(value = "Based on EmployeeID: Returns a list unique patient IDs that have visited the staff")
-    public String PatientsSeenByStaff() {
+    @GetMapping("PatientsSeen/{id}")
+    @ApiOperation(value = "Based on EmployeeID: Returns a list unique patients that have visited the staff (Model same as Discharged Quickly). Each Allocation in Allocations, loops through and matches EmployeeID. If it is found it will get Admission by ID and look at PatientID. If the Patient is unique add to List of Model.")
+    public String PatientsSeenByStaff(@RequestParam("id") int EmployeeID) {
         return null;
     }
 
