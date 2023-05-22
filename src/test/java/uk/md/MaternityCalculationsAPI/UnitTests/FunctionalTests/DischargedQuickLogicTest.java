@@ -4,8 +4,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import uk.md.MaternityCalculationsAPI.BusinessLogic.DischargedQuickLogic;
+import uk.md.MaternityCalculationsAPI.Models.DischargedQuick;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -50,10 +53,44 @@ class DischargedQuickLogicTest {
         fail("Test Not Implemented");
     }
 
-    // Code Needs to be implemented to filter them out
+    // Code Needs to be implemented to filter them out by PatientID
+    // Make Array of Test Data with Duplicates
+    // Basically pass in an array list of models into the function
+    // Check if that the return array only has 1 model of each patient
     @Test
     void test_no_duplicate_patients_for_discharged_quickly() {
-        fail("No Duplicate Patients Checker: Test Not Implemented");
+        // Arrange
+        List<DischargedQuick> dummyListData = new ArrayList<DischargedQuick>();
+
+        DischargedQuick patientInstance1 = new DischargedQuick();
+        patientInstance1.setPatientID(1);
+        patientInstance1.setNhsNumber("1111111");
+        patientInstance1.setForename("Dennis");
+        patientInstance1.setSurname("Smith");
+
+        // Should be ignored
+        DischargedQuick patientInstance2 = new DischargedQuick();
+        patientInstance2.setPatientID(1);
+        patientInstance2.setNhsNumber("1111111");
+        patientInstance2.setForename("Dennis");
+        patientInstance2.setSurname("Smith");
+
+        DischargedQuick patientInstance3 = new DischargedQuick();
+        patientInstance3.setPatientID(4);
+        patientInstance3.setNhsNumber("191525");
+        patientInstance3.setForename("David");
+        patientInstance3.setSurname("Keene");
+
+        dummyListData.add(patientInstance1);
+        dummyListData.add(patientInstance2);
+        dummyListData.add(patientInstance3);
+
+        // Act
+        DischargedQuickLogic logicObj = new DischargedQuickLogic();
+        List<DischargedQuick> filtered_patient_li = logicObj.filter_patient_duplicates(dummyListData);
+
+        // Assert no duplicates of Patient ID
+        Assertions.assertEquals(2, filtered_patient_li.size());
     }
 
     @Test

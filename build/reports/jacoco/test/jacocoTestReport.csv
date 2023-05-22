@@ -1,7 +1,7 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-MaternityCalculationsAPI,uk.md.MaternityCalculationsAPI.BusinessLogic,DischargedQuickLogic,106,0,6,0,25,0,9,0,6,0
-MaternityCalculationsAPI,uk.md.MaternityCalculationsAPI.Models,DischargedQuick,31,0,0,0,13,0,9,0,9,0
-MaternityCalculationsAPI,uk.md.MaternityCalculationsAPI,Main,5,3,0,0,2,1,1,1,1,1
+MaternityCalculationsAPI,uk.md.MaternityCalculationsAPI.BusinessLogic,DischargedQuickLogic,105,33,6,2,24,9,8,4,5,3
+MaternityCalculationsAPI,uk.md.MaternityCalculationsAPI.Models,DischargedQuick,9,22,0,0,3,10,3,6,3,6
+MaternityCalculationsAPI,uk.md.MaternityCalculationsAPI,Main,8,0,0,0,3,0,2,0,2,0
 MaternityCalculationsAPI,uk.md.MaternityCalculationsAPI.Config,SpringfoxConfig,29,0,0,0,8,0,3,0,3,0
 MaternityCalculationsAPI,uk.md.MaternityCalculationsAPI.Models.Entities,Patient,31,0,0,0,13,0,9,0,9,0
 MaternityCalculationsAPI,uk.md.MaternityCalculationsAPI.Models.Entities,Admission,31,0,0,0,13,0,9,0,9,0
@@ -13,5 +13,5 @@ MaternityCalculationsAPI,uk.md.MaternityCalculationsAPI.Controllers,GetApiLists.
 MaternityCalculationsAPI,uk.md.MaternityCalculationsAPI.Controllers,GetApiLists.new TypeReference() {...},6,0,0,0,1,0,1,0,1,0
 MaternityCalculationsAPI,uk.md.MaternityCalculationsAPI.Controllers,GetApiEntities.new TypeReference() {...},6,0,0,0,1,0,1,0,1,0
 MaternityCalculationsAPI,uk.md.MaternityCalculationsAPI.Controllers,GetApiEntities,48,0,4,0,13,0,5,0,3,0
-MaternityCalculationsAPI,uk.md.MaternityCalculationsAPI.Controllers,GetApiLists,188,3,16,0,50,1,16,1,8,1
-MaternityCalculationsAPI,uk.md.MaternityCalculationsAPI.Controllers,AdmissionsController,57,10,4,0,13,3,5,2,3,2
+MaternityCalculationsAPI,uk.md.MaternityCalculationsAPI.Controllers,GetApiLists,191,0,16,0,51,0,17,0,9,0
+MaternityCalculationsAPI,uk.md.MaternityCalculationsAPI.Controllers,AdmissionsController,67,0,4,0,16,0,7,0,5,0

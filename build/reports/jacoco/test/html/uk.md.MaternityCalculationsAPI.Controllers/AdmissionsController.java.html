@@ -23,8 +23,8 @@ import java.util.List;
 @RestController
 @RequestMapping(&quot;api/&quot;)
 @Api(value = &quot;Responsible for all business logic calculations&quot;)
-<span class="fc" id="L26">public class AdmissionsController {</span>
-<span class="fc" id="L27">    private GetApiLists _httpHandler = new GetApiLists();</span>
+<span class="nc" id="L26">public class AdmissionsController {</span>
+<span class="nc" id="L27">    private GetApiLists _httpHandler = new GetApiLists();</span>
 
     @GetMapping(&quot;PatientsSeenByStaff&quot;)
     @ApiOperation(value = &quot;Based on EmployeeID: Returns a list unique patient IDs that have visited the staff&quot;)
@@ -73,7 +73,7 @@ import java.util.List;
     @ApiOperation(value = &quot;Returns the calculated avg busiest day of the week&quot;,
             notes = &quot;Based on the Maternity '/Admissions' Endpoint: Loops through the List and Calculates the frequency of days in a hash table (e.g 'Mon: 4, Tues:2, Wed: 10...'). Then Returns the busiest day.&quot;)
     public String BusiestDayOfWeek() {
-<span class="fc" id="L76">        return null;</span>
+<span class="nc" id="L76">        return null;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -32,6 +32,22 @@ public class DischargedQuickLogic {
         return startDate.isBefore(endDate);
     }
 
+    // Returns Filtered List
+    public List<DischargedQuick> filter_patient_duplicates(List<DischargedQuick> unfiltered_patient_li) {
+        List<Integer> listOfPatientIDs = new ArrayList<Integer>();
+        List<DischargedQuick> temp = new ArrayList<DischargedQuick>();
+        unfiltered_patient_li.forEach( DischargedQuick -> {
+            // New Patient: If true
+            if (!listOfPatientIDs.contains(DischargedQuick.getPatientID())){
+                listOfPatientIDs.add(DischargedQuick.getPatientID());
+                temp.add(DischargedQuick);
+            }
+            // Patient Already Exists: Ignore it & it won't add the duplicate
+        });
+
+        return temp;
+    }
+
     // We can mock allAdmissions for Testing
     // This is a Component: It combines multiple Units together
     public List<DischargedQuick> calculateDischargedQuick(List<Admission> allAdmissions)  {
@@ -47,7 +63,6 @@ public class DischargedQuickLogic {
                 // Perform Calculations & Build Object
                 DischargedQuick fastPatientCase = new DischargedQuick();
                 fastPatientCase.setPatientID(Admission.getPatientID());
-                fastPatientCase.setAdmissionID(Admission.getId());
 
                 // Fetch Patient Name
                 GetApiEntities EntityHandler = new GetApiEntities();
@@ -55,6 +70,7 @@ public class DischargedQuickLogic {
                     HttpResponse<String> res = EntityHandler.getPatientById(fastPatientCase.getPatientID());
                     Patient currentPatient = EntityHandler.parsePatientById(res);
 
+                    fastPatientCase.setNhsNumber(currentPatient.getNhsNumber());
                     fastPatientCase.setForename(currentPatient.getForename());
                     fastPatientCase.setSurname(currentPatient.getSurname());
                 } catch (IOException | InterruptedException e) {
@@ -65,6 +81,9 @@ public class DischargedQuickLogic {
                 dischargedQuickList.add(fastPatientCase);
             }
         });
-        return dischargedQuickList;
+
+
+        // Filter dischargedQuickList Patients to only have 1 instance of each PatientID
+        return filter_patient_duplicates(dischargedQuickList);
     }
 }

@@ -2,7 +2,7 @@ package uk.md.MaternityCalculationsAPI.Models;
 
 public class DischargedQuick {
     public Integer patientID;
-    public Integer admissionID;
+    public String nhsNumber;
     public String surname;
     public String forename;
 
@@ -14,12 +14,12 @@ public class DischargedQuick {
         this.patientID = patientID;
     }
 
-    public Integer getAdmissionID() {
-        return admissionID;
+    public String getNhsNumber() {
+        return nhsNumber;
     }
 
-    public void setAdmissionID(Integer admissionID) {
-        this.admissionID = admissionID;
+    public void setNhsNumber(String nhsNumber) {
+        this.nhsNumber = nhsNumber;
     }
 
     public String getSurname() {
