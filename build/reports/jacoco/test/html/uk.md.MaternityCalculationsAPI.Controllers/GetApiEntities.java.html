@@ -13,31 +13,31 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-<span class="fc" id="L16">public class GetApiEntities {</span>
+<span class="nc" id="L16">public class GetApiEntities {</span>
     // If it's Empty we would have an Empty Array. Therefore, can't be null.
     public HttpResponse&lt;String&gt; getPatientById(Integer id) throws IOException, InterruptedException {
-<span class="fc" id="L19">        HttpClient httpClient = HttpClient.newBuilder().build();</span>
+<span class="nc" id="L19">        HttpClient httpClient = HttpClient.newBuilder().build();</span>
 
         // Making Request &amp; Performing GET Req
-<span class="fc" id="L22">        HttpRequest request = HttpRequest.newBuilder()</span>
-<span class="fc" id="L23">                .uri(URI.create(&quot;https://web.socem.plymouth.ac.uk/COMP2005/api/Patients/&quot; + id))</span>
-<span class="fc" id="L24">                .GET()</span>
-<span class="fc" id="L25">                .build();</span>
+<span class="nc" id="L22">        HttpRequest request = HttpRequest.newBuilder()</span>
+<span class="nc" id="L23">                .uri(URI.create(&quot;https://web.socem.plymouth.ac.uk/COMP2005/api/Patients/&quot; + id))</span>
+<span class="nc" id="L24">                .GET()</span>
+<span class="nc" id="L25">                .build();</span>
 
-<span class="fc" id="L27">        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());</span>
+<span class="nc" id="L27">        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());</span>
     }
 
     public Patient parsePatientById(HttpResponse&lt;String&gt; res) throws JsonProcessingException {
-<span class="fc" id="L31">        Patient patients = new Patient();</span>
-<span class="pc bpc" id="L32" title="2 of 4 branches missed.">        if (res != null &amp;&amp; res.statusCode() == 200) {</span>
-<span class="fc" id="L33">            String rawJSON = res.body();</span>
+<span class="nc" id="L31">        Patient patients = new Patient();</span>
+<span class="nc bnc" id="L32" title="All 4 branches missed.">        if (res != null &amp;&amp; res.statusCode() == 200) {</span>
+<span class="nc" id="L33">            String rawJSON = res.body();</span>
 
             // Mapping to the Deserialized Object
-<span class="fc" id="L36">            ObjectMapper mapper = new ObjectMapper();</span>
-<span class="fc" id="L37">            patients = mapper.readValue(rawJSON, new TypeReference&lt;Patient&gt;() {</span>
+<span class="nc" id="L36">            ObjectMapper mapper = new ObjectMapper();</span>
+<span class="nc" id="L37">            patients = mapper.readValue(rawJSON, new TypeReference&lt;Patient&gt;() {</span>
             });
         }
-<span class="fc" id="L40">        return patients;</span>
+<span class="nc" id="L40">        return patients;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

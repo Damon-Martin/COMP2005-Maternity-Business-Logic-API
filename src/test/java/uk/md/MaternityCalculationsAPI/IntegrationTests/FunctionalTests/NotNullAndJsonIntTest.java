@@ -11,12 +11,13 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import uk.md.MaternityCalculationsAPI.Controllers.AdmissionsController;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(AdmissionsController.class)
-class NotNullJsonIntTest {
+class NotNullAndJsonIntTest {
     @Autowired
     MockMvc mvc;
 
@@ -36,7 +37,7 @@ class NotNullJsonIntTest {
 
         MvcResult res = this.mvc.perform(req).andReturn();
 
-        Assertions.assertEquals("application/json;charset=UTF-8", res.getResponse().getContentType());
+        Assertions.assertEquals("application/json", res.getResponse().getContentType());
     }
 
 
@@ -53,7 +54,7 @@ class NotNullJsonIntTest {
 
         MvcResult res = this.mvc.perform(req).andReturn();
 
-        Assertions.assertEquals("application/json;charset=UTF-8", res.getResponse().getContentType());
+        Assertions.assertEquals("application/json", res.getResponse().getContentType());
     }
 
     @Test
@@ -69,7 +70,7 @@ class NotNullJsonIntTest {
 
         MvcResult res = this.mvc.perform(req).andReturn();
 
-        Assertions.assertEquals("application/json;charset=UTF-8", res.getResponse().getContentType());
+        Assertions.assertEquals("application/json", res.getResponse().getContentType());
     }
 
     @Test
@@ -85,6 +86,6 @@ class NotNullJsonIntTest {
 
         MvcResult res = this.mvc.perform(req).andReturn();
 
-        Assertions.assertEquals("application/json;charset=UTF-8", res.getResponse().getContentType());
+        Assertions.assertEquals("application/json", res.getResponse().getContentType());
     }
 }
