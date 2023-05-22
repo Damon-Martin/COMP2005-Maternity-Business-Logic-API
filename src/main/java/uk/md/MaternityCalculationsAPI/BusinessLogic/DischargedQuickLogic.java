@@ -47,7 +47,6 @@ public class DischargedQuickLogic {
                 // Perform Calculations & Build Object
                 DischargedQuick fastPatientCase = new DischargedQuick();
                 fastPatientCase.setPatientID(Admission.getPatientID());
-                fastPatientCase.setAdmissionID(Admission.getId());
 
                 // Fetch Patient Name
                 GetApiEntities EntityHandler = new GetApiEntities();
@@ -55,6 +54,7 @@ public class DischargedQuickLogic {
                     HttpResponse<String> res = EntityHandler.getPatientById(fastPatientCase.getPatientID());
                     Patient currentPatient = EntityHandler.parsePatientById(res);
 
+                    fastPatientCase.setNhsNumber(currentPatient.getNhsNumber());
                     fastPatientCase.setForename(currentPatient.getForename());
                     fastPatientCase.setSurname(currentPatient.getSurname());
                 } catch (IOException | InterruptedException e) {
