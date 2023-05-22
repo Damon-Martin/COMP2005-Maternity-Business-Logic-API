@@ -1,4 +1,4 @@
-package uk.md.MaternityCalculationsAPI.UnitTests;
+package uk.md.MaternityCalculationsAPI.UnitTests.FunctionalTests;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class AdmissionsListParsing {
+public class AdmissionsListParsingTest {
 
     // Using Dummy data and a Stubbing
     // Using Acceptable Parsable Data

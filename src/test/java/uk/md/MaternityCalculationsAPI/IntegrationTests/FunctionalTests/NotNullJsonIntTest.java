@@ -1,4 +1,4 @@
-package uk.md.MaternityCalculationsAPI.FunctionalTests;
+package uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(AdmissionsController.class)
-class BasicFunctionalTest {
+class NotNullJsonIntTest {
     @Autowired
     MockMvc mvc;
 

@@ -20,13 +20,13 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">3</div>
+<div class="counter">22</div>
 <p>tests</p>
 </div>
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">0</div>
+<div class="counter">9</div>
 <p>failures</p>
 </div>
 </td>
@@ -38,7 +38,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">1.194s</div>
+<div class="counter">4.661s</div>
 <p>duration</p>
 </div>
 </td>
@@ -47,8 +47,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox success" id="successRate">
-<div class="percent">100%</div>
+<div class="infoBox failures" id="successRate">
+<div class="percent">59%</div>
 <p>successful</p>
 </div>
 </td>
@@ -58,13 +58,57 @@
 <div id="tabs">
 <ul class="tabLinks">
 <li>
-<a href="#tab0">Packages</a>
+<a href="#tab0">Failed tests</a>
 </li>
 <li>
-<a href="#tab1">Classes</a>
+<a href="#tab1">Packages</a>
+</li>
+<li>
+<a href="#tab2">Classes</a>
 </li>
 </ul>
 <div id="tab0" class="tab">
+<h2>Failed tests</h2>
+<ul class="linkList">
+<li>
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.AdmissionsControllerIntTest.html">AdmissionsControllerIntTest</a>.
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.AdmissionsControllerIntTest.html#test_api_to_api_admissions_list_body_not_null()">test_api_to_api_admissions_list_body_not_null()</a>
+</li>
+<li>
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.DischargedQuicklyIntTest.html">DischargedQuicklyIntTest</a>.
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.DischargedQuicklyIntTest.html#test_quick_discharge_blocks_invalid_date_orders()">test_quick_discharge_blocks_invalid_date_orders()</a>
+</li>
+<li>
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.DischargedQuicklyIntTest.html">DischargedQuicklyIntTest</a>.
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.DischargedQuicklyIntTest.html#test_quick_discharge_is_correct_json_format()">test_quick_discharge_is_correct_json_format()</a>
+</li>
+<li>
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.NotNullJsonIntTest.html">NotNullJsonIntTest</a>.
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.NotNullJsonIntTest.html#test_avg_durationByStaff_is_JSON()">test_avg_durationByStaff_is_JSON()</a>
+</li>
+<li>
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.NotNullJsonIntTest.html">NotNullJsonIntTest</a>.
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.NotNullJsonIntTest.html#test_busiest_day_of_week_is_JSON()">test_busiest_day_of_week_is_JSON()</a>
+</li>
+<li>
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.NotNullJsonIntTest.html">NotNullJsonIntTest</a>.
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.NotNullJsonIntTest.html#test_patients_seen_by_staff_is_JSON()">test_patients_seen_by_staff_is_JSON()</a>
+</li>
+<li>
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.NotNullJsonIntTest.html">NotNullJsonIntTest</a>.
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.NotNullJsonIntTest.html#test_quick_discharge_is_JSON()">test_quick_discharge_is_JSON()</a>
+</li>
+<li>
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.NonFunctionalTests.PerformanceIntTest.html">PerformanceIntTest</a>.
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.NonFunctionalTests.PerformanceIntTest.html#dischargedQuickly_below_150ms()">dischargedQuickly_below_150ms()</a>
+</li>
+<li>
+<a href="classes/uk.md.MaternityCalculationsAPI.UnitTests.FunctionalTests.DischargedQuickLogicTest.html">DischargedQuickLogicTest</a>.
+<a href="classes/uk.md.MaternityCalculationsAPI.UnitTests.FunctionalTests.DischargedQuickLogicTest.html#test_if_admitted_before_discharged_is_ignored_in_return_list()">test_if_admitted_before_discharged_is_ignored_in_return_list()</a>
+</li>
+</ul>
+</div>
+<div id="tab1" class="tab">
 <h2>Packages</h2>
 <table>
 <thead>
@@ -79,19 +123,39 @@
 </thead>
 <tbody>
 <tr>
-<td class="success">
-<a href="packages/uk.md.MaternityCalculationsAPI.UnitTests.html">uk.md.MaternityCalculationsAPI.UnitTests</a>
+<td class="failures">
+<a href="packages/uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.html">uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests</a>
 </td>
-<td>3</td>
+<td>11</td>
+<td>7</td>
 <td>0</td>
+<td>4.239s</td>
+<td class="failures">36%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="packages/uk.md.MaternityCalculationsAPI.IntegrationTests.NonFunctionalTests.html">uk.md.MaternityCalculationsAPI.IntegrationTests.NonFunctionalTests</a>
+</td>
+<td>1</td>
+<td>1</td>
 <td>0</td>
-<td>1.194s</td>
-<td class="success">100%</td>
+<td>0.002s</td>
+<td class="failures">0%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="packages/uk.md.MaternityCalculationsAPI.UnitTests.FunctionalTests.html">uk.md.MaternityCalculationsAPI.UnitTests.FunctionalTests</a>
+</td>
+<td>10</td>
+<td>1</td>
+<td>0</td>
+<td>0.420s</td>
+<td class="failures">90%</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="tab1" class="tab">
+<div id="tab2" class="tab">
 <h2>Classes</h2>
 <table>
 <thead>
@@ -106,14 +170,64 @@
 </thead>
 <tbody>
 <tr>
+<td class="failures">
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.AdmissionsControllerIntTest.html">uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.AdmissionsControllerIntTest</a>
+</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0.777s</td>
+<td class="failures">0%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.DischargedQuicklyIntTest.html">uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.DischargedQuicklyIntTest</a>
+</td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+<td>0.027s</td>
+<td class="failures">0%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.NotNullJsonIntTest.html">uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.NotNullJsonIntTest</a>
+</td>
+<td>8</td>
+<td>4</td>
+<td>0</td>
+<td>3.435s</td>
+<td class="failures">50%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.NonFunctionalTests.PerformanceIntTest.html">uk.md.MaternityCalculationsAPI.IntegrationTests.NonFunctionalTests.PerformanceIntTest</a>
+</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0.002s</td>
+<td class="failures">0%</td>
+</tr>
+<tr>
 <td class="success">
-<a href="classes/uk.md.MaternityCalculationsAPI.UnitTests.MockApiParsing.html">uk.md.MaternityCalculationsAPI.UnitTests.MockApiParsing</a>
+<a href="classes/uk.md.MaternityCalculationsAPI.UnitTests.FunctionalTests.AdmissionsListParsingTest.html">uk.md.MaternityCalculationsAPI.UnitTests.FunctionalTests.AdmissionsListParsingTest</a>
 </td>
 <td>3</td>
 <td>0</td>
 <td>0</td>
-<td>1.194s</td>
+<td>0.401s</td>
 <td class="success">100%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="classes/uk.md.MaternityCalculationsAPI.UnitTests.FunctionalTests.DischargedQuickLogicTest.html">uk.md.MaternityCalculationsAPI.UnitTests.FunctionalTests.DischargedQuickLogicTest</a>
+</td>
+<td>7</td>
+<td>1</td>
+<td>0</td>
+<td>0.019s</td>
+<td class="failures">85%</td>
 </tr>
 </tbody>
 </table>
@@ -126,7 +240,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.6.1</a> at 21 May 2023, 07:01:22</p>
+<a href="http://www.gradle.org">Gradle 7.6.1</a> at 22 May 2023, 04:34:22</p>
 </div>
 </div>
 </body>

@@ -1,4 +1,4 @@
-package uk.md.MaternityCalculationsAPI.UnitTests;
+package uk.md.MaternityCalculationsAPI.UnitTests.FunctionalTests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -48,6 +48,12 @@ class DischargedQuickLogicTest {
     @Test
     void test_if_admitted_before_discharged_is_ignored_in_return_list() {
         fail("Test Not Implemented");
+    }
+
+    // Code Needs to be implemented to filter them out
+    @Test
+    void test_no_duplicate_patients_for_discharged_quickly() {
+        fail("No Duplicate Patients Checker: Test Not Implemented");
     }
 
     @Test
