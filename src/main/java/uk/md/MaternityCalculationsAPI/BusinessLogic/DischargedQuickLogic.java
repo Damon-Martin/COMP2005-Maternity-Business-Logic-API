@@ -32,6 +32,10 @@ public class DischargedQuickLogic {
         return startDate.isBefore(endDate);
     }
 
+    public List<DischargedQuick> filter_patient_duplicates() {
+        return null;
+    }
+
     // We can mock allAdmissions for Testing
     // This is a Component: It combines multiple Units together
     public List<DischargedQuick> calculateDischargedQuick(List<Admission> allAdmissions)  {
@@ -65,6 +69,12 @@ public class DischargedQuickLogic {
                 dischargedQuickList.add(fastPatientCase);
             }
         });
+
+
+        // Filter dischargedQuickList Patients to only have 1 instance of each PatientID
+
+
+
         return dischargedQuickList;
     }
 }

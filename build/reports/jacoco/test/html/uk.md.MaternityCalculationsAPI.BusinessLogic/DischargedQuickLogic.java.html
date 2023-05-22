@@ -32,40 +32,50 @@ import java.util.List;
 <span class="fc" id="L32">        return startDate.isBefore(endDate);</span>
     }
 
+    public List&lt;DischargedQuick&gt; filter_patient_duplicates() {
+<span class="fc" id="L36">        return null;</span>
+    }
+
     // We can mock allAdmissions for Testing
     // This is a Component: It combines multiple Units together
     public List&lt;DischargedQuick&gt; calculateDischargedQuick(List&lt;Admission&gt; allAdmissions)  {
-<span class="fc" id="L38">        List&lt;DischargedQuick&gt; dischargedQuickList = new ArrayList&lt;DischargedQuick&gt;();</span>
-<span class="fc" id="L39">        allAdmissions.forEach(Admission -&gt; {</span>
-<span class="fc" id="L40">            LocalDateTime currentStartDate = Admission.getAdmissionDate();</span>
-<span class="fc" id="L41">            LocalDateTime currentEndDate = Admission.getDischargeDate();</span>
+<span class="fc" id="L42">        List&lt;DischargedQuick&gt; dischargedQuickList = new ArrayList&lt;DischargedQuick&gt;();</span>
+<span class="fc" id="L43">        allAdmissions.forEach(Admission -&gt; {</span>
+<span class="fc" id="L44">            LocalDateTime currentStartDate = Admission.getAdmissionDate();</span>
+<span class="fc" id="L45">            LocalDateTime currentEndDate = Admission.getDischargeDate();</span>
 
-<span class="fc" id="L43">            Integer daysAdmitted = calculateDaysInHospital(currentStartDate, currentEndDate);</span>
+<span class="fc" id="L47">            Integer daysAdmitted = calculateDaysInHospital(currentStartDate, currentEndDate);</span>
 
             // Check start is before End Date
-<span class="fc bfc" id="L46" title="All 4 branches covered.">            if (isQuick(daysAdmitted) &amp;&amp; isStartDateBeforeEndDate(currentStartDate, currentEndDate)) {</span>
+<span class="fc bfc" id="L50" title="All 4 branches covered.">            if (isQuick(daysAdmitted) &amp;&amp; isStartDateBeforeEndDate(currentStartDate, currentEndDate)) {</span>
                 // Perform Calculations &amp; Build Object
-<span class="fc" id="L48">                DischargedQuick fastPatientCase = new DischargedQuick();</span>
-<span class="fc" id="L49">                fastPatientCase.setPatientID(Admission.getPatientID());</span>
+<span class="fc" id="L52">                DischargedQuick fastPatientCase = new DischargedQuick();</span>
+<span class="fc" id="L53">                fastPatientCase.setPatientID(Admission.getPatientID());</span>
 
                 // Fetch Patient Name
-<span class="fc" id="L52">                GetApiEntities EntityHandler = new GetApiEntities();</span>
+<span class="fc" id="L56">                GetApiEntities EntityHandler = new GetApiEntities();</span>
                 try {
-<span class="fc" id="L54">                    HttpResponse&lt;String&gt; res = EntityHandler.getPatientById(fastPatientCase.getPatientID());</span>
-<span class="fc" id="L55">                    Patient currentPatient = EntityHandler.parsePatientById(res);</span>
+<span class="fc" id="L58">                    HttpResponse&lt;String&gt; res = EntityHandler.getPatientById(fastPatientCase.getPatientID());</span>
+<span class="fc" id="L59">                    Patient currentPatient = EntityHandler.parsePatientById(res);</span>
 
-<span class="fc" id="L57">                    fastPatientCase.setNhsNumber(currentPatient.getNhsNumber());</span>
-<span class="fc" id="L58">                    fastPatientCase.setForename(currentPatient.getForename());</span>
-<span class="fc" id="L59">                    fastPatientCase.setSurname(currentPatient.getSurname());</span>
-<span class="nc" id="L60">                } catch (IOException | InterruptedException e) {</span>
-<span class="nc" id="L61">                    throw new RuntimeException(e);</span>
-<span class="fc" id="L62">                }</span>
+<span class="fc" id="L61">                    fastPatientCase.setNhsNumber(currentPatient.getNhsNumber());</span>
+<span class="fc" id="L62">                    fastPatientCase.setForename(currentPatient.getForename());</span>
+<span class="fc" id="L63">                    fastPatientCase.setSurname(currentPatient.getSurname());</span>
+<span class="nc" id="L64">                } catch (IOException | InterruptedException e) {</span>
+<span class="nc" id="L65">                    throw new RuntimeException(e);</span>
+<span class="fc" id="L66">                }</span>
 
                 // Adding To List
-<span class="fc" id="L65">                dischargedQuickList.add(fastPatientCase);</span>
+<span class="fc" id="L69">                dischargedQuickList.add(fastPatientCase);</span>
             }
-<span class="fc" id="L67">        });</span>
-<span class="fc" id="L68">        return dischargedQuickList;</span>
+<span class="fc" id="L71">        });</span>
+
+
+        // Filter dischargedQuickList Patients to only have 1 instance of each PatientID
+
+
+
+<span class="fc" id="L78">        return dischargedQuickList;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
