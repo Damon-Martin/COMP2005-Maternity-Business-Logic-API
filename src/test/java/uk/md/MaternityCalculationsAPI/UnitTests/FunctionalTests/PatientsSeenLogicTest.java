@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import uk.md.MaternityCalculationsAPI.BusinessLogic.BusiestDayLogic;
 import uk.md.MaternityCalculationsAPI.BusinessLogic.PatientsSeenLogic;
 import uk.md.MaternityCalculationsAPI.Controllers.GetApiLists;
 import uk.md.MaternityCalculationsAPI.Models.Entities.Admission;
@@ -24,6 +25,9 @@ import static org.mockito.Mockito.when;
 public class PatientsSeenLogicTest {
 
     // Dummy Instance: Default
+    // Info(For Default Case): Allocations has 5 items
+    // Employee 2 attends Allocations 1 & 2 & 3
+    // Allocations 1 & 3 are the same patient. However, the rest are diff patients (3 other)
     List<Allocation> dummyDataAllocations = new ArrayList<Allocation>();
     List<Admission> dummyDataAdmissions = new ArrayList<Admission>();
     List<Patient> dummyDataPatients = new ArrayList<Patient>();
@@ -68,26 +72,37 @@ public class PatientsSeenLogicTest {
 
         // Parsing Responses into List<Obj>
         GetApiLists listHttpHandler = new GetApiLists();
-        dummyDataAdmissions = listHttpHandler.parseAdmissionList(dummyAdmissionsHttpResponse);
-        dummyDataPatients = listHttpHandler.parsePatientsList(dummyPatientsHttpResponse);
-        dummyDataAllocations = listHttpHandler.parseAllocationList(dummyAllocationsHttpResponse);
+        this.dummyDataAdmissions = listHttpHandler.parseAdmissionList(dummyAdmissionsHttpResponse);
+        this.dummyDataPatients = listHttpHandler.parsePatientsList(dummyPatientsHttpResponse);
+        this.dummyDataAllocations = listHttpHandler.parseAllocationList(dummyAllocationsHttpResponse);
 
     }
 
     // Mock HttpResponse returns dummy data when called. There are duplicate Patients for Allocation in this example.
     // the unfiltered list creator is not responsible for removing bad values
     @Test
-    void unfiltered_list_test(){
+    void unfiltered_list_employee1_result_size_is_3(){
         //Arrange (Prepped in Constructor)
-
-        // Info(Not Essential): Allocations has 5 items
-        // Employee 2 attends Allocations 1 & 2 & 3
-        // Allocations 1 & 3 are the same patient. However, the rest are diff patients (3 other)
-
+        List<PatientCustom> result = new ArrayList<PatientCustom>();
+        int employeeId = 1; // Looking for 1
 
         // Act
+        PatientsSeenLogic logicObj = new PatientsSeenLogic();
+        result = logicObj.getNotFilteredPatientsByEmployeeID(employeeId, dummyDataAllocations, dummyDataAdmissions, dummyDataPatients);
 
+        Assertions.assertEquals(3, result.size());
+    }
 
-        Assertions.fail("Fail: Not Yet Implemented: " + "Patients: "+ dummyDataPatients.size() + ", Admissions: " + dummyDataAdmissions.size() + ", Allocations: " + dummyDataAllocations.size());
+    @Test
+    void unfiltered_list_employee2_result_size_is_2(){
+        //Arrange (Prepped in Constructor)
+        List<PatientCustom> result = new ArrayList<PatientCustom>();
+        int employeeId = 2; // Looking for 1
+
+        // Act
+        PatientsSeenLogic logicObj = new PatientsSeenLogic();
+        result = logicObj.getNotFilteredPatientsByEmployeeID(employeeId, dummyDataAllocations, dummyDataAdmissions, dummyDataPatients);
+
+        Assertions.assertEquals(2, result.size());
     }
 }
