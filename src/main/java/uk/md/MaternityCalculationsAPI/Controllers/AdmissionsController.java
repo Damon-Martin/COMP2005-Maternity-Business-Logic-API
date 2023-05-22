@@ -77,9 +77,27 @@ public class AdmissionsController {
     @GetMapping("BusiestDayOfWeek")
     @ApiOperation(value = "Returns the calculated avg busiest day of the week",
             notes = "Based on the Maternity '/Admissions' Endpoint: Loops through the List and Calculates the frequency of days in a hash table (e.g 'Mon: 4, Tues:2, Wed: 10...'). Then Returns the busiest day or days. Example Responses ['Monday'] if only Mon is Busiest or ['Wednesday','Thursday'] if Wed & Thus are equal & Busiest")
-    public List<String> BusiestDayOfWeek() {
-        // Run Busiest Day Logic
-        BusiestDayLogic logicObj = new BusiestDayLogic();
-        return logicObj.calculateBusiestDay();
+    public ResponseEntity<List<String>> BusiestDayOfWeek() throws IOException, InterruptedException {
+        // All Responses are JSON
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        // getting all allocations
+        HttpResponse<String> res = _httpHandler.getAdmissionsList();
+
+        // Checking if Successful or Error
+        if (res.statusCode() == 200) {
+            // Parsing Admissions
+            List<Admission> allAdmissions = _httpHandler.parseAdmissionList(res);
+
+            // Run Busiest Day Logic
+            BusiestDayLogic logicObj = new BusiestDayLogic();
+
+            return new ResponseEntity<>(logicObj.calculateBusiestDay(allAdmissions), headers, HttpStatus.OK);
+        }
+        else if (res.statusCode() == 404) {
+            return new ResponseEntity<>(null, headers, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(null, headers, HttpStatus.BAD_REQUEST);
     }
 }
