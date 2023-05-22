@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="uk.md.MaternityCalculationsAPI.UnitTests.FunctionalTests.AdmissionsListParsingTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2023-05-22T03:34:21" hostname="Damons-MacBook-Air.local" time="0.404">
+  <properties/>
+  <testcase name="test_get_admissions_parsing_acceptable_empty_and_len_zero()" classname="uk.md.MaternityCalculationsAPI.UnitTests.FunctionalTests.AdmissionsListParsingTest" time="0.386"/>
+  <testcase name="test_get_admissions_parsing_invalid_data_throws_json_parsing_error()" classname="uk.md.MaternityCalculationsAPI.UnitTests.FunctionalTests.AdmissionsListParsingTest" time="0.009"/>
+  <testcase name="test_get_admissions_parsing_acceptable_not_null()" classname="uk.md.MaternityCalculationsAPI.UnitTests.FunctionalTests.AdmissionsListParsingTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

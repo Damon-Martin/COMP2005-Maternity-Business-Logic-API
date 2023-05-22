@@ -1,4 +1,4 @@
-package uk.md.MaternityCalculationsAPI.IntegrationTests;
+package uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
