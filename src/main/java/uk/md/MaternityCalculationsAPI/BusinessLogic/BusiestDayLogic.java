@@ -2,9 +2,13 @@ package uk.md.MaternityCalculationsAPI.BusinessLogic;
 
 import uk.md.MaternityCalculationsAPI.Models.Entities.Admission;
 
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 // Which Day has most Admissions
 public class BusiestDayLogic {
@@ -12,9 +16,19 @@ public class BusiestDayLogic {
 
     // Testable Calculation Functions Here
     // Pass in
-    public HashMap<String,Integer> calculateFrequencyOfDays(List<Admission> allAllocations) {
+    public Map<String,Integer> calculateFrequencyOfDays(List<Admission> allAllocations) {
+        // List of weeks as list of enums
+        List<DayOfWeek> allWeekDaysInAllocations = allAllocations.stream()
+                .map(myObj -> myObj.admissionDate.getDayOfWeek())
+                .collect(Collectors.toList());
 
-        return null;
+        // Day Frequency
+        Map<String, Integer> dayFrequency = allWeekDaysInAllocations.stream()
+                .map(DayOfWeek::name)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.summingInt(e -> 1)));
+
+
+        return dayFrequency;
     }
 
 
