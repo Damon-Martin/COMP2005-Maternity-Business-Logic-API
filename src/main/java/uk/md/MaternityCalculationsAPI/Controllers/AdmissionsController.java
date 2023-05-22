@@ -11,12 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uk.md.MaternityCalculationsAPI.BusinessLogic.BusiestDayLogic;
 import uk.md.MaternityCalculationsAPI.BusinessLogic.DischargedQuickLogic;
-import uk.md.MaternityCalculationsAPI.Models.DischargedQuick;
+import uk.md.MaternityCalculationsAPI.Models.PatientCustom;
 import uk.md.MaternityCalculationsAPI.Models.Entities.Admission;
 
 import java.io.IOException;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -39,7 +38,7 @@ public class AdmissionsController {
                     @ApiResponse(code = 500, message = "Bad Request: Error Calculating Quick Discharge Patients List"),
                     @ApiResponse(code = 200, message = "Success: List of Patients discharged within 3 days")
             })
-    public ResponseEntity<List<DischargedQuick>> DischargedQuick() throws IOException, InterruptedException {
+    public ResponseEntity<List<PatientCustom>> DischargedQuick() throws IOException, InterruptedException {
         HttpResponse<String> res = _httpHandler.getAdmissionsList();
 
         // All Responses are JSON
@@ -51,7 +50,7 @@ public class AdmissionsController {
             List<Admission> allAdmissions = _httpHandler.parseAdmissionList(res);
             DischargedQuickLogic logicObj = new DischargedQuickLogic();
             
-            List<DischargedQuick> allDischargedQuick = logicObj.calculateDischargedQuick(allAdmissions);
+            List<PatientCustom> allDischargedQuick = logicObj.calculateDischargedQuick(allAdmissions);
 
             return new ResponseEntity<>(allDischargedQuick, headers, HttpStatus.OK);
         }

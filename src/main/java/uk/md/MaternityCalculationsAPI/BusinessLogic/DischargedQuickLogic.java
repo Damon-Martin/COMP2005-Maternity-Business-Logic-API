@@ -1,7 +1,7 @@
 package uk.md.MaternityCalculationsAPI.BusinessLogic;
 
 import uk.md.MaternityCalculationsAPI.Controllers.GetApiEntities;
-import uk.md.MaternityCalculationsAPI.Models.DischargedQuick;
+import uk.md.MaternityCalculationsAPI.Models.PatientCustom;
 import uk.md.MaternityCalculationsAPI.Models.Entities.Admission;
 import uk.md.MaternityCalculationsAPI.Models.Entities.Patient;
 
@@ -10,7 +10,6 @@ import java.net.http.HttpResponse;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class DischargedQuickLogic {
@@ -33,9 +32,9 @@ public class DischargedQuickLogic {
     }
 
     // Returns Filtered List
-    public List<DischargedQuick> filter_patient_duplicates(List<DischargedQuick> unfiltered_patient_li) {
+    public List<PatientCustom> filter_patient_duplicates(List<PatientCustom> unfiltered_patient_li) {
         List<Integer> listOfPatientIDs = new ArrayList<Integer>();
-        List<DischargedQuick> temp = new ArrayList<DischargedQuick>();
+        List<PatientCustom> temp = new ArrayList<PatientCustom>();
         unfiltered_patient_li.forEach( DischargedQuick -> {
             // New Patient: If true
             if (!listOfPatientIDs.contains(DischargedQuick.getPatientID())){
@@ -50,8 +49,8 @@ public class DischargedQuickLogic {
 
     // We can mock allAdmissions for Testing
     // This is a Component: It combines multiple Units together
-    public List<DischargedQuick> calculateDischargedQuick(List<Admission> allAdmissions)  {
-        List<DischargedQuick> dischargedQuickList = new ArrayList<DischargedQuick>();
+    public List<PatientCustom> calculateDischargedQuick(List<Admission> allAdmissions)  {
+        List<PatientCustom> dischargedQuickList = new ArrayList<PatientCustom>();
         allAdmissions.forEach(Admission -> {
             LocalDateTime currentStartDate = Admission.getAdmissionDate();
             LocalDateTime currentEndDate = Admission.getDischargeDate();
@@ -61,7 +60,7 @@ public class DischargedQuickLogic {
             // Check start is before End Date
             if (isQuick(daysAdmitted) && isStartDateBeforeEndDate(currentStartDate, currentEndDate)) {
                 // Perform Calculations & Build Object
-                DischargedQuick fastPatientCase = new DischargedQuick();
+                PatientCustom fastPatientCase = new PatientCustom();
                 fastPatientCase.setPatientID(Admission.getPatientID());
 
                 // Fetch Patient Name
