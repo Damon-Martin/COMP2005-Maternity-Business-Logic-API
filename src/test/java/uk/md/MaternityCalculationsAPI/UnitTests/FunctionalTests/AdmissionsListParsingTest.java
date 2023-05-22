@@ -27,7 +27,7 @@ public class AdmissionsListParsingTest {
     @Test
     void test_get_admissions_parsing_acceptable_not_null() throws IOException {
         // Arrange
-        // Creating Dummy Data: Using CSV files for raw JSON Bodies
+        // Creating Dummy Data
         HttpResponse<String> dummyHttpResponse = mock(HttpResponse.class);
         String rawJsonBody = "[ { \"id\": 1, \"admissionDate\": \"2020-11-28T16:45:00\", \"dischargeDate\": \"2020-11-28T23:56:00\", \"patientID\": 2 }, { \"id\": 2, \"admissionDate\": \"2020-12-07T22:14:00\", \"dischargeDate\": \"0001-01-01T00:00:00\", \"patientID\": 1 }, { \"id\": 3, \"admissionDate\": \"2021-09-23T21:50:00\", \"dischargeDate\": \"2021-09-27T09:56:00\", \"patientID\": 2 } ]";
 

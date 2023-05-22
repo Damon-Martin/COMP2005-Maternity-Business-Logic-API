@@ -1,5 +1,6 @@
 package uk.md.MaternityCalculationsAPI.UnitTests.FunctionalTests;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -25,20 +26,21 @@ public class PatientsSeenLogicTest {
     // Dummy Instance: Default
     List<Allocation> dummyDataAllocations = new ArrayList<Allocation>();
     List<Admission> dummyDataAdmissions = new ArrayList<Admission>();
-    List<PatientCustom> dummyDataPatients = new ArrayList<PatientCustom>();
+    List<Patient> dummyDataPatients = new ArrayList<Patient>();
 
     // Mocking Responses & Parsing into Lists of Obj
-    void PatientsSeenLogicTest() {
+    public PatientsSeenLogicTest() throws JsonProcessingException {
+        // Arange
+        HttpResponse<String> dummyAdmissionsHttpResponse = mock(HttpResponse.class);
+        HttpResponse<String> dummyAllocationsHttpResponse = mock(HttpResponse.class);
+        HttpResponse<String> dummyPatientsHttpResponse = mock(HttpResponse.class);
 
         // 3 Allocations total
         // Emp1: P1 admissions 2x
         // Emp2: P1 admissions: 1x, P2 admissions 1x, P3 admissions 1x
 
         // 3 Patients total (P1: 3 Admissions, P2: 1 Admission, P3: 1 Admission)
-        String rawPatientsJson = "[ { \"id\": 1, \"surname\": \"Smith\", \"forename\": \"Jack\", \"nhsNumber\": \"999234\" }, [ { \"id\": 2, \"surname\": \"Thomas\", \"forename\": \"Martin\", \"nhsNumber\": \"892134\" } , [ { \"id\": 3, \"surname\": \"Chadwick\", \"forename\": \"Alex\", \"nhsNumber\": \"829321\" } ]] ]";
-
-        // 2 Employees total
-        String rawEmployeeJson = "[ { \"id\": 1, \"surname\": \"Finley\", \"forename\": \"Sarah\" }, { \"id\": 2, \"surname\": \"Jackson\", \"forename\": \"Robert\" }]";
+        String rawPatientsJson = "[ { \"id\": 1, \"surname\": \"Smith\", \"forename\": \"Jack\", \"nhsNumber\": \"999234\" }, { \"id\": 2, \"surname\": \"Thomas\", \"forename\": \"Martin\", \"nhsNumber\": \"892134\" } , { \"id\": 3, \"surname\": \"Chadwick\", \"forename\": \"Alex\", \"nhsNumber\": \"829321\" } ]";
 
         // 5 Admissions total (5 Allocations to 2 Employees)
         // Emp1: P1 admissions 2x
@@ -46,10 +48,29 @@ public class PatientsSeenLogicTest {
         String rawAdmissionJson = "[ { \"id\": 1, \"admissionDate\": \"2020-11-28T16:45:00\", \"dischargeDate\": \"2020-11-28T23:56:00\", \"patientID\": 1 }, { \"id\": 2, \"admissionDate\": \"2020-12-07T22:14:00\", \"dischargeDate\": \"2021-01-05T19:15:05\", \"patientID\": 1 }, { \"id\": 3, \"admissionDate\": \"2020-09-23T21:50:00\", \"dischargeDate\": \"2020-09-27T09:56:00\", \"patientID\": 2 }, { \"id\": 4, \"admissionDate\": \"2021-09-23T21:50:00\", \"dischargeDate\": \"2021-09-27T09:56:00\", \"patientID\": 1 }, { \"id\": 5, \"admissionDate\": \"2023-09-23T21:50:00\", \"dischargeDate\": \"2023-09-27T09:56:00\", \"patientID\": 3 } ]";
 
         // Allocations: Employees to Admissions
-        String rawAllocationsJson = "[ { \"id\": 1, \"admissionID\": 1, \"employeeID\": 1, \"startTime\": \"2020-11-28T16:45:00\", \"endTime\": \"2020-11-28T23:56:00\"} ,  { \"id\": 2, \"admissionID\": 2, \"employeeID\": 1, \"startTime\": \"2020-12-07T22:14:00\", \"endTime\": \"2021-01-05T19:15:05\"}, { \"id\": 3, \"admissionID\": 3, \"employeeID\": 2, \"startTime\": \"2020-09-23T21:50:00\", \"endTime\": \"2020-09-27T09:56:00\"} , { \"id\": 5, \"admissionID\": 5, \"employeeID\": 2, \"startTime\": \"2023-09-23T21:50:00\", \"endTime\": \"2023-09-27T09:56:00\"} ]";
+        String rawAllocationsJson = "[ { \"id\": 1, \"admissionID\": 1, \"employeeID\": 1, \"startTime\": \"2020-11-28T16:45:00\", \"endTime\": \"2020-11-28T23:56:00\"} ,  { \"id\": 2, \"admissionID\": 2, \"employeeID\": 1, \"startTime\": \"2020-12-07T22:14:00\", \"endTime\": \"2021-01-05T19:15:05\"}, { \"id\": 3, \"admissionID\": 3, \"employeeID\": 2, \"startTime\": \"2020-09-23T21:50:00\", \"endTime\": \"2020-09-27T09:56:00\"} ,  { \"id\": 4, \"admissionID\": 4, \"employeeID\": 1, \"startTime\": \"2021-09-23T21:50:00\", \"endTime\": \"2021-09-27T09:56:00\"}  ,{ \"id\": 5, \"admissionID\": 5, \"employeeID\": 2, \"startTime\": \"2023-09-23T21:50:00\", \"endTime\": \"2023-09-27T09:56:00\"} ]";
 
         // Parsing & Saving using mock HttpRequests
-        
+        // Stubbing out get Employee List to return the dummy data
+        when(dummyAdmissionsHttpResponse.statusCode()).thenReturn(200);
+        when(dummyAdmissionsHttpResponse.body()).thenReturn(rawAdmissionJson);
+        HttpHeaders headers = HttpHeaders.of(Map.of("Content-Type", List.of("application/json")), (s, s2) -> true);
+        Mockito.when(dummyAdmissionsHttpResponse.headers()).thenReturn(headers);
+
+        when(dummyAllocationsHttpResponse.statusCode()).thenReturn(200);
+        when(dummyAllocationsHttpResponse.body()).thenReturn(rawAllocationsJson);
+        Mockito.when(dummyAllocationsHttpResponse.headers()).thenReturn(headers);
+
+        when(dummyPatientsHttpResponse.statusCode()).thenReturn(200);
+        when(dummyPatientsHttpResponse.body()).thenReturn(rawPatientsJson);
+        Mockito.when(dummyPatientsHttpResponse.headers()).thenReturn(headers);
+
+
+        // Parsing Responses into List<Obj>
+        GetApiLists listHttpHandler = new GetApiLists();
+        dummyDataAdmissions = listHttpHandler.parseAdmissionList(dummyAdmissionsHttpResponse);
+        dummyDataPatients = listHttpHandler.parsePatientsList(dummyPatientsHttpResponse);
+        dummyDataAllocations = listHttpHandler.parseAllocationList(dummyAllocationsHttpResponse);
 
     }
 
@@ -67,6 +88,6 @@ public class PatientsSeenLogicTest {
         // Act
 
 
-        Assertions.fail("Fail: Not Yet Implemented" + dummyDataPatients.get(0).getForename());
+        Assertions.fail("Fail: Not Yet Implemented: " + "Patients: "+ dummyDataPatients.size() + ", Admissions: " + dummyDataAdmissions.size() + ", Allocations: " + dummyDataAllocations.size());
     }
 }
