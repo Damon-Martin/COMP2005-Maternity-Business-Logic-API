@@ -76,7 +76,7 @@ public class AdmissionsListParsingTest {
             // Arrange
             // Creating Dummy Data: Using CSV files for raw JSON Bodies
             HttpResponse<String> dummyHttpResponse = mock(HttpResponse.class);
-            String rawJsonBody = "[  { \"id\": 3, \"admissionDate\": 10, \"dischargeDate\": 10, \"patientID\": 10 } ] ,{ \"id\": 3, \"admissionDate\": 10, \"dischargeDate\": 10, \"patientID\": 10 } ]";
+            String rawJsonBody = "[  { \"id\": 3, \"admissionDate\": 10, \"dischargeDate\": 10, \"patientID\": 10 } , { \"id\": 3, \"admissionDate\": 10, \"dischargeDate\": 10, \"patientID\": 10 } ]";
 
             // Stubbing out get Employee List to return the dummy data
             when(dummyHttpResponse.statusCode()).thenReturn(200);

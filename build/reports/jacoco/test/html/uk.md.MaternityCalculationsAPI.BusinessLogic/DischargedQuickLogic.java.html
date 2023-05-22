@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-<span class="fc" id="L16">public class DischargedQuickLogic {</span>
+<span class="nc" id="L16">public class DischargedQuickLogic {</span>
 
 
     // Checks how many days have passed
@@ -34,18 +34,18 @@ import java.util.List;
 
     // Returns Filtered List
     public List&lt;DischargedQuick&gt; filter_patient_duplicates(List&lt;DischargedQuick&gt; unfiltered_patient_li) {
-<span class="fc" id="L37">        List&lt;Integer&gt; listOfPatientIDs = new ArrayList&lt;Integer&gt;();</span>
-<span class="fc" id="L38">        List&lt;DischargedQuick&gt; temp = new ArrayList&lt;DischargedQuick&gt;();</span>
-<span class="fc" id="L39">        unfiltered_patient_li.forEach( DischargedQuick -&gt; {</span>
+<span class="nc" id="L37">        List&lt;Integer&gt; listOfPatientIDs = new ArrayList&lt;Integer&gt;();</span>
+<span class="nc" id="L38">        List&lt;DischargedQuick&gt; temp = new ArrayList&lt;DischargedQuick&gt;();</span>
+<span class="nc" id="L39">        unfiltered_patient_li.forEach( DischargedQuick -&gt; {</span>
             // New Patient: If true
-<span class="fc bfc" id="L41" title="All 2 branches covered.">            if (!listOfPatientIDs.contains(DischargedQuick.getPatientID())){</span>
-<span class="fc" id="L42">                listOfPatientIDs.add(DischargedQuick.getPatientID());</span>
-<span class="fc" id="L43">                temp.add(DischargedQuick);</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">            if (!listOfPatientIDs.contains(DischargedQuick.getPatientID())){</span>
+<span class="nc" id="L42">                listOfPatientIDs.add(DischargedQuick.getPatientID());</span>
+<span class="nc" id="L43">                temp.add(DischargedQuick);</span>
             }
             // Patient Already Exists: Ignore it &amp; it won't add the duplicate
-<span class="fc" id="L46">        });</span>
+<span class="nc" id="L46">        });</span>
 
-<span class="fc" id="L48">        return temp;</span>
+<span class="nc" id="L48">        return temp;</span>
     }
 
     // We can mock allAdmissions for Testing
