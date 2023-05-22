@@ -32,8 +32,20 @@ public class DischargedQuickLogic {
         return startDate.isBefore(endDate);
     }
 
-    public List<DischargedQuick> filter_patient_duplicates() {
-        return null;
+    // Returns Filtered List
+    public List<DischargedQuick> filter_patient_duplicates(List<DischargedQuick> unfiltered_patient_li) {
+        List<Integer> listOfPatientIDs = new ArrayList<Integer>();
+        List<DischargedQuick> temp = new ArrayList<DischargedQuick>();
+        unfiltered_patient_li.forEach( DischargedQuick -> {
+            // New Patient: If true
+            if (!listOfPatientIDs.contains(DischargedQuick.getPatientID())){
+                listOfPatientIDs.add(DischargedQuick.getPatientID());
+                temp.add(DischargedQuick);
+            }
+            // Patient Already Exists: Ignore it & it won't add the duplicate
+        });
+
+        return temp;
     }
 
     // We can mock allAdmissions for Testing
@@ -72,9 +84,6 @@ public class DischargedQuickLogic {
 
 
         // Filter dischargedQuickList Patients to only have 1 instance of each PatientID
-
-
-
-        return dischargedQuickList;
+        return filter_patient_duplicates(dischargedQuickList);
     }
 }

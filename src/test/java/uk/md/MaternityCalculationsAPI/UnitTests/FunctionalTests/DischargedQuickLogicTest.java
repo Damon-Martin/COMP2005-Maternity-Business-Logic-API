@@ -87,22 +87,9 @@ class DischargedQuickLogicTest {
 
         // Act
         DischargedQuickLogic logicObj = new DischargedQuickLogic();
-        List<DischargedQuick> filtered_patient_li = logicObj.filter_patient_duplicates();
+        List<DischargedQuick> filtered_patient_li = logicObj.filter_patient_duplicates(dummyListData);
 
         // Assert no duplicates of Patient ID
-        List<Integer> listOfPatientIDs = new ArrayList<Integer>();
-        List<DischargedQuick> temp = new ArrayList<DischargedQuick>();
-        filtered_patient_li.forEach( DischargedQuick -> {
-            // New Patient: If true
-            if (!listOfPatientIDs.contains(DischargedQuick.getPatientID())){
-                listOfPatientIDs.add(DischargedQuick.getPatientID());
-                temp.add(DischargedQuick);
-            }
-            // Patient Already Exists: Ignore it & it won't add the duplicate
-        });
-
-        filtered_patient_li = temp;
-
         Assertions.assertEquals(2, filtered_patient_li.size());
     }
 
