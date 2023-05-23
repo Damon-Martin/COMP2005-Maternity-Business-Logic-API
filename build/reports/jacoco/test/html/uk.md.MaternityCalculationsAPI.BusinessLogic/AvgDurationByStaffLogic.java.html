@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AvgDurationByStaffLogic.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MaternityCalculationsAPI</a> &gt; <a href="index.source.html" class="el_package">uk.md.MaternityCalculationsAPI.BusinessLogic</a> &gt; <span class="el_source">AvgDurationByStaffLogic.java</span></div><h1>AvgDurationByStaffLogic.java</h1><pre class="source lang-java linenums">package uk.md.MaternityCalculationsAPI.BusinessLogic;
+
+import uk.md.MaternityCalculationsAPI.Models.Entities.Admission;
+import uk.md.MaternityCalculationsAPI.Models.Entities.Allocation;
+import uk.md.MaternityCalculationsAPI.Models.Entities.Patient;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.List;
+
+// Lots of good for edge cases of dates
+<span class="fc" id="L13">public class AvgDurationByStaffLogic {</span>
+<span class="fc" id="L14">    private HashMap&lt;Integer, Duration&gt; patientCumulativeDuration = new HashMap&lt;&gt;();</span>
+
+    // Test this function Heavily
+    // Assuming Date Order is Already Checked
+    // Use Edge Cases: 1. max distance in time. 2 min distance in time
+    public Duration caclulateSingleDuration(LocalDateTime startTime, LocalDateTime endTime) {
+<span class="fc" id="L20">        return Duration.between(startTime, endTime);</span>
+    }
+
+    // Duration: Final Duration Calculated
+    // Uses all other functions in class
+    // Will be Displayed as a String with Days, Hours, Minutes in Controller
+    public Duration calculateDurationByStaffID(int EmployeeID, List&lt;Allocation&gt; allAllocations, List&lt;Admission&gt; allAdmissions, List&lt;Patient&gt; allPatients) {
+<span class="nc" id="L27">        return null;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

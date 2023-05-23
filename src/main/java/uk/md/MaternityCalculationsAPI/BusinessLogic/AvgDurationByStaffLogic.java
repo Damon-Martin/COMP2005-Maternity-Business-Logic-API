@@ -17,7 +17,7 @@ public class AvgDurationByStaffLogic {
     // Assuming Date Order is Already Checked
     // Use Edge Cases: 1. max distance in time. 2 min distance in time
     public Duration caclulateSingleDuration(LocalDateTime startTime, LocalDateTime endTime) {
-        return null;
+        return Duration.between(startTime, endTime);
     }
 
     // Duration: Final Duration Calculated
