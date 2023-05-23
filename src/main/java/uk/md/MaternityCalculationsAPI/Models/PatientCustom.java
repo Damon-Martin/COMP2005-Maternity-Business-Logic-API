@@ -1,6 +1,6 @@
 package uk.md.MaternityCalculationsAPI.Models;
 
-public class DischargedQuick {
+public class PatientCustom {
     public Integer patientID;
     public String nhsNumber;
     public String surname;

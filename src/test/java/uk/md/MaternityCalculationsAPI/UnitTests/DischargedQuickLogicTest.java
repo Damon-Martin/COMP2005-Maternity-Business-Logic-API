@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import uk.md.MaternityCalculationsAPI.BusinessLogic.DischargedQuickLogic;
-import uk.md.MaternityCalculationsAPI.Models.DischargedQuick;
+import uk.md.MaternityCalculationsAPI.Models.PatientCustom;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -60,22 +60,22 @@ class DischargedQuickLogicTest {
     @Test
     void test_no_duplicate_patients_for_discharged_quickly() {
         // Arrange
-        List<DischargedQuick> dummyListData = new ArrayList<DischargedQuick>();
+        List<PatientCustom> dummyListData = new ArrayList<PatientCustom>();
 
-        DischargedQuick patientInstance1 = new DischargedQuick();
+        PatientCustom patientInstance1 = new PatientCustom();
         patientInstance1.setPatientID(1);
         patientInstance1.setNhsNumber("1111111");
         patientInstance1.setForename("Dennis");
         patientInstance1.setSurname("Smith");
 
         // Should be ignored
-        DischargedQuick patientInstance2 = new DischargedQuick();
+        PatientCustom patientInstance2 = new PatientCustom();
         patientInstance2.setPatientID(1);
         patientInstance2.setNhsNumber("1111111");
         patientInstance2.setForename("Dennis");
         patientInstance2.setSurname("Smith");
 
-        DischargedQuick patientInstance3 = new DischargedQuick();
+        PatientCustom patientInstance3 = new PatientCustom();
         patientInstance3.setPatientID(4);
         patientInstance3.setNhsNumber("191525");
         patientInstance3.setForename("David");
@@ -87,7 +87,7 @@ class DischargedQuickLogicTest {
 
         // Act
         DischargedQuickLogic logicObj = new DischargedQuickLogic();
-        List<DischargedQuick> filtered_patient_li = logicObj.filter_patient_duplicates(dummyListData);
+        List<PatientCustom> filtered_patient_li = logicObj.filter_patient_duplicates(dummyListData);
 
         // Assert no duplicates of Patient ID
         Assertions.assertEquals(2, filtered_patient_li.size());
