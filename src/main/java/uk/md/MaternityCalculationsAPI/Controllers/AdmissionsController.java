@@ -36,27 +36,35 @@ public class AdmissionsController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        HttpResponse<String> patentsRes = _httpHandler.getPatientsList();
-        HttpResponse<String> admissionsRes = _httpHandler.getAdmissionsList();
-        HttpResponse<String> allocationsRes = _httpHandler.getAllocationsList();
+        // Checking if Employee ID Exists
+        GetApiEntities entityHttpObj = new GetApiEntities();
+        HttpResponse<String> employeeRes = entityHttpObj.getEmployeeById(EmployeeID);
 
-        if (patentsRes.statusCode() == 200 && admissionsRes.statusCode() == 200 && allocationsRes.statusCode() == 200 && admissionsRes.statusCode() == 200) {
 
-            List<Allocation> allAllocations = _httpHandler.parseAllocationList(allocationsRes);
-            List<Admission> allAdmissions = _httpHandler.parseAdmissionList(admissionsRes);
-            List<Patient> allPatients = _httpHandler.parsePatientsList(patentsRes);
+        if (employeeRes.statusCode() == 200) {
+            HttpResponse<String> patentsRes = _httpHandler.getPatientsList();
+            HttpResponse<String> admissionsRes = _httpHandler.getAdmissionsList();
+            HttpResponse<String> allocationsRes = _httpHandler.getAllocationsList();
 
-            List<PatientCustom> filteredPatients =logicObj.getFilteredPatientsByEmployeeID(EmployeeID, allAllocations, allAdmissions, allPatients);
+            if (patentsRes.statusCode() == 200 && admissionsRes.statusCode() == 200 && allocationsRes.statusCode() == 200 && admissionsRes.statusCode() == 200) {
 
-            return new ResponseEntity<>(filteredPatients, headers, HttpStatus.OK);
+                List<Allocation> allAllocations = _httpHandler.parseAllocationList(allocationsRes);
+                List<Admission> allAdmissions = _httpHandler.parseAdmissionList(admissionsRes);
+                List<Patient> allPatients = _httpHandler.parsePatientsList(patentsRes);
+
+                List<PatientCustom> filteredPatients =logicObj.getFilteredPatientsByEmployeeID(EmployeeID, allAllocations, allAdmissions, allPatients);
+
+                return new ResponseEntity<>(filteredPatients, headers, HttpStatus.OK);
+            }
         }
-        else{
-            return new ResponseEntity<>(null, headers, HttpStatus.BAD_REQUEST);
+        else if (employeeRes.statusCode() == 404) {
+            return new ResponseEntity<>(null, headers, HttpStatus.NOT_FOUND);
         }
+
+        return new ResponseEntity<>(null, headers, HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("DischargedQuick")
-    @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Returns a list of patients who are discharged within 3 days of admission")
     @ApiResponses(
             value = {

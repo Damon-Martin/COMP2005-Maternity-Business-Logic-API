@@ -65,4 +65,16 @@ public class GetApiEntities {
         }
         return admission;
     }
+
+    public HttpResponse<String> getEmployeeById(Integer id) throws IOException, InterruptedException {
+        HttpClient httpClient = HttpClient.newBuilder().build();
+
+        // Making Request & Performing GET Req
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://web.socem.plymouth.ac.uk/COMP2005/api/Employees/" + id))
+                .GET()
+                .build();
+
+        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+    }
 }

@@ -42,15 +42,32 @@ class NotNullAndJsonIntTest {
 
 
     @Test
-    void test_patients_seen_by_staff_IsHttpSuccess() throws Exception {
-        RequestBuilder req = MockMvcRequestBuilders.get("/api/PatientsSeen/4");
+    void test_patients_seen_by_staff_IsHttpSuccess_with_ID_Good() throws Exception {
+        RequestBuilder req = MockMvcRequestBuilders.get("http://localhost:8080/api/PatientsSeen/%7Bid%7D?id=4");
 
         MvcResult res = this.mvc.perform(req).andExpect(status().isOk()).andReturn();
     }
 
     @Test
-    void test_patients_seen_by_staff_is_JSON() throws Exception {
-        RequestBuilder req = MockMvcRequestBuilders.get("/api/PatientsSeen/4");
+    void test_patients_seen_by_staff_IsHttpSuccess_with_ID_Bad() throws Exception {
+        RequestBuilder req = MockMvcRequestBuilders.get("http://localhost:8080/api/PatientsSeen/%7Bid%7D?id=20");
+
+        MvcResult res = this.mvc.perform(req).andExpect(status().isNotFound()).andReturn();
+    }
+
+    @Test
+    void test_patients_seen_by_staff_is_JSON_with_ID_Good() throws Exception {
+        // id = 4
+        RequestBuilder req = MockMvcRequestBuilders.get("http://localhost:8080/api/PatientsSeen/%7Bid%7D?id=4");
+
+        MvcResult res = this.mvc.perform(req).andReturn();
+
+        Assertions.assertEquals("application/json", res.getResponse().getContentType());
+    }
+    @Test
+    void test_patients_seen_by_staff_is_JSON_with_ID_Bad() throws Exception {
+        // id = 4
+        RequestBuilder req = MockMvcRequestBuilders.get("http://localhost:8080/api/PatientsSeen/%7Bid%7D?id=20");
 
         MvcResult res = this.mvc.perform(req).andReturn();
 

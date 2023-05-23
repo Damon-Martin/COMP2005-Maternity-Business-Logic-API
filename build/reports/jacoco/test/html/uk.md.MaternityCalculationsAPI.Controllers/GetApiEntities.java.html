@@ -65,5 +65,17 @@ import java.net.http.HttpResponse;
         }
 <span class="fc" id="L66">        return admission;</span>
     }
+
+    public HttpResponse&lt;String&gt; getEmployeeById(Integer id) throws IOException, InterruptedException {
+<span class="fc" id="L70">        HttpClient httpClient = HttpClient.newBuilder().build();</span>
+
+        // Making Request &amp; Performing GET Req
+<span class="fc" id="L73">        HttpRequest request = HttpRequest.newBuilder()</span>
+<span class="fc" id="L74">                .uri(URI.create(&quot;https://web.socem.plymouth.ac.uk/COMP2005/api/Employees/&quot; + id))</span>
+<span class="fc" id="L75">                .GET()</span>
+<span class="fc" id="L76">                .build();</span>
+
+<span class="fc" id="L78">        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

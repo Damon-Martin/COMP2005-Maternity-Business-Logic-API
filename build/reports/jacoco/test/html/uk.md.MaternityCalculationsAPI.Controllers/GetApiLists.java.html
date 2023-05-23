@@ -80,15 +80,15 @@ import java.util.List;
 
     public HttpResponse&lt;String&gt; getAllocationsList() throws IOException, InterruptedException {
         List&lt;Allocation&gt; allocations;
-<span class="nc" id="L83">        HttpClient httpClient = HttpClient.newBuilder().build();</span>
+<span class="fc" id="L83">        HttpClient httpClient = HttpClient.newBuilder().build();</span>
 
         // Making Request &amp; Performing GET Req
-<span class="nc" id="L86">        HttpRequest request = HttpRequest.newBuilder()</span>
-<span class="nc" id="L87">                .uri(URI.create(&quot;https://web.socem.plymouth.ac.uk/COMP2005/api/Allocations&quot;))</span>
-<span class="nc" id="L88">                .GET()</span>
-<span class="nc" id="L89">                .build();</span>
+<span class="fc" id="L86">        HttpRequest request = HttpRequest.newBuilder()</span>
+<span class="fc" id="L87">                .uri(URI.create(&quot;https://web.socem.plymouth.ac.uk/COMP2005/api/Allocations&quot;))</span>
+<span class="fc" id="L88">                .GET()</span>
+<span class="fc" id="L89">                .build();</span>
 
-<span class="nc" id="L91">        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());</span>
+<span class="fc" id="L91">        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());</span>
     }
 
     public List&lt;Allocation&gt; parseAllocationList(HttpResponse&lt;String&gt; res) throws JsonProcessingException {
@@ -106,15 +106,15 @@ import java.util.List;
     }
     // If it's Empty we would have an Empty Array. Therefore, can't be null.
     public HttpResponse&lt;String&gt; getPatientsList() throws IOException, InterruptedException {
-<span class="nc" id="L109">        HttpClient httpClient = HttpClient.newBuilder().build();</span>
+<span class="fc" id="L109">        HttpClient httpClient = HttpClient.newBuilder().build();</span>
 
         // Making Request &amp; Performing GET Req
-<span class="nc" id="L112">        HttpRequest request = HttpRequest.newBuilder()</span>
-<span class="nc" id="L113">                .uri(URI.create(&quot;https://web.socem.plymouth.ac.uk/COMP2005/api/Patients&quot;))</span>
-<span class="nc" id="L114">                .GET()</span>
-<span class="nc" id="L115">                .build();</span>
+<span class="fc" id="L112">        HttpRequest request = HttpRequest.newBuilder()</span>
+<span class="fc" id="L113">                .uri(URI.create(&quot;https://web.socem.plymouth.ac.uk/COMP2005/api/Patients&quot;))</span>
+<span class="fc" id="L114">                .GET()</span>
+<span class="fc" id="L115">                .build();</span>
 
-<span class="nc" id="L117">        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());</span>
+<span class="fc" id="L117">        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());</span>
     }
 
     public List&lt;Patient&gt; parsePatientsList(HttpResponse&lt;String&gt; res) throws JsonProcessingException {

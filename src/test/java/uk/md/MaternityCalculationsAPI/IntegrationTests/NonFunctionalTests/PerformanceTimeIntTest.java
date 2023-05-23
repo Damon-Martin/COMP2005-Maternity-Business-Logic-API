@@ -43,7 +43,7 @@ public class PerformanceTimeIntTest {
 
     @Test
     void test_patientsSeen_below_1000ms() throws Exception {
-        RequestBuilder req = MockMvcRequestBuilders.get("/api/PatientsSeen/4");
+        RequestBuilder req = MockMvcRequestBuilders.get("http://localhost:8080/api/PatientsSeen/%7Bid%7D?id=4");
 
         // Using System Clock for calculation
         long startTime = System.currentTimeMillis();
