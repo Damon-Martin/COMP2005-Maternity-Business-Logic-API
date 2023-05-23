@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">2.034s</div>
+<div class="counter">2.050s</div>
 <p>duration</p>
 </div>
 </td>
@@ -183,22 +183,22 @@
 </thead>
 <tr>
 <td class="failures">test_avgDurationByStaff_below_1500ms()</td>
-<td class="failures">0.010s</td>
+<td class="failures">0.006s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="success">test_busiestDayOfWeek_below_1500ms()</td>
-<td class="success">0.183s</td>
+<td class="success">0.186s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">test_dischargedQuickly_below_1500ms()</td>
-<td class="success">0.374s</td>
+<td class="success">0.384s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">test_patientsSeen_below_1500ms()</td>
-<td class="success">1.467s</td>
+<td class="success">1.474s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -206,12 +206,12 @@
 <div id="tab2" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2023-05-23 10:11:59.382  INFO 5996 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [uk.md.MaternityCalculationsAPI.IntegrationTests.NonFunctionalTests.PerformanceTimeIntTest], using SpringBootContextLoader
-2023-05-23 10:11:59.383  INFO 5996 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [uk.md.MaternityCalculationsAPI.IntegrationTests.NonFunctionalTests.PerformanceTimeIntTest]: no resource found for suffixes {-context.xml, Context.groovy}.
-2023-05-23 10:11:59.383  INFO 5996 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [uk.md.MaternityCalculationsAPI.IntegrationTests.NonFunctionalTests.PerformanceTimeIntTest]: PerformanceTimeIntTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2023-05-23 10:11:59.390  INFO 5996 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration uk.md.MaternityCalculationsAPI.Main for test class uk.md.MaternityCalculationsAPI.IntegrationTests.NonFunctionalTests.PerformanceTimeIntTest
-2023-05-23 10:11:59.391  INFO 5996 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
-2023-05-23 10:11:59.392  INFO 5996 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@cae3857, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@7773141c, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@777bfe82, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@7653e109, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@bc21314, org.springframework.test.context.support.DirtiesContextTestExecutionListener@64fe3584, org.springframework.test.context.event.EventPublishingTestExecutionListener@4c594877, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@256ba35c, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@3e2a5e56, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@2b6d0e02, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@2d71f1e8, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@55f8d659, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@39ccea5e]
+<pre>2023-05-23 10:45:39.331  INFO 6745 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [uk.md.MaternityCalculationsAPI.IntegrationTests.NonFunctionalTests.PerformanceTimeIntTest], using SpringBootContextLoader
+2023-05-23 10:45:39.332  INFO 6745 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [uk.md.MaternityCalculationsAPI.IntegrationTests.NonFunctionalTests.PerformanceTimeIntTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2023-05-23 10:45:39.332  INFO 6745 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [uk.md.MaternityCalculationsAPI.IntegrationTests.NonFunctionalTests.PerformanceTimeIntTest]: PerformanceTimeIntTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2023-05-23 10:45:39.339  INFO 6745 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration uk.md.MaternityCalculationsAPI.Main for test class uk.md.MaternityCalculationsAPI.IntegrationTests.NonFunctionalTests.PerformanceTimeIntTest
+2023-05-23 10:45:39.340  INFO 6745 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2023-05-23 10:45:39.340  INFO 6745 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@3abfc328, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@504b5208, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@cce98b3, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@581df833, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@1cffc69b, org.springframework.test.context.support.DirtiesContextTestExecutionListener@162e1c1e, org.springframework.test.context.event.EventPublishingTestExecutionListener@6edd0568, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@5936b4e0, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@3b9f6a43, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@5db74fc2, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@5bc7e759, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@37bac975, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@77b760b3]
 
 MockHttpServletRequest:
       HTTP Method = GET
@@ -259,7 +259,7 @@ MockHttpServletResponse:
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.6.1</a> at 23 May 2023, 10:12:03</p>
+<a href="http://www.gradle.org">Gradle 7.6.1</a> at 23 May 2023, 10:45:43</p>
 </div>
 </div>
 </body>

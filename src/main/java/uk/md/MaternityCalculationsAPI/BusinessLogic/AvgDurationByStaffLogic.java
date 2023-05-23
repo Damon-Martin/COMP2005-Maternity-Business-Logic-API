@@ -58,7 +58,6 @@ public class AvgDurationByStaffLogic {
                 HttpResponse<String> res = httpEntityObj.getAdmissionById(AdmissionID);
                 visitedAllocations.add(AdmissionID);
 
-
                 if (res.statusCode() == 200) {
                     Admission currentIncident = httpEntityObj.parseSingleAdmission(res);
                     Integer PatientID = currentIncident.getPatientID();

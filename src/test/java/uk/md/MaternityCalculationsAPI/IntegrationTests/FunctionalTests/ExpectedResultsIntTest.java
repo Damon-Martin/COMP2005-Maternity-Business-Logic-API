@@ -14,9 +14,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.web.util.UriComponentsBuilder;
 import uk.md.MaternityCalculationsAPI.Controllers.AdmissionsController;
+import uk.md.MaternityCalculationsAPI.Models.MeanDuration;
 import uk.md.MaternityCalculationsAPI.Models.PatientCustom;
 
+import java.net.URI;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.fail;
@@ -94,7 +97,6 @@ public class ExpectedResultsIntTest {
         String rawJsonBody = res.getResponse().getContentAsString();
 
         ObjectMapper mapper = new ObjectMapper();
-
         List<PatientCustom> actualResult = mapper.readValue(rawJsonBody, new TypeReference<List<PatientCustom>>() {});
 
         // This is Required Doesn't like the diff memory locations
@@ -107,14 +109,20 @@ public class ExpectedResultsIntTest {
 
     @Test
     void test_avg_duration_int_test() throws Exception {
-        RequestBuilder req = MockMvcRequestBuilders.get("/api/AvgDurationByStaff/{id}?id=4");
+        // Arrange
         // Expected
         long expectedTime = ((24660 + 294360) / 2);
+
+        URI fullUri = UriComponentsBuilder.fromUriString("http://localhost:8080/api/AvgDurationByStaff/")
+                .buildAndExpand(4)
+                .toUri();
+
+        RequestBuilder req = MockMvcRequestBuilders.get(fullUri);
 
         MvcResult res = this.mvc.perform(req).andReturn();
         String rawJsonBody = res.getResponse().getContentAsString();
 
-        Assertions.fail("Not Yet Implemented");
+        fail("Not Yet Implemented");
     }
 
 }

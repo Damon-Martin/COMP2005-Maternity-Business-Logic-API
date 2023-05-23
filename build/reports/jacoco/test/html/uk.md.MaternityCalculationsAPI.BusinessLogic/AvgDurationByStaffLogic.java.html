@@ -58,28 +58,27 @@ import java.util.Map;
 <span class="nc" id="L58">                HttpResponse&lt;String&gt; res = httpEntityObj.getAdmissionById(AdmissionID);</span>
 <span class="nc" id="L59">                visitedAllocations.add(AdmissionID);</span>
 
+<span class="nc bnc" id="L61" title="All 2 branches missed.">                if (res.statusCode() == 200) {</span>
+<span class="nc" id="L62">                    Admission currentIncident = httpEntityObj.parseSingleAdmission(res);</span>
+<span class="nc" id="L63">                    Integer PatientID = currentIncident.getPatientID();</span>
 
-<span class="nc bnc" id="L62" title="All 2 branches missed.">                if (res.statusCode() == 200) {</span>
-<span class="nc" id="L63">                    Admission currentIncident = httpEntityObj.parseSingleAdmission(res);</span>
-<span class="nc" id="L64">                    Integer PatientID = currentIncident.getPatientID();</span>
+<span class="nc" id="L65">                    Duration currentDuration = caclulateSingleDuration(currentIncident.admissionDate, currentIncident.dischargeDate);</span>
 
-<span class="nc" id="L66">                    Duration currentDuration = caclulateSingleDuration(currentIncident.admissionDate, currentIncident.dischargeDate);</span>
-
-<span class="nc bnc" id="L68" title="All 2 branches missed.">                    if (PatientDurationMap.containsKey(PatientID)) {</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">                    if (PatientDurationMap.containsKey(PatientID)) {</span>
                         // Calculate new duration
-<span class="nc" id="L70">                        Duration prevSumDuration = PatientDurationMap.get(PatientID);</span>
+<span class="nc" id="L69">                        Duration prevSumDuration = PatientDurationMap.get(PatientID);</span>
 
                         // Update the Map
-<span class="nc" id="L73">                        PatientDurationMap.put( PatientID , add2Durations(prevSumDuration, currentDuration) );</span>
-<span class="nc" id="L74">                    }</span>
+<span class="nc" id="L72">                        PatientDurationMap.put( PatientID , add2Durations(prevSumDuration, currentDuration) );</span>
+<span class="nc" id="L73">                    }</span>
                     else {
-<span class="nc" id="L76">                        PatientDurationMap.put(PatientID, currentDuration);</span>
+<span class="nc" id="L75">                        PatientDurationMap.put(PatientID, currentDuration);</span>
                     }
                 }
             }
-<span class="nc" id="L80">        }</span>
+<span class="nc" id="L79">        }</span>
 
-<span class="nc" id="L82">        return meanDuration(PatientDurationMap);</span>
+<span class="nc" id="L81">        return meanDuration(PatientDurationMap);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

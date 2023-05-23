@@ -15,6 +15,7 @@ import uk.md.MaternityCalculationsAPI.BusinessLogic.DischargedQuickLogic;
 import uk.md.MaternityCalculationsAPI.BusinessLogic.PatientsSeenLogic;
 import uk.md.MaternityCalculationsAPI.Models.Entities.Allocation;
 import uk.md.MaternityCalculationsAPI.Models.Entities.Patient;
+import uk.md.MaternityCalculationsAPI.Models.MeanDuration;
 import uk.md.MaternityCalculationsAPI.Models.PatientCustom;
 import uk.md.MaternityCalculationsAPI.Models.Entities.Admission;
 
@@ -103,9 +104,9 @@ public class AdmissionsController {
     // 3. If Patient in this Allocation is known, update the value
     // 3. If New Patient, Make new (k, v) with Patient and this duration
     // 4. At very end calculate average (Sum of all durations) / (total no keys/patients)
-    @GetMapping("AvgDurationByStaff/{id}")
+    @GetMapping("AvgDurationByStaff/{EmpID}")
     @ApiOperation(value = "Based on EmployeeID, Returns the mean calculated avg duration of recovery time/stay of all their patients")
-    public ResponseEntity AvgDurationByStaff(@RequestParam("id") int EmployeeID) throws IOException, InterruptedException {
+    public ResponseEntity<MeanDuration> AvgDurationByStaff(@RequestParam("EmpID") int EmployeeID) throws IOException, InterruptedException {
         // Check if Employee Exists or Error 404. If all fails the give a bad req.
 
         // All Responses are JSON
@@ -131,10 +132,11 @@ public class AdmissionsController {
                 Duration meanDuration  = logicObj.calculateDurationByStaffID(EmployeeID, allAllocations);
 
                 // Displaying Means in diff formats
-                Map<String, Long> meansMap = new HashMap<>();
-                meansMap.put("MeanTimeInSeconds", meanDuration.toSeconds());
+                MeanDuration temp = new MeanDuration();
+                temp.setTitle("MeanTimeInSeconds");
+                temp.setDuration(meanDuration.toSeconds());
 
-                return new ResponseEntity<>(meansMap, headers, HttpStatus.OK);
+                return new ResponseEntity<>(temp, headers, HttpStatus.OK);
             }
         }
         else if (employeeRes.statusCode() == 404) {
