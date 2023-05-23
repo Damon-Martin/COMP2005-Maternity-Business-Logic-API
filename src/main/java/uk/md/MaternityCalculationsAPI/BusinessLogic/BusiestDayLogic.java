@@ -4,7 +4,6 @@ import uk.md.MaternityCalculationsAPI.Models.Entities.Admission;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -40,7 +39,7 @@ public class BusiestDayLogic {
         List<Admission> allAdmissions = new ArrayList<Admission>();
         allAdmissionsBeforeFilter.forEach( admission -> {
             DischargedQuickLogic logicObj = new DischargedQuickLogic();
-            Boolean datesOrder = logicObj.isStartDateBeforeEndDate(admission.admissionDate, admission.dischargeDate);
+            Boolean datesOrder = logicObj.dateOrderCorrect(admission.admissionDate, admission.dischargeDate);
             if (datesOrder) {
                 allAdmissions.add(admission);
             }

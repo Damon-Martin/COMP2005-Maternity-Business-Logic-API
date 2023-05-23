@@ -1,4 +1,4 @@
-package uk.md.MaternityCalculationsAPI.UnitTests.FunctionalTests;
+package uk.md.MaternityCalculationsAPI.UnitTests;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -47,11 +47,6 @@ class DischargedQuickLogicTest {
         Assertions.assertEquals(655, daysAdmitted);
     }
 
-    // Note: Will use dummy data of different instances to test this is working
-    @Test
-    void test_if_admitted_before_discharged_is_ignored_in_return_list() {
-        fail("Test Not Implemented");
-    }
 
     // Code Needs to be implemented to filter them out by PatientID
     // Make Array of Test Data with Duplicates
@@ -112,7 +107,7 @@ class DischargedQuickLogicTest {
         DischargedQuickLogic logicObj = new DischargedQuickLogic();
         LocalDateTime startDate = LocalDateTime.of(2023,2,24,12,15);
         LocalDateTime endDate = LocalDateTime.of(2023,2,28,12,15);
-        Boolean isBefore = logicObj.isStartDateBeforeEndDate(startDate, endDate);
+        Boolean isBefore = logicObj.dateOrderCorrect(startDate, endDate);
         Assertions.assertTrue(isBefore);
     }
 
@@ -121,7 +116,7 @@ class DischargedQuickLogicTest {
         DischargedQuickLogic logicObj = new DischargedQuickLogic();
         LocalDateTime startDate = LocalDateTime.of(2024,10,24,12,15);
         LocalDateTime endDate = LocalDateTime.of(2023,2,28,12,15);
-        Boolean isBefore = logicObj.isStartDateBeforeEndDate(startDate, endDate);
+        Boolean isBefore = logicObj.dateOrderCorrect(startDate, endDate);
         Assertions.assertFalse(isBefore);
     }
 

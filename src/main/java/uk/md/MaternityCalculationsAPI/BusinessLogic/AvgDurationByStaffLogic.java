@@ -41,11 +41,11 @@ public class AvgDurationByStaffLogic {
     // Duration: Final Duration Calculated
     // Uses all other functions in class
     // Will be Displayed as a String with Days, Hours, Minutes in Controller
-    public Duration calculateDurationByStaffID(int EmployeeID, List<Allocation> allAllocations, List<Admission> allAdmissions, List<Patient> allPatients) {
+    public Duration calculateDurationByStaffID(int EmployeeID, List<Allocation> allocations, List<Admission> allAdmissions, List<Patient> allPatients) {
         // Duration is the cumulative
-        Map<Integer, Duration> patientCumulativeDuration = new HashMap<>();
+        Map<Integer, Duration> PatientDurationMap = new HashMap<>();
 
-        allAllocations.forEach( Allocation -> {
+        allocations.forEach( Allocation -> {
             if (Allocation.getEmployeeID() == EmployeeID) {
                 // This is our Employee so get the Admission with patient data
                 Integer AdmissionID = Allocation.admissionID; // Corresponding Admission
@@ -62,21 +62,25 @@ public class AvgDurationByStaffLogic {
                         DischargedQuickLogic otherTimeLogicObj = new DischargedQuickLogic();
 
                         // Has to be Valid Date Order or Ignored
-                        if (otherTimeLogicObj.isStartDateBeforeEndDate(currentAdmission.admissionDate, currentAdmission.dischargeDate)) {
+                        if (otherTimeLogicObj.dateOrderCorrect(currentAdmission.admissionDate, currentAdmission.dischargeDate)) {
+
+
                             Duration currentDiff = logicObj.caclulateSingleDuration(currentAdmission.admissionDate, currentAdmission.dischargeDate);
+
+
                             // Checking if Patient (Key) Already Exists
-                            if (patientCumulativeDuration.containsKey(PatientID)) {
+                            if (PatientDurationMap.containsKey(PatientID)) {
                                 // get Prev Value
-                                Duration prevDuration = patientCumulativeDuration.get(PatientID);
+                                Duration prevDuration = PatientDurationMap.get(PatientID);
                                 // Add the 2 durations and update the value
                                 Duration newDuration = add2Durations(prevDuration, currentDiff);
 
                                 // Updating Map
-                                patientCumulativeDuration.put(PatientID, newDuration);
+                                PatientDurationMap.put(PatientID, newDuration);
                             }
                             // PatientID not in List: Just pop the Key & Value
                             else {
-                                patientCumulativeDuration.put(PatientID, currentDiff);
+                                PatientDurationMap.put(PatientID, currentDiff);
                             }
                         }
                     }
@@ -86,6 +90,6 @@ public class AvgDurationByStaffLogic {
             }
         });
 
-        return meanDuration(patientCumulativeDuration);
+        return meanDuration(PatientDurationMap);
     }
 }

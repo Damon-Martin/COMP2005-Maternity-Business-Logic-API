@@ -1,30 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AvgDurationByStaffLogic.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MaternityCalculationsAPI</a> &gt; <a href="index.source.html" class="el_package">uk.md.MaternityCalculationsAPI.BusinessLogic</a> &gt; <span class="el_source">AvgDurationByStaffLogic.java</span></div><h1>AvgDurationByStaffLogic.java</h1><pre class="source lang-java linenums">package uk.md.MaternityCalculationsAPI.BusinessLogic;
 
+import uk.md.MaternityCalculationsAPI.Controllers.GetApiEntities;
 import uk.md.MaternityCalculationsAPI.Models.Entities.Admission;
 import uk.md.MaternityCalculationsAPI.Models.Entities.Allocation;
 import uk.md.MaternityCalculationsAPI.Models.Entities.Patient;
 
+import java.io.IOException;
+import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 // Lots of good for edge cases of dates
-<span class="fc" id="L13">public class AvgDurationByStaffLogic {</span>
-<span class="fc" id="L14">    private HashMap&lt;Integer, Duration&gt; patientCumulativeDuration = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L17">public class AvgDurationByStaffLogic {</span>
+
+    public Duration meanDuration(Map&lt;Integer,Duration&gt; patientCumulativeTime) {
+<span class="fc" id="L20">        long totTime = 0;</span>
+
+<span class="fc bfc" id="L22" title="All 2 branches covered.">        for (Duration duration : patientCumulativeTime.values()) {</span>
+<span class="fc" id="L23">            totTime += duration.getSeconds();</span>
+<span class="fc" id="L24">        }</span>
+
+<span class="fc" id="L26">        long mean = totTime / patientCumulativeTime.size();</span>
+<span class="fc" id="L27">        return Duration.ofSeconds(mean);</span>
+    }
 
     // Test this function Heavily
     // Assuming Date Order is Already Checked
     // Use Edge Cases: 1. max distance in time. 2 min distance in time
     public Duration caclulateSingleDuration(LocalDateTime startTime, LocalDateTime endTime) {
-<span class="fc" id="L20">        return Duration.between(startTime, endTime);</span>
+<span class="fc" id="L34">        return Duration.between(startTime, endTime);</span>
+    }
+
+    public Duration add2Durations(Duration item1, Duration item2) {
+<span class="nc" id="L38">        return item1.plus(item2);</span>
     }
 
     // Duration: Final Duration Calculated
     // Uses all other functions in class
     // Will be Displayed as a String with Days, Hours, Minutes in Controller
-    public Duration calculateDurationByStaffID(int EmployeeID, List&lt;Allocation&gt; allAllocations, List&lt;Admission&gt; allAdmissions, List&lt;Patient&gt; allPatients) {
-<span class="nc" id="L27">        return null;</span>
+    public Duration calculateDurationByStaffID(int EmployeeID, List&lt;Allocation&gt; allocations, List&lt;Admission&gt; allAdmissions, List&lt;Patient&gt; allPatients) {
+        // Duration is the cumulative
+<span class="nc" id="L46">        Map&lt;Integer, Duration&gt; PatientDurationMap = new HashMap&lt;&gt;();</span>
+
+<span class="nc" id="L48">        allocations.forEach( Allocation -&gt; {</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">            if (Allocation.getEmployeeID() == EmployeeID) {</span>
+                // This is our Employee so get the Admission with patient data
+<span class="nc" id="L51">                Integer AdmissionID = Allocation.admissionID; // Corresponding Admission</span>
+
+                // Fetching This Admission
+<span class="nc" id="L54">                GetApiEntities httpObj = new GetApiEntities();</span>
+                try {
+<span class="nc" id="L56">                    HttpResponse&lt;String&gt; res = httpObj.getAdmissionById(AdmissionID);</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">                    if (res.statusCode() == 200) {</span>
+<span class="nc" id="L58">                        Admission currentAdmission = httpObj.parseSingleAdmission(res);</span>
+<span class="nc" id="L59">                        Integer PatientID = currentAdmission.getPatientID();</span>
+
+<span class="nc" id="L61">                        AvgDurationByStaffLogic logicObj = new AvgDurationByStaffLogic();</span>
+<span class="nc" id="L62">                        DischargedQuickLogic otherTimeLogicObj = new DischargedQuickLogic();</span>
+
+                        // Has to be Valid Date Order or Ignored
+<span class="nc bnc" id="L65" title="All 2 branches missed.">                        if (otherTimeLogicObj.dateOrderCorrect(currentAdmission.admissionDate, currentAdmission.dischargeDate)) {</span>
+
+
+<span class="nc" id="L68">                            Duration currentDiff = logicObj.caclulateSingleDuration(currentAdmission.admissionDate, currentAdmission.dischargeDate);</span>
+
+
+                            // Checking if Patient (Key) Already Exists
+<span class="nc bnc" id="L72" title="All 2 branches missed.">                            if (PatientDurationMap.containsKey(PatientID)) {</span>
+                                // get Prev Value
+<span class="nc" id="L74">                                Duration prevDuration = PatientDurationMap.get(PatientID);</span>
+                                // Add the 2 durations and update the value
+<span class="nc" id="L76">                                Duration newDuration = add2Durations(prevDuration, currentDiff);</span>
+
+                                // Updating Map
+<span class="nc" id="L79">                                PatientDurationMap.put(PatientID, newDuration);</span>
+<span class="nc" id="L80">                            }</span>
+                            // PatientID not in List: Just pop the Key &amp; Value
+                            else {
+<span class="nc" id="L83">                                PatientDurationMap.put(PatientID, currentDiff);</span>
+                            }
+                        }
+                    }
+<span class="nc" id="L87">                } catch (IOException | InterruptedException e) {</span>
+<span class="nc" id="L88">                    throw new RuntimeException(e);</span>
+<span class="nc" id="L89">                }</span>
+            }
+<span class="nc" id="L91">        });</span>
+
+<span class="nc" id="L93">        return meanDuration(PatientDurationMap);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

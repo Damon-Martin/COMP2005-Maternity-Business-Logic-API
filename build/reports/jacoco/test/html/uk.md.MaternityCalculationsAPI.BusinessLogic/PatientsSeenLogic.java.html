@@ -11,63 +11,63 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-<span class="nc" id="L14">public class PatientsSeenLogic {</span>
+<span class="fc" id="L14">public class PatientsSeenLogic {</span>
 
 
     public List&lt;PatientCustom&gt; filter(List&lt;PatientCustom&gt; unfilteredList) {
         // Filter Duplicate Patients
-<span class="nc" id="L19">        List&lt;PatientCustom&gt; filteredList = new ArrayList&lt;PatientCustom&gt;();</span>
-<span class="nc" id="L20">        List&lt;Integer&gt; prevPatientIDs = new ArrayList&lt;Integer&gt;();</span>
+<span class="fc" id="L19">        List&lt;PatientCustom&gt; filteredList = new ArrayList&lt;PatientCustom&gt;();</span>
+<span class="fc" id="L20">        List&lt;Integer&gt; prevPatientIDs = new ArrayList&lt;Integer&gt;();</span>
 
         // Filtering
-<span class="nc" id="L23">        unfilteredList.forEach(patientCustom -&gt; {</span>
-<span class="nc" id="L24">            Integer currentID = patientCustom.getPatientID();</span>
-<span class="nc bnc" id="L25" title="All 2 branches missed.">            if (!prevPatientIDs.contains(currentID)) {</span>
-<span class="nc" id="L26">                filteredList.add(patientCustom);</span>
-<span class="nc" id="L27">                prevPatientIDs.add(currentID);</span>
+<span class="fc" id="L23">        unfilteredList.forEach(patientCustom -&gt; {</span>
+<span class="fc" id="L24">            Integer currentID = patientCustom.getPatientID();</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">            if (!prevPatientIDs.contains(currentID)) {</span>
+<span class="fc" id="L26">                filteredList.add(patientCustom);</span>
+<span class="fc" id="L27">                prevPatientIDs.add(currentID);</span>
             }
-<span class="nc" id="L29">        });</span>
+<span class="fc" id="L29">        });</span>
 
-<span class="nc" id="L31">        return filteredList;</span>
+<span class="fc" id="L31">        return filteredList;</span>
     }
 
     public List&lt;PatientCustom&gt; getNotFilteredPatientsByEmployeeID(int EmployeeID, List&lt;Allocation&gt; allAllocations, List&lt;Admission&gt; allAdmissions, List&lt;Patient&gt; allPatients) {
         // We have all data needed
         // For Each Allocation (Looping): If EmployeeID == Allocation.getEmployeeID(), Go to this Admission and view patients. Then, Build list of Patients
-<span class="nc" id="L37">        List&lt;PatientCustom&gt; unfilteredList = new ArrayList&lt;PatientCustom&gt;();</span>
-<span class="nc" id="L38">        allAllocations.forEach( Allocation -&gt; {</span>
-<span class="nc bnc" id="L39" title="All 2 branches missed.">            if (EmployeeID == Allocation.getEmployeeID()) {</span>
+<span class="fc" id="L37">        List&lt;PatientCustom&gt; unfilteredList = new ArrayList&lt;PatientCustom&gt;();</span>
+<span class="fc" id="L38">        allAllocations.forEach( Allocation -&gt; {</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">            if (EmployeeID == Allocation.getEmployeeID()) {</span>
                 // Grab the current Admission from Allocation
-<span class="nc" id="L41">                GetApiEntities httpReqObj = new GetApiEntities();</span>
+<span class="fc" id="L41">                GetApiEntities httpReqObj = new GetApiEntities();</span>
 
                 try {
-<span class="nc" id="L44">                    HttpResponse&lt;String&gt; admissionById = httpReqObj.getAdmissionById(Allocation.getAdmissionID());</span>
-<span class="nc" id="L45">                    PatientCustom newPatient = new PatientCustom();</span>
-<span class="nc bnc" id="L46" title="All 2 branches missed.">                    if (admissionById.statusCode() == 200) {</span>
-<span class="nc" id="L47">                        Admission currentAdmission = httpReqObj.parseSingleAdmission(admissionById);</span>
+<span class="fc" id="L44">                    HttpResponse&lt;String&gt; admissionById = httpReqObj.getAdmissionById(Allocation.getAdmissionID());</span>
+<span class="fc" id="L45">                    PatientCustom newPatient = new PatientCustom();</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">                    if (admissionById.statusCode() == 200) {</span>
+<span class="fc" id="L47">                        Admission currentAdmission = httpReqObj.parseSingleAdmission(admissionById);</span>
 
-<span class="nc" id="L49">                        int PatientID = currentAdmission.getPatientID();</span>
+<span class="fc" id="L49">                        int PatientID = currentAdmission.getPatientID();</span>
 
-<span class="nc" id="L51">                        HttpResponse&lt;String&gt; patientRes= httpReqObj.getPatientById(PatientID);</span>
+<span class="fc" id="L51">                        HttpResponse&lt;String&gt; patientRes= httpReqObj.getPatientById(PatientID);</span>
 
-<span class="nc bnc" id="L53" title="All 2 branches missed.">                        if (patientRes.statusCode() == 200) {</span>
+<span class="pc bpc" id="L53" title="1 of 2 branches missed.">                        if (patientRes.statusCode() == 200) {</span>
                             // Parsing List
-<span class="nc" id="L55">                            Patient currentPatient = httpReqObj.parseSinglePatient(patientRes);</span>
+<span class="fc" id="L55">                            Patient currentPatient = httpReqObj.parseSinglePatient(patientRes);</span>
                             // Propagate/Copy values
-<span class="nc" id="L57">                            newPatient.setPatientID(currentAdmission.getPatientID());</span>
-<span class="nc" id="L58">                            newPatient.setNhsNumber(currentPatient.getNhsNumber());</span>
-<span class="nc" id="L59">                            newPatient.setForename(currentPatient.getForename());</span>
-<span class="nc" id="L60">                            newPatient.setSurname(currentPatient.getSurname());</span>
+<span class="fc" id="L57">                            newPatient.setPatientID(currentAdmission.getPatientID());</span>
+<span class="fc" id="L58">                            newPatient.setNhsNumber(currentPatient.getNhsNumber());</span>
+<span class="fc" id="L59">                            newPatient.setForename(currentPatient.getForename());</span>
+<span class="fc" id="L60">                            newPatient.setSurname(currentPatient.getSurname());</span>
 
-<span class="nc" id="L62">                            unfilteredList.add(newPatient);</span>
+<span class="fc" id="L62">                            unfilteredList.add(newPatient);</span>
                         }
                     }
 <span class="nc" id="L65">                } catch (IOException | InterruptedException e) {</span>
 <span class="nc" id="L66">                    throw new RuntimeException(e);</span>
-<span class="nc" id="L67">                }</span>
+<span class="fc" id="L67">                }</span>
             }
-<span class="nc" id="L69">        });</span>
-<span class="nc" id="L70">        return unfilteredList;</span>
+<span class="fc" id="L69">        });</span>
+<span class="fc" id="L70">        return unfilteredList;</span>
     }
 
     // Use this one for Controller
@@ -75,10 +75,10 @@ import java.util.List;
         // We have all data needed
 
         // Get Unfiltered List
-<span class="nc" id="L78">        List&lt;PatientCustom&gt; unfilteredList = getNotFilteredPatientsByEmployeeID(EmployeeID, allAllocations, allAdmissions, allPatients);</span>
+<span class="fc" id="L78">        List&lt;PatientCustom&gt; unfilteredList = getNotFilteredPatientsByEmployeeID(EmployeeID, allAllocations, allAdmissions, allPatients);</span>
 
         // Filter Patients to be unique
-<span class="nc" id="L81">        return filter(unfilteredList);</span>
+<span class="fc" id="L81">        return filter(unfilteredList);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
