@@ -93,10 +93,34 @@ public class AdmissionsController {
         return new ResponseEntity<>(null, headers, HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping("AvgDurationByStaff")
+    // 1. For Each Allocation (Loop): If Allocation's Employee ID == the actual Employee ID
+    // Note: We are building a hash map of (k, v) as Patient: total Duration
+    // 2. Using the Admission ID && EmployeeID match, fetch this admission
+    // 3. If Patient in this Allocation is known, update the value
+    // 3. If New Patient, Make new (k, v) with Patient and this duration
+    // 4. At very end calculate average (Sum of all durations) / (total no keys/patients)
+    @GetMapping("AvgDurationByStaff/{id}")
     @ApiOperation(value = "Based on EmployeeID, Returns the mean calculated avg duration of recovery time/stay of all their patients")
-    public String AvgDurationByStaff() {
-        return null;
+    public ResponseEntity AvgDurationByStaff(@RequestParam("id") int EmployeeID) throws IOException, InterruptedException {
+        // Check if Employee Exists or Error 404. If all fails the give a bad req.
+
+        // All Responses are JSON
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        // Checking if Employee ID Exists
+        GetApiEntities entityHttpObj = new GetApiEntities();
+        HttpResponse<String> employeeRes = entityHttpObj.getEmployeeById(EmployeeID);
+
+        if (employeeRes.statusCode() == 200) {
+
+            return new ResponseEntity<>(null, headers, HttpStatus.OK);
+        }
+        else if (employeeRes.statusCode() == 404) {
+            return new ResponseEntity<>(null, headers, HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(null, headers, HttpStatus.BAD_REQUEST);
     }
 
     // Provide Week: Returns the busiest day based on Mode
