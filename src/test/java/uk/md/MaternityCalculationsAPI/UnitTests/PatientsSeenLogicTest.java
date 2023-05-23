@@ -34,7 +34,7 @@ public class PatientsSeenLogicTest {
 
     // Mocking Responses & Parsing into Lists of Obj
     public PatientsSeenLogicTest() throws JsonProcessingException {
-        // Arange
+        // Arrange
         HttpResponse<String> dummyAdmissionsHttpResponse = mock(HttpResponse.class);
         HttpResponse<String> dummyAllocationsHttpResponse = mock(HttpResponse.class);
         HttpResponse<String> dummyPatientsHttpResponse = mock(HttpResponse.class);
@@ -82,7 +82,7 @@ public class PatientsSeenLogicTest {
     // the unfiltered list creator is not responsible for removing bad values
     //
     @Test
-    void unfiltered_list_employee1_result_size_is_3(){
+    void unfiltered_list_employee1_result_size_is_2(){
         //Arrange (Prepped in Constructor)
         List<PatientCustom> result = new ArrayList<PatientCustom>();
         int employeeId = 1; // Looking for 1
@@ -95,7 +95,7 @@ public class PatientsSeenLogicTest {
     }
 
     @Test
-    void unfiltered_list_employee2_result_size_is_2(){
+    void unfiltered_list_employee2_result_size_is_1(){
         //Arrange (Prepped in Constructor)
         List<PatientCustom> result = new ArrayList<PatientCustom>();
         int employeeId = 2; // Looking for 1

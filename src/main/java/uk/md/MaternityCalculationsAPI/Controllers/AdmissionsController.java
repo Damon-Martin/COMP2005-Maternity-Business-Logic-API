@@ -9,17 +9,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import uk.md.MaternityCalculationsAPI.BusinessLogic.AvgDurationByStaffLogic;
 import uk.md.MaternityCalculationsAPI.BusinessLogic.BusiestDayLogic;
 import uk.md.MaternityCalculationsAPI.BusinessLogic.DischargedQuickLogic;
 import uk.md.MaternityCalculationsAPI.BusinessLogic.PatientsSeenLogic;
 import uk.md.MaternityCalculationsAPI.Models.Entities.Allocation;
 import uk.md.MaternityCalculationsAPI.Models.Entities.Patient;
+import uk.md.MaternityCalculationsAPI.Models.MeanDuration;
 import uk.md.MaternityCalculationsAPI.Models.PatientCustom;
 import uk.md.MaternityCalculationsAPI.Models.Entities.Admission;
 
 import java.io.IOException;
 import java.net.http.HttpResponse;
+import java.time.Duration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("api/")
@@ -99,9 +104,9 @@ public class AdmissionsController {
     // 3. If Patient in this Allocation is known, update the value
     // 3. If New Patient, Make new (k, v) with Patient and this duration
     // 4. At very end calculate average (Sum of all durations) / (total no keys/patients)
-    @GetMapping("AvgDurationByStaff/{id}")
+    @GetMapping("AvgDurationByStaff/{EmpID}")
     @ApiOperation(value = "Based on EmployeeID, Returns the mean calculated avg duration of recovery time/stay of all their patients")
-    public ResponseEntity AvgDurationByStaff(@RequestParam("id") int EmployeeID) throws IOException, InterruptedException {
+    public ResponseEntity<MeanDuration> AvgDurationByStaff(@RequestParam("EmpID") int EmployeeID) throws IOException, InterruptedException {
         // Check if Employee Exists or Error 404. If all fails the give a bad req.
 
         // All Responses are JSON
@@ -113,8 +118,26 @@ public class AdmissionsController {
         HttpResponse<String> employeeRes = entityHttpObj.getEmployeeById(EmployeeID);
 
         if (employeeRes.statusCode() == 200) {
+            HttpResponse<String> patentsRes = _httpHandler.getPatientsList();
+            HttpResponse<String> admissionsRes = _httpHandler.getAdmissionsList();
+            HttpResponse<String> allocationsRes = _httpHandler.getAllocationsList();
 
-            return new ResponseEntity<>(null, headers, HttpStatus.OK);
+            if (patentsRes.statusCode() == 200 && admissionsRes.statusCode() == 200 && allocationsRes.statusCode() == 200 && admissionsRes.statusCode() == 200) {
+
+                List<Allocation> allAllocations = _httpHandler.parseAllocationList(allocationsRes);
+                List<Admission> allAdmissions = _httpHandler.parseAdmissionList(admissionsRes);
+                List<Patient> allPatients = _httpHandler.parsePatientsList(patentsRes);
+
+                AvgDurationByStaffLogic logicObj = new AvgDurationByStaffLogic();
+                Duration meanDuration  = logicObj.calculateDurationByStaffID(EmployeeID, allAllocations);
+
+                // Displaying Means in diff formats
+                MeanDuration temp = new MeanDuration();
+                temp.setTitle("MeanTimeInSeconds");
+                temp.setDuration(meanDuration.toSeconds());
+
+                return new ResponseEntity<>(temp, headers, HttpStatus.OK);
+            }
         }
         else if (employeeRes.statusCode() == 404) {
             return new ResponseEntity<>(null, headers, HttpStatus.NOT_FOUND);

@@ -20,13 +20,13 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">4</div>
+<div class="counter">42</div>
 <p>tests</p>
 </div>
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">0</div>
+<div class="counter">4</div>
 <p>failures</p>
 </div>
 </td>
@@ -38,7 +38,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.039s</div>
+<div class="counter">12.024s</div>
 <p>duration</p>
 </div>
 </td>
@@ -47,8 +47,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox success" id="successRate">
-<div class="percent">100%</div>
+<div class="infoBox failures" id="successRate">
+<div class="percent">90%</div>
 <p>successful</p>
 </div>
 </td>
@@ -58,13 +58,37 @@
 <div id="tabs">
 <ul class="tabLinks">
 <li>
-<a href="#tab0">Packages</a>
+<a href="#tab0">Failed tests</a>
 </li>
 <li>
-<a href="#tab1">Classes</a>
+<a href="#tab1">Packages</a>
+</li>
+<li>
+<a href="#tab2">Classes</a>
 </li>
 </ul>
 <div id="tab0" class="tab">
+<h2>Failed tests</h2>
+<ul class="linkList">
+<li>
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.ExpectedResultsIntTest.html">ExpectedResultsIntTest</a>.
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.ExpectedResultsIntTest.html#test_avg_duration_int_test()">test_avg_duration_int_test()</a>
+</li>
+<li>
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.NotNullJsonValidInvalidReqsIntTest.html">NotNullJsonValidInvalidReqsIntTest</a>.
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.NotNullJsonValidInvalidReqsIntTest.html#test_avg_durationByStaff_is_JSON()">test_avg_durationByStaff_is_JSON()</a>
+</li>
+<li>
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.NotNullJsonValidInvalidReqsIntTest.html">NotNullJsonValidInvalidReqsIntTest</a>.
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.NotNullJsonValidInvalidReqsIntTest.html#test_avg_duration_by_staff_IsHttpSuccess()">test_avg_duration_by_staff_IsHttpSuccess()</a>
+</li>
+<li>
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.NonFunctionalTests.PerformanceTimeIntTest.html">PerformanceTimeIntTest</a>.
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.NonFunctionalTests.PerformanceTimeIntTest.html#test_avgDurationByStaff_below_1500ms()">test_avgDurationByStaff_below_1500ms()</a>
+</li>
+</ul>
+</div>
+<div id="tab1" class="tab">
 <h2>Packages</h2>
 <table>
 <thead>
@@ -79,19 +103,39 @@
 </thead>
 <tbody>
 <tr>
+<td class="failures">
+<a href="packages/uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.html">uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests</a>
+</td>
+<td>14</td>
+<td>3</td>
+<td>0</td>
+<td>8.259s</td>
+<td class="failures">78%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="packages/uk.md.MaternityCalculationsAPI.IntegrationTests.NonFunctionalTests.html">uk.md.MaternityCalculationsAPI.IntegrationTests.NonFunctionalTests</a>
+</td>
+<td>4</td>
+<td>1</td>
+<td>0</td>
+<td>2.050s</td>
+<td class="failures">75%</td>
+</tr>
+<tr>
 <td class="success">
 <a href="packages/uk.md.MaternityCalculationsAPI.UnitTests.html">uk.md.MaternityCalculationsAPI.UnitTests</a>
 </td>
-<td>4</td>
+<td>24</td>
 <td>0</td>
 <td>0</td>
-<td>0.039s</td>
+<td>1.715s</td>
 <td class="success">100%</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="tab1" class="tab">
+<div id="tab2" class="tab">
 <h2>Classes</h2>
 <table>
 <thead>
@@ -106,13 +150,93 @@
 </thead>
 <tbody>
 <tr>
+<td class="failures">
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.ExpectedResultsIntTest.html">uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.ExpectedResultsIntTest</a>
+</td>
+<td>4</td>
+<td>1</td>
+<td>0</td>
+<td>3.670s</td>
+<td class="failures">75%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.NotNullJsonValidInvalidReqsIntTest.html">uk.md.MaternityCalculationsAPI.IntegrationTests.FunctionalTests.NotNullJsonValidInvalidReqsIntTest</a>
+</td>
+<td>10</td>
+<td>2</td>
+<td>0</td>
+<td>4.589s</td>
+<td class="failures">80%</td>
+</tr>
+<tr>
+<td class="failures">
+<a href="classes/uk.md.MaternityCalculationsAPI.IntegrationTests.NonFunctionalTests.PerformanceTimeIntTest.html">uk.md.MaternityCalculationsAPI.IntegrationTests.NonFunctionalTests.PerformanceTimeIntTest</a>
+</td>
+<td>4</td>
+<td>1</td>
+<td>0</td>
+<td>2.050s</td>
+<td class="failures">75%</td>
+</tr>
+<tr>
 <td class="success">
 <a href="classes/uk.md.MaternityCalculationsAPI.UnitTests.AvgDurationByStaffLogicTest.html">uk.md.MaternityCalculationsAPI.UnitTests.AvgDurationByStaffLogicTest</a>
+</td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0.001s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/uk.md.MaternityCalculationsAPI.UnitTests.BusiestDayLogicTest.html">uk.md.MaternityCalculationsAPI.UnitTests.BusiestDayLogicTest</a>
 </td>
 <td>4</td>
 <td>0</td>
 <td>0</td>
-<td>0.039s</td>
+<td>0.254s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/uk.md.MaternityCalculationsAPI.UnitTests.DischargedQuickLogicTest.html">uk.md.MaternityCalculationsAPI.UnitTests.DischargedQuickLogicTest</a>
+</td>
+<td>7</td>
+<td>0</td>
+<td>0</td>
+<td>0.002s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/uk.md.MaternityCalculationsAPI.UnitTests.DurationCalcWithCornerCasesTest.html">uk.md.MaternityCalculationsAPI.UnitTests.DurationCalcWithCornerCasesTest</a>
+</td>
+<td>4</td>
+<td>0</td>
+<td>0</td>
+<td>0.003s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/uk.md.MaternityCalculationsAPI.UnitTests.ParsingTest.html">uk.md.MaternityCalculationsAPI.UnitTests.ParsingTest</a>
+</td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>0.009s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="classes/uk.md.MaternityCalculationsAPI.UnitTests.PatientsSeenLogicTest.html">uk.md.MaternityCalculationsAPI.UnitTests.PatientsSeenLogicTest</a>
+</td>
+<td>3</td>
+<td>0</td>
+<td>0</td>
+<td>1.446s</td>
 <td class="success">100%</td>
 </tr>
 </tbody>
@@ -126,7 +250,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.6.1</a> at 23 May 2023, 03:38:27</p>
+<a href="http://www.gradle.org">Gradle 7.6.1</a> at 23 May 2023, 10:45:43</p>
 </div>
 </div>
 </body>

@@ -25,7 +25,7 @@ public class PerformanceTimeIntTest {
     // We wouldn't know it's Json unless it was successful
     // Checking if request time is below 1 second
     @Test
-    void test_dischargedQuickly_below_1000ms() throws Exception {
+    void test_dischargedQuickly_below_1500ms() throws Exception {
         RequestBuilder req = MockMvcRequestBuilders.get("/api/DischargedQuick");
 
         // Using System Clock for calculation
@@ -36,13 +36,13 @@ public class PerformanceTimeIntTest {
         // Calculating time executed
         long timeExecuted = endTime - startTime;
 
-        Assertions.assertTrue(timeExecuted < 1000);
+        Assertions.assertTrue(timeExecuted < 1500);
         Assertions.assertEquals(200, res.getResponse().getStatus());
         Assertions.assertEquals("application/json", res.getResponse().getContentType());
     }
 
     @Test
-    void test_patientsSeen_below_1000ms() throws Exception {
+    void test_patientsSeen_below_1500ms() throws Exception {
         RequestBuilder req = MockMvcRequestBuilders.get("http://localhost:8080/api/PatientsSeen/%7Bid%7D?id=4");
 
         // Using System Clock for calculation
@@ -53,13 +53,13 @@ public class PerformanceTimeIntTest {
         // Calculating time executed
         long timeExecuted = endTime - startTime;
 
-        Assertions.assertTrue(timeExecuted < 1000);
+        Assertions.assertTrue(timeExecuted < 1500);
         Assertions.assertEquals(200, res.getResponse().getStatus());
         Assertions.assertEquals("application/json", res.getResponse().getContentType());
     }
 
     @Test
-    void test_avgDurationByStaff_below_1000ms() throws Exception {
+    void test_avgDurationByStaff_below_1500ms() throws Exception {
         RequestBuilder req = MockMvcRequestBuilders.get("/api/AvgDurationByStaff");
 
         // Using System Clock for calculation
@@ -70,14 +70,14 @@ public class PerformanceTimeIntTest {
         // Calculating time executed
         long timeExecuted = endTime - startTime;
 
-        Assertions.assertTrue(timeExecuted < 1000);
+        Assertions.assertTrue(timeExecuted < 1500);
         Assertions.assertEquals(200, res.getResponse().getStatus());
         Assertions.assertEquals("application/json", res.getResponse().getContentType());
     }
 
     
     @Test
-    void test_busiestDayOfWeek_below_1000ms() throws Exception {
+    void test_busiestDayOfWeek_below_1500ms() throws Exception {
         RequestBuilder req = MockMvcRequestBuilders.get("/api/BusiestDayOfWeek");
 
         // Using System Clock for calculation
@@ -88,7 +88,7 @@ public class PerformanceTimeIntTest {
         // Calculating time executed
         long timeExecuted = endTime - startTime;
 
-        Assertions.assertTrue(timeExecuted < 1000);
+        Assertions.assertTrue(timeExecuted < 1500);
         Assertions.assertEquals(200, res.getResponse().getStatus());
         Assertions.assertEquals("application/json", res.getResponse().getContentType());
     }

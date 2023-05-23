@@ -1,4 +1,4 @@
-package uk.md.MaternityCalculationsAPI.UnitTests.FunctionalTests;
+package uk.md.MaternityCalculationsAPI.UnitTests;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Test;

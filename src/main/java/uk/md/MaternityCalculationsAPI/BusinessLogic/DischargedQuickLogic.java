@@ -27,7 +27,7 @@ public class DischargedQuickLogic {
     }
 
     // Checks if the JSON Admission Data is Valid Data
-    public Boolean isStartDateBeforeEndDate(LocalDateTime startDate, LocalDateTime endDate){
+    public Boolean dateOrderCorrect(LocalDateTime startDate, LocalDateTime endDate){
         return startDate.isBefore(endDate);
     }
 
@@ -58,7 +58,7 @@ public class DischargedQuickLogic {
             Integer daysAdmitted = calculateDaysInHospital(currentStartDate, currentEndDate);
 
             // Check start is before End Date
-            if (isQuick(daysAdmitted) && isStartDateBeforeEndDate(currentStartDate, currentEndDate)) {
+            if (isQuick(daysAdmitted) && dateOrderCorrect(currentStartDate, currentEndDate)) {
                 // Perform Calculations & Build Object
                 PatientCustom fastPatientCase = new PatientCustom();
                 fastPatientCase.setPatientID(Admission.getPatientID());

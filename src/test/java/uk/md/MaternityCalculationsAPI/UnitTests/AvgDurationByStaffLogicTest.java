@@ -1,73 +1,56 @@
 package uk.md.MaternityCalculationsAPI.UnitTests;
 
+import java.time.*;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import uk.md.MaternityCalculationsAPI.BusinessLogic.AvgDurationByStaffLogic;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AvgDurationByStaffLogicTest {
 
-    // Assuming Regular Working Day
     @Test
-    void test_check_normal_date_duration_hours_minutes_calculator() {
-        // Arrange
-        LocalDateTime startTime = LocalDateTime.of(2023, 8, 23, 9, 30, 0);
-        LocalDateTime endTime = LocalDateTime.of(2023, 8, 23, 17, 30, 0);
+    void test_mean_duration_all_5_mins() {
+        // Arrange 3x 5 mins durations
+        Map<Integer, Duration> cumulative = new HashMap<Integer, Duration>();
+        for (int i = 0; i < 3; i++) {
+            Duration temp = Duration.ofMinutes(5);
+            cumulative.put(i, temp);
+        }
 
-        // Act
         AvgDurationByStaffLogic logicObj = new AvgDurationByStaffLogic();
-        Duration calculatedDuration = logicObj.caclulateSingleDuration(startTime, endTime);
+        Duration mean = logicObj.meanDuration(cumulative);
 
-        // Assert: 8hrs exact
-        Assertions.assertEquals(8, calculatedDuration.toHours());
+        Assertions.assertEquals(5, mean.toMinutes());
     }
 
-    // like 11:30pm to 12:30pm
-    // Mild: Corner Case
     @Test
-    void test_check_normal_date_short_duration_over_night_calculator() {
-        // Arrange
-        LocalDateTime startTime = LocalDateTime.of(2023, 7, 23, 23, 30, 0);
-        LocalDateTime endTime = LocalDateTime.of(2023, 7, 24, 1, 30, 0);
+    void test_mean_duration_5_items_randomly() {
+        // Arrange 3x 5 mins durations
+        Map<Integer, Duration> cumulative = new HashMap<Integer, Duration>();
+        cumulative.put(0 , Duration.ofSeconds(9090));
+        cumulative.put(5 , Duration.ofSeconds(500));
+        cumulative.put(9 , Duration.ofSeconds(82828));
+        cumulative.put(10 , Duration.ofSeconds(4000));
 
-        // Act
         AvgDurationByStaffLogic logicObj = new AvgDurationByStaffLogic();
-        Duration calculatedDuration = logicObj.caclulateSingleDuration(startTime, endTime);
+        Duration mean = logicObj.meanDuration(cumulative);
 
-        // Asserting 120 minutes exact
-        Assertions.assertEquals(120, calculatedDuration.toMinutes());
+        Assertions.assertEquals(24104, mean.toSeconds());
     }
-    
-    // Corner Case
-    // using 1 Sec diff: more standard corner case
+
     @Test
-    void test_check_min_date_duration_difference_calculator_1() {
-        LocalDateTime startTime = LocalDateTime.of(2023, 5, 23, 18, 30, 0);
-        LocalDateTime endTime = LocalDateTime.of(2023, 5, 23, 18, 30, 1);
+    void addingDurations() {
+        // Arranging
+        Duration num1 = Duration.ofSeconds(120);
+        Duration num2 = Duration.ofSeconds(8000);
 
-        // Act
         AvgDurationByStaffLogic logicObj = new AvgDurationByStaffLogic();
-        Duration calculatedDuration = logicObj.caclulateSingleDuration(startTime, endTime);
+        Duration expected = logicObj.add2Durations(num1, num2);
 
-        // Assert: Asserting 1 nano sec diff
-        Assertions.assertEquals(1, calculatedDuration.toSeconds());
+        Assertions.assertEquals(8120, expected.toSeconds());
     }
-    
-    // Corner Case
-    // using 1 nan sec diff
-    @Test
-    void test_check_min_date_duration_difference_calculator_2() {
-        // Arrange
-        LocalDateTime startTime = LocalDateTime.of(2023, 5, 23, 18, 30, 0, 0);
-        LocalDateTime endTime = LocalDateTime.of(2023, 5, 23, 18, 30, 0, 1);
 
-        // Act
-        AvgDurationByStaffLogic logicObj = new AvgDurationByStaffLogic();
-        Duration calculatedDuration = logicObj.caclulateSingleDuration(startTime, endTime);
-
-        // Assert
-        Assertions.assertEquals(1, calculatedDuration.toNanos());
-    }
 }

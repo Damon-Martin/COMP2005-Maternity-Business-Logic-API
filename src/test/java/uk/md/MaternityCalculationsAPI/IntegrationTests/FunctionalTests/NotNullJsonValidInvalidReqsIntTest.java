@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(AdmissionsController.class)
-class NotNullAndJsonIntTest {
+class NotNullJsonValidInvalidReqsIntTest {
     @Autowired
     MockMvc mvc;
 
@@ -43,14 +43,14 @@ class NotNullAndJsonIntTest {
 
     @Test
     void test_patients_seen_by_staff_IsHttpSuccess_with_ID_Good() throws Exception {
-        RequestBuilder req = MockMvcRequestBuilders.get("http://localhost:8080/api/PatientsSeen/%7Bid%7D?id=4");
+        RequestBuilder req = MockMvcRequestBuilders.get("/api/PatientsSeen/%7Bid%7D?id=4");
 
         MvcResult res = this.mvc.perform(req).andExpect(status().isOk()).andReturn();
     }
 
     @Test
     void test_patients_seen_by_staff_IsHttpSuccess_with_ID_Bad() throws Exception {
-        RequestBuilder req = MockMvcRequestBuilders.get("http://localhost:8080/api/PatientsSeen/%7Bid%7D?id=20");
+        RequestBuilder req = MockMvcRequestBuilders.get("/api/PatientsSeen/%7Bid%7D?id=20");
 
         MvcResult res = this.mvc.perform(req).andExpect(status().isNotFound()).andReturn();
     }
@@ -58,7 +58,7 @@ class NotNullAndJsonIntTest {
     @Test
     void test_patients_seen_by_staff_is_JSON_with_ID_Good() throws Exception {
         // id = 4
-        RequestBuilder req = MockMvcRequestBuilders.get("http://localhost:8080/api/PatientsSeen/%7Bid%7D?id=4");
+        RequestBuilder req = MockMvcRequestBuilders.get("/api/PatientsSeen/%7Bid%7D?id=4");
 
         MvcResult res = this.mvc.perform(req).andReturn();
 
@@ -67,7 +67,7 @@ class NotNullAndJsonIntTest {
     @Test
     void test_patients_seen_by_staff_is_JSON_with_ID_Bad() throws Exception {
         // id = 4
-        RequestBuilder req = MockMvcRequestBuilders.get("http://localhost:8080/api/PatientsSeen/%7Bid%7D?id=20");
+        RequestBuilder req = MockMvcRequestBuilders.get("/api/PatientsSeen/%7Bid%7D?id=20");
 
         MvcResult res = this.mvc.perform(req).andReturn();
 
@@ -76,14 +76,14 @@ class NotNullAndJsonIntTest {
 
     @Test
     void test_avg_duration_by_staff_IsHttpSuccess() throws Exception {
-        RequestBuilder req = MockMvcRequestBuilders.get("/api/AvgDurationByStaff");
+        RequestBuilder req = MockMvcRequestBuilders.get("/api/AvgDurationByStaff/{id}?id=4");
 
         MvcResult res = this.mvc.perform(req).andExpect(status().isOk()).andReturn();
     }
 
     @Test
     void test_avg_durationByStaff_is_JSON() throws Exception {
-        RequestBuilder req = MockMvcRequestBuilders.get("/api/AvgDurationByStaff");
+        RequestBuilder req = MockMvcRequestBuilders.get("/api/AvgDurationByStaff/{id}?id=4");
 
         MvcResult res = this.mvc.perform(req).andReturn();
 
@@ -92,7 +92,7 @@ class NotNullAndJsonIntTest {
 
     @Test
     void test_busiest_day_of_week_IsHttpSuccess() throws Exception {
-        RequestBuilder req = MockMvcRequestBuilders.get("/api/AvgDurationByStaff");
+        RequestBuilder req = MockMvcRequestBuilders.get("/api/BusiestDayOfWeek");
 
         MvcResult res = this.mvc.perform(req).andExpect(status().isOk()).andReturn();
     }
