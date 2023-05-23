@@ -10,59 +10,59 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 // Which Day has most Admissions
-<span class="fc" id="L13">public class BusiestDayLogic {</span>
+<span class="nc" id="L13">public class BusiestDayLogic {</span>
 
 
     // Testable Calculation Functions Here
     // Pass in
     public Map&lt;String,Integer&gt; calculateFrequencyOfDays(List&lt;Admission&gt; allAllocations) {
         // List of weeks as list of enums
-<span class="fc" id="L20">        List&lt;DayOfWeek&gt; allWeekDaysInAllocations = allAllocations.stream()</span>
-<span class="fc" id="L21">                .map(myObj -&gt; myObj.admissionDate.getDayOfWeek())</span>
-<span class="fc" id="L22">                .collect(Collectors.toList());</span>
+<span class="nc" id="L20">        List&lt;DayOfWeek&gt; allWeekDaysInAllocations = allAllocations.stream()</span>
+<span class="nc" id="L21">                .map(myObj -&gt; myObj.admissionDate.getDayOfWeek())</span>
+<span class="nc" id="L22">                .collect(Collectors.toList());</span>
 
         // Day Frequency
-<span class="fc" id="L25">        Map&lt;String, Integer&gt; dayFrequency = allWeekDaysInAllocations.stream()</span>
-<span class="fc" id="L26">                .map(DayOfWeek::name)</span>
-<span class="fc" id="L27">                .collect(Collectors.groupingBy(Function.identity(), Collectors.summingInt(e -&gt; 1)));</span>
+<span class="nc" id="L25">        Map&lt;String, Integer&gt; dayFrequency = allWeekDaysInAllocations.stream()</span>
+<span class="nc" id="L26">                .map(DayOfWeek::name)</span>
+<span class="nc" id="L27">                .collect(Collectors.groupingBy(Function.identity(), Collectors.summingInt(e -&gt; 1)));</span>
 
 
-<span class="fc" id="L30">        return dayFrequency;</span>
+<span class="nc" id="L30">        return dayFrequency;</span>
     }
 
 
     // Merges all testable functions for ease of use
     public List&lt;String&gt; calculateBusiestDay(List&lt;Admission&gt; allAdmissionsBeforeFilter) {
-<span class="fc" id="L36">        List&lt;String&gt; busiestDay = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L36">        List&lt;String&gt; busiestDay = new ArrayList&lt;String&gt;();</span>
 
         // Filter Bad Date Orders
-<span class="fc" id="L39">        List&lt;Admission&gt; allAdmissions = new ArrayList&lt;Admission&gt;();</span>
-<span class="fc" id="L40">        allAdmissionsBeforeFilter.forEach( admission -&gt; {</span>
-<span class="fc" id="L41">            DischargedQuickLogic logicObj = new DischargedQuickLogic();</span>
-<span class="fc" id="L42">            Boolean datesOrder = logicObj.dateOrderCorrect(admission.admissionDate, admission.dischargeDate);</span>
-<span class="fc bfc" id="L43" title="All 2 branches covered.">            if (datesOrder) {</span>
-<span class="fc" id="L44">                allAdmissions.add(admission);</span>
+<span class="nc" id="L39">        List&lt;Admission&gt; allAdmissions = new ArrayList&lt;Admission&gt;();</span>
+<span class="nc" id="L40">        allAdmissionsBeforeFilter.forEach( admission -&gt; {</span>
+<span class="nc" id="L41">            DischargedQuickLogic logicObj = new DischargedQuickLogic();</span>
+<span class="nc" id="L42">            Boolean datesOrder = logicObj.dateOrderCorrect(admission.admissionDate, admission.dischargeDate);</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">            if (datesOrder) {</span>
+<span class="nc" id="L44">                allAdmissions.add(admission);</span>
             }
-<span class="fc" id="L46">        });</span>
+<span class="nc" id="L46">        });</span>
 
         // All Logic here
-<span class="fc" id="L49">        Map&lt;String, Integer&gt; weekdayFrequency = calculateFrequencyOfDays(allAdmissions);</span>
+<span class="nc" id="L49">        Map&lt;String, Integer&gt; weekdayFrequency = calculateFrequencyOfDays(allAdmissions);</span>
 
         // Look for the max frequency in the map
         // if there are multiple with that value. Then return all.
 
-<span class="fc" id="L54">        final Integer[] maxFreq = {0}; // Holds a single Integer: Work around for lambda expression</span>
-<span class="fc" id="L55">        weekdayFrequency.forEach((weekday, freq) -&gt; {</span>
-<span class="fc bfc" id="L56" title="All 2 branches covered.">            if (freq &gt; maxFreq[0]) {</span>
-<span class="fc" id="L57">                maxFreq[0] = freq;</span>
-<span class="fc" id="L58">                busiestDay.clear();</span>
-<span class="fc" id="L59">                busiestDay.add(weekday);</span>
-<span class="fc bfc" id="L60" title="All 2 branches covered.">            } else if (freq.equals(maxFreq[0])) {</span>
-<span class="fc" id="L61">                busiestDay.add(weekday);</span>
+<span class="nc" id="L54">        final Integer[] maxFreq = {0}; // Holds a single Integer: Work around for lambda expression</span>
+<span class="nc" id="L55">        weekdayFrequency.forEach((weekday, freq) -&gt; {</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">            if (freq &gt; maxFreq[0]) {</span>
+<span class="nc" id="L57">                maxFreq[0] = freq;</span>
+<span class="nc" id="L58">                busiestDay.clear();</span>
+<span class="nc" id="L59">                busiestDay.add(weekday);</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">            } else if (freq.equals(maxFreq[0])) {</span>
+<span class="nc" id="L61">                busiestDay.add(weekday);</span>
             }
-<span class="fc" id="L63">        });</span>
+<span class="nc" id="L63">        });</span>
 
-<span class="fc" id="L65">        return busiestDay;</span>
+<span class="nc" id="L65">        return busiestDay;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

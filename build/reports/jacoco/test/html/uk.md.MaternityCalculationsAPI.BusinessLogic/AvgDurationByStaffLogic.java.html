@@ -14,24 +14,24 @@ import java.util.List;
 import java.util.Map;
 
 // Lots of good for edge cases of dates
-<span class="fc" id="L17">public class AvgDurationByStaffLogic {</span>
+<span class="nc" id="L17">public class AvgDurationByStaffLogic {</span>
 
     public Duration meanDuration(Map&lt;Integer,Duration&gt; patientCumulativeTime) {
-<span class="fc" id="L20">        long totTime = 0;</span>
+<span class="nc" id="L20">        long totTime = 0;</span>
 
-<span class="fc bfc" id="L22" title="All 2 branches covered.">        for (Duration duration : patientCumulativeTime.values()) {</span>
-<span class="fc" id="L23">            totTime += duration.getSeconds();</span>
-<span class="fc" id="L24">        }</span>
+<span class="nc bnc" id="L22" title="All 2 branches missed.">        for (Duration duration : patientCumulativeTime.values()) {</span>
+<span class="nc" id="L23">            totTime += duration.getSeconds();</span>
+<span class="nc" id="L24">        }</span>
 
-<span class="fc" id="L26">        long mean = totTime / patientCumulativeTime.size();</span>
-<span class="fc" id="L27">        return Duration.ofSeconds(mean);</span>
+<span class="nc" id="L26">        long mean = totTime / patientCumulativeTime.size();</span>
+<span class="nc" id="L27">        return Duration.ofSeconds(mean);</span>
     }
 
     // Test this function Heavily
     // Assuming Date Order is Already Checked
     // Use Edge Cases: 1. max distance in time. 2 min distance in time
     public Duration caclulateSingleDuration(LocalDateTime startTime, LocalDateTime endTime) {
-<span class="fc" id="L34">        return Duration.between(startTime, endTime);</span>
+<span class="nc" id="L34">        return Duration.between(startTime, endTime);</span>
     }
 
     public Duration add2Durations(Duration item1, Duration item2) {

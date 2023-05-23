@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="uk.md.MaternityCalculationsAPI.UnitTests.PatientsSeenLogicTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2023-05-23T06:09:38" hostname="Damons-MacBook-Air.local" time="0.841">
-  <properties/>
-  <testcase name="test_filtering_duplicates()" classname="uk.md.MaternityCalculationsAPI.UnitTests.PatientsSeenLogicTest" time="0.0"/>
-  <testcase name="unfiltered_list_employee2_result_size_is_2()" classname="uk.md.MaternityCalculationsAPI.UnitTests.PatientsSeenLogicTest" time="0.324"/>
-  <testcase name="unfiltered_list_employee1_result_size_is_3()" classname="uk.md.MaternityCalculationsAPI.UnitTests.PatientsSeenLogicTest" time="0.506"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

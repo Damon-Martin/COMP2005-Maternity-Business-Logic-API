@@ -13,69 +13,69 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-<span class="fc" id="L16">public class GetApiEntities {</span>
+<span class="nc" id="L16">public class GetApiEntities {</span>
     // If it's Empty we would have an Empty Array. Therefore, can't be null.
     public HttpResponse&lt;String&gt; getPatientById(Integer id) throws IOException, InterruptedException {
-<span class="fc" id="L19">        HttpClient httpClient = HttpClient.newBuilder().build();</span>
+<span class="nc" id="L19">        HttpClient httpClient = HttpClient.newBuilder().build();</span>
 
         // Making Request &amp; Performing GET Req
-<span class="fc" id="L22">        HttpRequest request = HttpRequest.newBuilder()</span>
-<span class="fc" id="L23">                .uri(URI.create(&quot;https://web.socem.plymouth.ac.uk/COMP2005/api/Patients/&quot; + id))</span>
-<span class="fc" id="L24">                .GET()</span>
-<span class="fc" id="L25">                .build();</span>
+<span class="nc" id="L22">        HttpRequest request = HttpRequest.newBuilder()</span>
+<span class="nc" id="L23">                .uri(URI.create(&quot;https://web.socem.plymouth.ac.uk/COMP2005/api/Patients/&quot; + id))</span>
+<span class="nc" id="L24">                .GET()</span>
+<span class="nc" id="L25">                .build();</span>
 
-<span class="fc" id="L27">        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());</span>
+<span class="nc" id="L27">        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());</span>
     }
 
     public Patient parseSinglePatient(HttpResponse&lt;String&gt; res) throws JsonProcessingException {
-<span class="fc" id="L31">        Patient patients = new Patient();</span>
-<span class="pc bpc" id="L32" title="2 of 4 branches missed.">        if (res != null &amp;&amp; res.statusCode() == 200) {</span>
-<span class="fc" id="L33">            String rawJSON = res.body();</span>
+<span class="nc" id="L31">        Patient patients = new Patient();</span>
+<span class="nc bnc" id="L32" title="All 4 branches missed.">        if (res != null &amp;&amp; res.statusCode() == 200) {</span>
+<span class="nc" id="L33">            String rawJSON = res.body();</span>
 
             // Mapping to the Deserialized Object
-<span class="fc" id="L36">            ObjectMapper mapper = new ObjectMapper();</span>
-<span class="fc" id="L37">            patients = mapper.readValue(rawJSON, new TypeReference&lt;Patient&gt;() {</span>
+<span class="nc" id="L36">            ObjectMapper mapper = new ObjectMapper();</span>
+<span class="nc" id="L37">            patients = mapper.readValue(rawJSON, new TypeReference&lt;Patient&gt;() {</span>
             });
         }
-<span class="fc" id="L40">        return patients;</span>
+<span class="nc" id="L40">        return patients;</span>
     }
 
     public HttpResponse&lt;String&gt; getAdmissionById(Integer id) throws IOException, InterruptedException {
-<span class="fc" id="L44">        HttpClient httpClient = HttpClient.newBuilder().build();</span>
+<span class="nc" id="L44">        HttpClient httpClient = HttpClient.newBuilder().build();</span>
 
         // Making Request &amp; Performing GET Req
-<span class="fc" id="L47">        HttpRequest request = HttpRequest.newBuilder()</span>
-<span class="fc" id="L48">                .uri(URI.create(&quot;https://web.socem.plymouth.ac.uk/COMP2005/api/Admissions/&quot; + id))</span>
-<span class="fc" id="L49">                .GET()</span>
-<span class="fc" id="L50">                .build();</span>
+<span class="nc" id="L47">        HttpRequest request = HttpRequest.newBuilder()</span>
+<span class="nc" id="L48">                .uri(URI.create(&quot;https://web.socem.plymouth.ac.uk/COMP2005/api/Admissions/&quot; + id))</span>
+<span class="nc" id="L49">                .GET()</span>
+<span class="nc" id="L50">                .build();</span>
 
-<span class="fc" id="L52">        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());</span>
+<span class="nc" id="L52">        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());</span>
     }
 
     public Admission parseSingleAdmission(HttpResponse&lt;String&gt; res) throws JsonProcessingException {
-<span class="fc" id="L56">        Admission admission = new Admission();</span>
-<span class="pc bpc" id="L57" title="2 of 4 branches missed.">        if (res != null &amp;&amp; res.statusCode() == 200) {</span>
-<span class="fc" id="L58">            String rawJSON = res.body();</span>
+<span class="nc" id="L56">        Admission admission = new Admission();</span>
+<span class="nc bnc" id="L57" title="All 4 branches missed.">        if (res != null &amp;&amp; res.statusCode() == 200) {</span>
+<span class="nc" id="L58">            String rawJSON = res.body();</span>
 
             // Mapping to the Deserialized Object
-<span class="fc" id="L61">            ObjectMapper mapper = new ObjectMapper();</span>
-<span class="fc" id="L62">            mapper.registerModule(new JavaTimeModule());</span>
-<span class="fc" id="L63">            admission = mapper.readValue(rawJSON, new TypeReference&lt;Admission&gt;() {</span>
+<span class="nc" id="L61">            ObjectMapper mapper = new ObjectMapper();</span>
+<span class="nc" id="L62">            mapper.registerModule(new JavaTimeModule());</span>
+<span class="nc" id="L63">            admission = mapper.readValue(rawJSON, new TypeReference&lt;Admission&gt;() {</span>
             });
         }
-<span class="fc" id="L66">        return admission;</span>
+<span class="nc" id="L66">        return admission;</span>
     }
 
     public HttpResponse&lt;String&gt; getEmployeeById(Integer id) throws IOException, InterruptedException {
-<span class="fc" id="L70">        HttpClient httpClient = HttpClient.newBuilder().build();</span>
+<span class="nc" id="L70">        HttpClient httpClient = HttpClient.newBuilder().build();</span>
 
         // Making Request &amp; Performing GET Req
-<span class="fc" id="L73">        HttpRequest request = HttpRequest.newBuilder()</span>
-<span class="fc" id="L74">                .uri(URI.create(&quot;https://web.socem.plymouth.ac.uk/COMP2005/api/Employees/&quot; + id))</span>
-<span class="fc" id="L75">                .GET()</span>
-<span class="fc" id="L76">                .build();</span>
+<span class="nc" id="L73">        HttpRequest request = HttpRequest.newBuilder()</span>
+<span class="nc" id="L74">                .uri(URI.create(&quot;https://web.socem.plymouth.ac.uk/COMP2005/api/Employees/&quot; + id))</span>
+<span class="nc" id="L75">                .GET()</span>
+<span class="nc" id="L76">                .build();</span>
 
-<span class="fc" id="L78">        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());</span>
+<span class="nc" id="L78">        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
