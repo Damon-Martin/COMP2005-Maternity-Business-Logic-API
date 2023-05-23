@@ -23,8 +23,10 @@ https://tasks.office.com/live.plymouth.ac.uk/en-GB/Home/Planner#/plantaskboard?g
 
 ## References (Insert Later)
 
-Jacoco
-Springfox
-Spring boot
-XUnit
-Mockito
+Jacoco (2023) Jacoco Java Code Coverage Library, EclEmma - JaCoCo Java Code Coverage Library. Available at: https://www.jacoco.org/jacoco/ (Accessed: 23 May 2023). 
+
+Springfox (2023) Springfox, SpringFox by springfox. Available at: https://springfox.github.io/springfox/ (Accessed: 23 May 2023). 
+
+Spring Boot (2023) Spring Boot. Available at: https://spring.io/projects/spring-boot (Accessed: 23 May 2023). 
+
+Mockito (2023) Mockito Framework Site, Mockito framework site. Available at: https://site.mockito.org/ (Accessed: 23 May 2023). 
