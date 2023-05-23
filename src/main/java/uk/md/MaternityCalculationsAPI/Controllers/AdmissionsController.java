@@ -128,7 +128,7 @@ public class AdmissionsController {
                 List<Patient> allPatients = _httpHandler.parsePatientsList(patentsRes);
 
                 AvgDurationByStaffLogic logicObj = new AvgDurationByStaffLogic();
-                Duration meanDuration  = logicObj.calculateDurationByStaffID(EmployeeID, allAllocations, allAdmissions, allPatients);
+                Duration meanDuration  = logicObj.calculateDurationByStaffID(EmployeeID, allAllocations);
 
                 // Displaying Means in diff formats
                 Map<String, Long> meansMap = new HashMap<>();

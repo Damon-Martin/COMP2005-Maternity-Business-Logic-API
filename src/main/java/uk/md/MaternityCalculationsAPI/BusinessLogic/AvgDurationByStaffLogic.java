@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,54 +42,42 @@ public class AvgDurationByStaffLogic {
     // Duration: Final Duration Calculated
     // Uses all other functions in class
     // Will be Displayed as a String with Days, Hours, Minutes in Controller
-    public Duration calculateDurationByStaffID(int EmployeeID, List<Allocation> allocations, List<Admission> allAdmissions, List<Patient> allPatients) {
+    public Duration calculateDurationByStaffID(int EmployeeID, List<Allocation> allocations) throws IOException, InterruptedException {
         // Duration is the cumulative
         Map<Integer, Duration> PatientDurationMap = new HashMap<>();
+        // Blocks Duplicate Allocation for this Employee
+        List<Integer> visitedAllocations = new ArrayList<>();
 
-        allocations.forEach( Allocation -> {
-            if (Allocation.getEmployeeID() == EmployeeID) {
-                // This is our Employee so get the Admission with patient data
-                Integer AdmissionID = Allocation.admissionID; // Corresponding Admission
+        GetApiEntities httpEntityObj  = new GetApiEntities();
 
-                // Fetching This Admission
-                GetApiEntities httpObj = new GetApiEntities();
-                try {
-                    HttpResponse<String> res = httpObj.getAdmissionById(AdmissionID);
-                    if (res.statusCode() == 200) {
-                        Admission currentAdmission = httpObj.parseSingleAdmission(res);
-                        Integer PatientID = currentAdmission.getPatientID();
+        for ( Allocation currentShift: allocations ) {
+            if (currentShift.getEmployeeID() == EmployeeID && !visitedAllocations.contains(currentShift.getAdmissionID())) {
+                // Get this Allocation
+                Integer AdmissionID = currentShift.getAdmissionID();
 
-                        AvgDurationByStaffLogic logicObj = new AvgDurationByStaffLogic();
-                        DischargedQuickLogic otherTimeLogicObj = new DischargedQuickLogic();
-
-                        // Has to be Valid Date Order or Ignored
-                        if (otherTimeLogicObj.dateOrderCorrect(currentAdmission.admissionDate, currentAdmission.dischargeDate)) {
+                HttpResponse<String> res = httpEntityObj.getAdmissionById(AdmissionID);
+                visitedAllocations.add(AdmissionID);
 
 
-                            Duration currentDiff = logicObj.caclulateSingleDuration(currentAdmission.admissionDate, currentAdmission.dischargeDate);
+                if (res.statusCode() == 200) {
+                    Admission currentIncident = httpEntityObj.parseSingleAdmission(res);
+                    Integer PatientID = currentIncident.getPatientID();
 
+                    Duration currentDuration = caclulateSingleDuration(currentIncident.admissionDate, currentIncident.dischargeDate);
 
-                            // Checking if Patient (Key) Already Exists
-                            if (PatientDurationMap.containsKey(PatientID)) {
-                                // get Prev Value
-                                Duration prevDuration = PatientDurationMap.get(PatientID);
-                                // Add the 2 durations and update the value
-                                Duration newDuration = add2Durations(prevDuration, currentDiff);
+                    if (PatientDurationMap.containsKey(PatientID)) {
+                        // Calculate new duration
+                        Duration prevSumDuration = PatientDurationMap.get(PatientID);
 
-                                // Updating Map
-                                PatientDurationMap.put(PatientID, newDuration);
-                            }
-                            // PatientID not in List: Just pop the Key & Value
-                            else {
-                                PatientDurationMap.put(PatientID, currentDiff);
-                            }
-                        }
+                        // Update the Map
+                        PatientDurationMap.put( PatientID , add2Durations(prevSumDuration, currentDuration) );
                     }
-                } catch (IOException | InterruptedException e) {
-                    throw new RuntimeException(e);
+                    else {
+                        PatientDurationMap.put(PatientID, currentDuration);
+                    }
                 }
             }
-        });
+        }
 
         return meanDuration(PatientDurationMap);
     }

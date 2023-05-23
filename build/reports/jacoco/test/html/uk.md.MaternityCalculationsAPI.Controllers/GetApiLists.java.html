@@ -24,33 +24,33 @@ import java.util.List;
 
     // Physically can't have an empty string. If the List is empty the res body will be '[]'
     public HttpResponse&lt;String&gt; getAdmissionsList() throws IOException, InterruptedException {
-<span class="nc" id="L27">        HttpClient httpClient = HttpClient.newBuilder().build();</span>
+<span class="fc" id="L27">        HttpClient httpClient = HttpClient.newBuilder().build();</span>
 
         // Making Request &amp; Performing GET Req
-<span class="nc" id="L30">        HttpRequest request = HttpRequest.newBuilder()</span>
-<span class="nc" id="L31">                .uri(URI.create(&quot;https://web.socem.plymouth.ac.uk/COMP2005/api/Admissions&quot;))</span>
-<span class="nc" id="L32">                .GET()</span>
-<span class="nc" id="L33">                .build();</span>
+<span class="fc" id="L30">        HttpRequest request = HttpRequest.newBuilder()</span>
+<span class="fc" id="L31">                .uri(URI.create(&quot;https://web.socem.plymouth.ac.uk/COMP2005/api/Admissions&quot;))</span>
+<span class="fc" id="L32">                .GET()</span>
+<span class="fc" id="L33">                .build();</span>
 
         // Returning the HttpResponse: Contains Body + Header
-<span class="nc" id="L36">        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());</span>
+<span class="fc" id="L36">        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());</span>
     }
 
     // Unit Test JsonProcessing Exception
     public List&lt;Admission&gt; parseAdmissionList(HttpResponse&lt;String&gt; res) throws JsonProcessingException {
 
-<span class="nc" id="L42">        List&lt;Admission&gt; admissions = new ArrayList&lt;Admission&gt;();</span>
-<span class="nc bnc" id="L43" title="All 4 branches missed.">        if (res != null &amp;&amp; res.statusCode() == 200) {</span>
-<span class="nc" id="L44">            String rawJSON = res.body();</span>
+<span class="fc" id="L42">        List&lt;Admission&gt; admissions = new ArrayList&lt;Admission&gt;();</span>
+<span class="pc bpc" id="L43" title="2 of 4 branches missed.">        if (res != null &amp;&amp; res.statusCode() == 200) {</span>
+<span class="fc" id="L44">            String rawJSON = res.body();</span>
 
             // Mapping to the Deserialized Object
-<span class="nc" id="L47">            ObjectMapper mapper = new ObjectMapper();</span>
-<span class="nc" id="L48">            mapper.registerModule(new JavaTimeModule());</span>
+<span class="fc" id="L47">            ObjectMapper mapper = new ObjectMapper();</span>
+<span class="fc" id="L48">            mapper.registerModule(new JavaTimeModule());</span>
 
-<span class="nc" id="L50">            admissions = mapper.readValue(rawJSON, new TypeReference&lt;List&lt;Admission&gt;&gt;() {</span>
+<span class="fc" id="L50">            admissions = mapper.readValue(rawJSON, new TypeReference&lt;List&lt;Admission&gt;&gt;() {</span>
             });
         }
-<span class="nc" id="L53">        return admissions;</span>
+<span class="fc" id="L53">        return admissions;</span>
     }
 
     public HttpResponse&lt;String&gt; getEmployeesList() throws IOException, InterruptedException {
@@ -80,54 +80,54 @@ import java.util.List;
 
     public HttpResponse&lt;String&gt; getAllocationsList() throws IOException, InterruptedException {
         List&lt;Allocation&gt; allocations;
-<span class="nc" id="L83">        HttpClient httpClient = HttpClient.newBuilder().build();</span>
+<span class="fc" id="L83">        HttpClient httpClient = HttpClient.newBuilder().build();</span>
 
         // Making Request &amp; Performing GET Req
-<span class="nc" id="L86">        HttpRequest request = HttpRequest.newBuilder()</span>
-<span class="nc" id="L87">                .uri(URI.create(&quot;https://web.socem.plymouth.ac.uk/COMP2005/api/Allocations&quot;))</span>
-<span class="nc" id="L88">                .GET()</span>
-<span class="nc" id="L89">                .build();</span>
+<span class="fc" id="L86">        HttpRequest request = HttpRequest.newBuilder()</span>
+<span class="fc" id="L87">                .uri(URI.create(&quot;https://web.socem.plymouth.ac.uk/COMP2005/api/Allocations&quot;))</span>
+<span class="fc" id="L88">                .GET()</span>
+<span class="fc" id="L89">                .build();</span>
 
-<span class="nc" id="L91">        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());</span>
+<span class="fc" id="L91">        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());</span>
     }
 
     public List&lt;Allocation&gt; parseAllocationList(HttpResponse&lt;String&gt; res) throws JsonProcessingException {
-<span class="nc" id="L95">        List&lt;Allocation&gt; allocations = new ArrayList&lt;Allocation&gt;();</span>
-<span class="nc bnc" id="L96" title="All 4 branches missed.">        if (res != null &amp;&amp; res.statusCode() == 200) {</span>
-<span class="nc" id="L97">            String rawJSON = res.body();</span>
+<span class="fc" id="L95">        List&lt;Allocation&gt; allocations = new ArrayList&lt;Allocation&gt;();</span>
+<span class="pc bpc" id="L96" title="2 of 4 branches missed.">        if (res != null &amp;&amp; res.statusCode() == 200) {</span>
+<span class="fc" id="L97">            String rawJSON = res.body();</span>
 
             // Mapping to the Deserialized Object
-<span class="nc" id="L100">            ObjectMapper mapper = new ObjectMapper();</span>
-<span class="nc" id="L101">            mapper.registerModule(new JavaTimeModule());</span>
-<span class="nc" id="L102">            allocations = mapper.readValue(rawJSON, new TypeReference&lt;List&lt;Allocation&gt;&gt;() {</span>
+<span class="fc" id="L100">            ObjectMapper mapper = new ObjectMapper();</span>
+<span class="fc" id="L101">            mapper.registerModule(new JavaTimeModule());</span>
+<span class="fc" id="L102">            allocations = mapper.readValue(rawJSON, new TypeReference&lt;List&lt;Allocation&gt;&gt;() {</span>
             });
         }
-<span class="nc" id="L105">        return allocations;</span>
+<span class="fc" id="L105">        return allocations;</span>
     }
     // If it's Empty we would have an Empty Array. Therefore, can't be null.
     public HttpResponse&lt;String&gt; getPatientsList() throws IOException, InterruptedException {
-<span class="nc" id="L109">        HttpClient httpClient = HttpClient.newBuilder().build();</span>
+<span class="fc" id="L109">        HttpClient httpClient = HttpClient.newBuilder().build();</span>
 
         // Making Request &amp; Performing GET Req
-<span class="nc" id="L112">        HttpRequest request = HttpRequest.newBuilder()</span>
-<span class="nc" id="L113">                .uri(URI.create(&quot;https://web.socem.plymouth.ac.uk/COMP2005/api/Patients&quot;))</span>
-<span class="nc" id="L114">                .GET()</span>
-<span class="nc" id="L115">                .build();</span>
+<span class="fc" id="L112">        HttpRequest request = HttpRequest.newBuilder()</span>
+<span class="fc" id="L113">                .uri(URI.create(&quot;https://web.socem.plymouth.ac.uk/COMP2005/api/Patients&quot;))</span>
+<span class="fc" id="L114">                .GET()</span>
+<span class="fc" id="L115">                .build();</span>
 
-<span class="nc" id="L117">        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());</span>
+<span class="fc" id="L117">        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());</span>
     }
 
     public List&lt;Patient&gt; parsePatientsList(HttpResponse&lt;String&gt; res) throws JsonProcessingException {
-<span class="nc" id="L121">        List&lt;Patient&gt; patients = new ArrayList&lt;Patient&gt;();</span>
-<span class="nc bnc" id="L122" title="All 4 branches missed.">        if (res != null &amp;&amp; res.statusCode() == 200) {</span>
-<span class="nc" id="L123">            String rawJSON = res.body();</span>
+<span class="fc" id="L121">        List&lt;Patient&gt; patients = new ArrayList&lt;Patient&gt;();</span>
+<span class="pc bpc" id="L122" title="2 of 4 branches missed.">        if (res != null &amp;&amp; res.statusCode() == 200) {</span>
+<span class="fc" id="L123">            String rawJSON = res.body();</span>
 
             // Mapping to the Deserialized Object
-<span class="nc" id="L126">            ObjectMapper mapper = new ObjectMapper();</span>
-<span class="nc" id="L127">            patients = mapper.readValue(rawJSON, new TypeReference&lt;List&lt;Patient&gt;&gt;() {</span>
+<span class="fc" id="L126">            ObjectMapper mapper = new ObjectMapper();</span>
+<span class="fc" id="L127">            patients = mapper.readValue(rawJSON, new TypeReference&lt;List&lt;Patient&gt;&gt;() {</span>
             });
         }
-<span class="nc" id="L130">        return patients;</span>
+<span class="fc" id="L130">        return patients;</span>
     }
 }
 
