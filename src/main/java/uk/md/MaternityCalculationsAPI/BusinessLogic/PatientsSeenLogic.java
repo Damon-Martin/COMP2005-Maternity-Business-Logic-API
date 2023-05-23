@@ -16,8 +16,19 @@ public class PatientsSeenLogic {
 
     public List<PatientCustom> filter(List<PatientCustom> unfilteredList) {
         // Filter Duplicate Patients
+        List<PatientCustom> filteredList = new ArrayList<PatientCustom>();
+        List<Integer> prevPatientIDs = new ArrayList<Integer>();
 
-        return unfilteredList;
+        // Filtering
+        unfilteredList.forEach(patientCustom -> {
+            Integer currentID = patientCustom.getPatientID();
+            if (!prevPatientIDs.contains(currentID)) {
+                filteredList.add(patientCustom);
+                prevPatientIDs.add(currentID);
+            }
+        });
+
+        return filteredList;
     }
 
     public List<PatientCustom> getNotFilteredPatientsByEmployeeID(int EmployeeID, List<Allocation> allAllocations, List<Admission> allAdmissions, List<Patient> allPatients) {
@@ -33,7 +44,7 @@ public class PatientsSeenLogic {
                     HttpResponse<String> admissionById = httpReqObj.getAdmissionById(Allocation.getAdmissionID());
                     PatientCustom newPatient = new PatientCustom();
                     if (admissionById.statusCode() == 200) {
-                        Admission currentAdmission = httpReqObj.parseAdmission(admissionById);
+                        Admission currentAdmission = httpReqObj.parseSingleAdmission(admissionById);
 
                         int PatientID = currentAdmission.getPatientID();
 
@@ -41,12 +52,12 @@ public class PatientsSeenLogic {
 
                         if (patientRes.statusCode() == 200) {
                             // Parsing List
-                            Patient currentPatient = httpReqObj.parsePatientById(patientRes);
+                            Patient currentPatient = httpReqObj.parseSinglePatient(patientRes);
                             // Propagate/Copy values
                             newPatient.setPatientID(currentAdmission.getPatientID());
                             newPatient.setNhsNumber(currentPatient.getNhsNumber());
                             newPatient.setForename(currentPatient.getForename());
-                            newPatient.setSurname(currentPatient.getForename());
+                            newPatient.setSurname(currentPatient.getSurname());
 
                             unfilteredList.add(newPatient);
                         }

@@ -12,78 +12,78 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-<span class="nc" id="L15">public class DischargedQuickLogic {</span>
+<span class="fc" id="L15">public class DischargedQuickLogic {</span>
 
 
     // Checks how many days have passed
     public Integer calculateDaysInHospital(LocalDateTime startDate, LocalDateTime endDate){
-<span class="nc" id="L20">        long daysPassedLong = ChronoUnit.DAYS.between(startDate.toLocalDate(), endDate.toLocalDate());</span>
-<span class="nc" id="L21">        return (int) daysPassedLong;</span>
+<span class="fc" id="L20">        long daysPassedLong = ChronoUnit.DAYS.between(startDate.toLocalDate(), endDate.toLocalDate());</span>
+<span class="fc" id="L21">        return (int) daysPassedLong;</span>
     }
 
     // Checks if the Days are Less than or Equal to 3 days
     public Boolean isQuick(Integer daysAdmitted){
-<span class="nc bnc" id="L26" title="All 2 branches missed.">        return daysAdmitted &lt;= 3;</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">        return daysAdmitted &lt;= 3;</span>
     }
 
     // Checks if the JSON Admission Data is Valid Data
     public Boolean isStartDateBeforeEndDate(LocalDateTime startDate, LocalDateTime endDate){
-<span class="nc" id="L31">        return startDate.isBefore(endDate);</span>
+<span class="fc" id="L31">        return startDate.isBefore(endDate);</span>
     }
 
     // Returns Filtered List
     public List&lt;PatientCustom&gt; filter_patient_duplicates(List&lt;PatientCustom&gt; unfiltered_patient_li) {
-<span class="nc" id="L36">        List&lt;Integer&gt; listOfPatientIDs = new ArrayList&lt;Integer&gt;();</span>
-<span class="nc" id="L37">        List&lt;PatientCustom&gt; temp = new ArrayList&lt;PatientCustom&gt;();</span>
-<span class="nc" id="L38">        unfiltered_patient_li.forEach( DischargedQuick -&gt; {</span>
+<span class="fc" id="L36">        List&lt;Integer&gt; listOfPatientIDs = new ArrayList&lt;Integer&gt;();</span>
+<span class="fc" id="L37">        List&lt;PatientCustom&gt; temp = new ArrayList&lt;PatientCustom&gt;();</span>
+<span class="fc" id="L38">        unfiltered_patient_li.forEach( DischargedQuick -&gt; {</span>
             // New Patient: If true
-<span class="nc bnc" id="L40" title="All 2 branches missed.">            if (!listOfPatientIDs.contains(DischargedQuick.getPatientID())){</span>
-<span class="nc" id="L41">                listOfPatientIDs.add(DischargedQuick.getPatientID());</span>
-<span class="nc" id="L42">                temp.add(DischargedQuick);</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">            if (!listOfPatientIDs.contains(DischargedQuick.getPatientID())){</span>
+<span class="fc" id="L41">                listOfPatientIDs.add(DischargedQuick.getPatientID());</span>
+<span class="fc" id="L42">                temp.add(DischargedQuick);</span>
             }
             // Patient Already Exists: Ignore it &amp; it won't add the duplicate
-<span class="nc" id="L45">        });</span>
+<span class="fc" id="L45">        });</span>
 
-<span class="nc" id="L47">        return temp;</span>
+<span class="fc" id="L47">        return temp;</span>
     }
 
     // We can mock allAdmissions for Testing
     // This is a Component: It combines multiple Units together
     public List&lt;PatientCustom&gt; calculateDischargedQuick(List&lt;Admission&gt; allAdmissions)  {
-<span class="nc" id="L53">        List&lt;PatientCustom&gt; dischargedQuickList = new ArrayList&lt;PatientCustom&gt;();</span>
-<span class="nc" id="L54">        allAdmissions.forEach(Admission -&gt; {</span>
-<span class="nc" id="L55">            LocalDateTime currentStartDate = Admission.getAdmissionDate();</span>
-<span class="nc" id="L56">            LocalDateTime currentEndDate = Admission.getDischargeDate();</span>
+<span class="fc" id="L53">        List&lt;PatientCustom&gt; dischargedQuickList = new ArrayList&lt;PatientCustom&gt;();</span>
+<span class="fc" id="L54">        allAdmissions.forEach(Admission -&gt; {</span>
+<span class="fc" id="L55">            LocalDateTime currentStartDate = Admission.getAdmissionDate();</span>
+<span class="fc" id="L56">            LocalDateTime currentEndDate = Admission.getDischargeDate();</span>
 
-<span class="nc" id="L58">            Integer daysAdmitted = calculateDaysInHospital(currentStartDate, currentEndDate);</span>
+<span class="fc" id="L58">            Integer daysAdmitted = calculateDaysInHospital(currentStartDate, currentEndDate);</span>
 
             // Check start is before End Date
-<span class="nc bnc" id="L61" title="All 4 branches missed.">            if (isQuick(daysAdmitted) &amp;&amp; isStartDateBeforeEndDate(currentStartDate, currentEndDate)) {</span>
+<span class="fc bfc" id="L61" title="All 4 branches covered.">            if (isQuick(daysAdmitted) &amp;&amp; isStartDateBeforeEndDate(currentStartDate, currentEndDate)) {</span>
                 // Perform Calculations &amp; Build Object
-<span class="nc" id="L63">                PatientCustom fastPatientCase = new PatientCustom();</span>
-<span class="nc" id="L64">                fastPatientCase.setPatientID(Admission.getPatientID());</span>
+<span class="fc" id="L63">                PatientCustom fastPatientCase = new PatientCustom();</span>
+<span class="fc" id="L64">                fastPatientCase.setPatientID(Admission.getPatientID());</span>
 
                 // Fetch Patient Name
-<span class="nc" id="L67">                GetApiEntities EntityHandler = new GetApiEntities();</span>
+<span class="fc" id="L67">                GetApiEntities EntityHandler = new GetApiEntities();</span>
                 try {
-<span class="nc" id="L69">                    HttpResponse&lt;String&gt; res = EntityHandler.getPatientById(fastPatientCase.getPatientID());</span>
-<span class="nc" id="L70">                    Patient currentPatient = EntityHandler.parsePatientById(res);</span>
+<span class="fc" id="L69">                    HttpResponse&lt;String&gt; res = EntityHandler.getPatientById(fastPatientCase.getPatientID());</span>
+<span class="fc" id="L70">                    Patient currentPatient = EntityHandler.parseSinglePatient(res);</span>
 
-<span class="nc" id="L72">                    fastPatientCase.setNhsNumber(currentPatient.getNhsNumber());</span>
-<span class="nc" id="L73">                    fastPatientCase.setForename(currentPatient.getForename());</span>
-<span class="nc" id="L74">                    fastPatientCase.setSurname(currentPatient.getSurname());</span>
+<span class="fc" id="L72">                    fastPatientCase.setNhsNumber(currentPatient.getNhsNumber());</span>
+<span class="fc" id="L73">                    fastPatientCase.setForename(currentPatient.getForename());</span>
+<span class="fc" id="L74">                    fastPatientCase.setSurname(currentPatient.getSurname());</span>
 <span class="nc" id="L75">                } catch (IOException | InterruptedException e) {</span>
 <span class="nc" id="L76">                    throw new RuntimeException(e);</span>
-<span class="nc" id="L77">                }</span>
+<span class="fc" id="L77">                }</span>
 
                 // Adding To List
-<span class="nc" id="L80">                dischargedQuickList.add(fastPatientCase);</span>
+<span class="fc" id="L80">                dischargedQuickList.add(fastPatientCase);</span>
             }
-<span class="nc" id="L82">        });</span>
+<span class="fc" id="L82">        });</span>
 
 
         // Filter dischargedQuickList Patients to only have 1 instance of each PatientID
-<span class="nc" id="L86">        return filter_patient_duplicates(dischargedQuickList);</span>
+<span class="fc" id="L86">        return filter_patient_duplicates(dischargedQuickList);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

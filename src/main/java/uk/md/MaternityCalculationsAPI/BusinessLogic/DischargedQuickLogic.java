@@ -67,7 +67,7 @@ public class DischargedQuickLogic {
                 GetApiEntities EntityHandler = new GetApiEntities();
                 try {
                     HttpResponse<String> res = EntityHandler.getPatientById(fastPatientCase.getPatientID());
-                    Patient currentPatient = EntityHandler.parsePatientById(res);
+                    Patient currentPatient = EntityHandler.parseSinglePatient(res);
 
                     fastPatientCase.setNhsNumber(currentPatient.getNhsNumber());
                     fastPatientCase.setForename(currentPatient.getForename());

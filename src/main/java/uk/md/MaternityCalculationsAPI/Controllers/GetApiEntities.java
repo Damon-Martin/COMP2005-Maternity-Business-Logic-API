@@ -12,8 +12,6 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
-import java.util.List;
 
 public class GetApiEntities {
     // If it's Empty we would have an Empty Array. Therefore, can't be null.
@@ -29,7 +27,7 @@ public class GetApiEntities {
         return httpClient.send(request, HttpResponse.BodyHandlers.ofString());
     }
 
-    public Patient parsePatientById(HttpResponse<String> res) throws JsonProcessingException {
+    public Patient parseSinglePatient(HttpResponse<String> res) throws JsonProcessingException {
         Patient patients = new Patient();
         if (res != null && res.statusCode() == 200) {
             String rawJSON = res.body();
@@ -54,7 +52,7 @@ public class GetApiEntities {
         return httpClient.send(request, HttpResponse.BodyHandlers.ofString());
     }
 
-    public Admission parseAdmission(HttpResponse<String> res) throws JsonProcessingException {
+    public Admission parseSingleAdmission(HttpResponse<String> res) throws JsonProcessingException {
         Admission admission = new Admission();
         if (res != null && res.statusCode() == 200) {
             String rawJSON = res.body();
