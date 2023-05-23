@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import uk.md.MaternityCalculationsAPI.BusinessLogic.AvgDurationByStaffLogic;
 import uk.md.MaternityCalculationsAPI.BusinessLogic.BusiestDayLogic;
 import uk.md.MaternityCalculationsAPI.BusinessLogic.DischargedQuickLogic;
 import uk.md.MaternityCalculationsAPI.BusinessLogic.PatientsSeenLogic;
@@ -19,7 +20,10 @@ import uk.md.MaternityCalculationsAPI.Models.Entities.Admission;
 
 import java.io.IOException;
 import java.net.http.HttpResponse;
+import java.time.Duration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("api/")
@@ -113,8 +117,25 @@ public class AdmissionsController {
         HttpResponse<String> employeeRes = entityHttpObj.getEmployeeById(EmployeeID);
 
         if (employeeRes.statusCode() == 200) {
+            HttpResponse<String> patentsRes = _httpHandler.getPatientsList();
+            HttpResponse<String> admissionsRes = _httpHandler.getAdmissionsList();
+            HttpResponse<String> allocationsRes = _httpHandler.getAllocationsList();
 
-            return new ResponseEntity<>(null, headers, HttpStatus.OK);
+            if (patentsRes.statusCode() == 200 && admissionsRes.statusCode() == 200 && allocationsRes.statusCode() == 200 && admissionsRes.statusCode() == 200) {
+
+                List<Allocation> allAllocations = _httpHandler.parseAllocationList(allocationsRes);
+                List<Admission> allAdmissions = _httpHandler.parseAdmissionList(admissionsRes);
+                List<Patient> allPatients = _httpHandler.parsePatientsList(patentsRes);
+
+                AvgDurationByStaffLogic logicObj = new AvgDurationByStaffLogic();
+                Duration meanDuration  = logicObj.calculateDurationByStaffID(EmployeeID, allAllocations, allAdmissions, allPatients);
+
+                // Displaying Means in diff formats
+                Map<String, Long> meansMap = new HashMap<>();
+                meansMap.put("MeanTimeInSeconds", meanDuration.toSeconds());
+
+                return new ResponseEntity<>(meansMap, headers, HttpStatus.OK);
+            }
         }
         else if (employeeRes.statusCode() == 404) {
             return new ResponseEntity<>(null, headers, HttpStatus.NOT_FOUND);
