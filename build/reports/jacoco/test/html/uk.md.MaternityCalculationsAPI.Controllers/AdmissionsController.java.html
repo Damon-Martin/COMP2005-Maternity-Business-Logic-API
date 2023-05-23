@@ -24,8 +24,8 @@ import java.util.List;
 @RestController
 @RequestMapping(&quot;api/&quot;)
 @Api(value = &quot;Responsible for all business logic calculations&quot;)
-<span class="fc" id="L27">public class AdmissionsController {</span>
-<span class="fc" id="L28">    private final GetApiLists _httpHandler = new GetApiLists();</span>
+<span class="nc" id="L27">public class AdmissionsController {</span>
+<span class="nc" id="L28">    private final GetApiLists _httpHandler = new GetApiLists();</span>
 
     @GetMapping(&quot;PatientsSeen/{id}&quot;)
     @ApiOperation(value = &quot;Based on EmployeeID: Returns a list unique patients that have visited the staff (Model same as Discharged Quickly). Each Allocation in Allocations, loops through and matches EmployeeID. If it is found it will get Admission by ID and look at PatientID. If the Patient is unique add to List of Model.&quot;)
@@ -64,20 +64,20 @@ import java.util.List;
                     @ApiResponse(code = 200, message = &quot;Success: List of Patients discharged within 3 days&quot;)
             })
     public ResponseEntity&lt;List&lt;PatientCustom&gt;&gt; DischargedQuick() throws IOException, InterruptedException {
-<span class="fc" id="L67">        HttpResponse&lt;String&gt; res = _httpHandler.getAdmissionsList();</span>
+<span class="nc" id="L67">        HttpResponse&lt;String&gt; res = _httpHandler.getAdmissionsList();</span>
 
         // All Responses are JSON
-<span class="fc" id="L70">        HttpHeaders headers = new HttpHeaders();</span>
-<span class="fc" id="L71">        headers.setContentType(MediaType.APPLICATION_JSON);</span>
+<span class="nc" id="L70">        HttpHeaders headers = new HttpHeaders();</span>
+<span class="nc" id="L71">        headers.setContentType(MediaType.APPLICATION_JSON);</span>
 
         // Checking if Successful or Error
-<span class="pc bpc" id="L74" title="1 of 2 branches missed.">        if (res.statusCode() == 200) {</span>
-<span class="fc" id="L75">            List&lt;Admission&gt; allAdmissions = _httpHandler.parseAdmissionList(res);</span>
-<span class="fc" id="L76">            DischargedQuickLogic logicObj = new DischargedQuickLogic();</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        if (res.statusCode() == 200) {</span>
+<span class="nc" id="L75">            List&lt;Admission&gt; allAdmissions = _httpHandler.parseAdmissionList(res);</span>
+<span class="nc" id="L76">            DischargedQuickLogic logicObj = new DischargedQuickLogic();</span>
             
-<span class="fc" id="L78">            List&lt;PatientCustom&gt; allDischargedQuick = logicObj.calculateDischargedQuick(allAdmissions);</span>
+<span class="nc" id="L78">            List&lt;PatientCustom&gt; allDischargedQuick = logicObj.calculateDischargedQuick(allAdmissions);</span>
 
-<span class="fc" id="L80">            return new ResponseEntity&lt;&gt;(allDischargedQuick, headers, HttpStatus.OK);</span>
+<span class="nc" id="L80">            return new ResponseEntity&lt;&gt;(allDischargedQuick, headers, HttpStatus.OK);</span>
         }
 <span class="nc bnc" id="L82" title="All 2 branches missed.">        else if (res.statusCode() == 404) {</span>
 <span class="nc" id="L83">            return new ResponseEntity&lt;&gt;(null, headers, HttpStatus.NOT_FOUND);</span>
@@ -88,7 +88,7 @@ import java.util.List;
     @GetMapping(&quot;AvgDurationByStaff&quot;)
     @ApiOperation(value = &quot;Based on EmployeeID, Returns the mean calculated avg duration of recovery time/stay of all their patients&quot;)
     public String AvgDurationByStaff() {
-<span class="fc" id="L91">        return null;</span>
+<span class="nc" id="L91">        return null;</span>
     }
 
     // Provide Week: Returns the busiest day based on Mode
@@ -100,21 +100,21 @@ import java.util.List;
             notes = &quot;Based on the Maternity '/Admissions' Endpoint: Loops through the List and Calculates the frequency of days in a hash table (e.g 'Mon: 4, Tues:2, Wed: 10...'). Then Returns the busiest day or days. Example Responses ['Monday'] if only Mon is Busiest or ['Wednesday','Thursday'] if Wed &amp; Thus are equal &amp; Busiest&quot;)
     public ResponseEntity&lt;List&lt;String&gt;&gt; BusiestDayOfWeek() throws IOException, InterruptedException {
         // All Responses are JSON
-<span class="fc" id="L103">        HttpHeaders headers = new HttpHeaders();</span>
-<span class="fc" id="L104">        headers.setContentType(MediaType.APPLICATION_JSON);</span>
+<span class="nc" id="L103">        HttpHeaders headers = new HttpHeaders();</span>
+<span class="nc" id="L104">        headers.setContentType(MediaType.APPLICATION_JSON);</span>
 
         // getting all allocations
-<span class="fc" id="L107">        HttpResponse&lt;String&gt; res = _httpHandler.getAdmissionsList();</span>
+<span class="nc" id="L107">        HttpResponse&lt;String&gt; res = _httpHandler.getAdmissionsList();</span>
 
         // Checking if Successful or Error
-<span class="pc bpc" id="L110" title="1 of 2 branches missed.">        if (res.statusCode() == 200) {</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">        if (res.statusCode() == 200) {</span>
             // Parsing Admissions
-<span class="fc" id="L112">            List&lt;Admission&gt; allAdmissions = _httpHandler.parseAdmissionList(res);</span>
+<span class="nc" id="L112">            List&lt;Admission&gt; allAdmissions = _httpHandler.parseAdmissionList(res);</span>
 
             // Run Busiest Day Logic
-<span class="fc" id="L115">            BusiestDayLogic logicObj = new BusiestDayLogic();</span>
+<span class="nc" id="L115">            BusiestDayLogic logicObj = new BusiestDayLogic();</span>
 
-<span class="fc" id="L117">            return new ResponseEntity&lt;&gt;(logicObj.calculateBusiestDay(allAdmissions), headers, HttpStatus.OK);</span>
+<span class="nc" id="L117">            return new ResponseEntity&lt;&gt;(logicObj.calculateBusiestDay(allAdmissions), headers, HttpStatus.OK);</span>
         }
 <span class="nc bnc" id="L119" title="All 2 branches missed.">        else if (res.statusCode() == 404) {</span>
 <span class="nc" id="L120">            return new ResponseEntity&lt;&gt;(null, headers, HttpStatus.NOT_FOUND);</span>

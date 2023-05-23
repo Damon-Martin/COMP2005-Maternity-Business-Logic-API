@@ -24,16 +24,16 @@ import java.util.List;
 
     // Physically can't have an empty string. If the List is empty the res body will be '[]'
     public HttpResponse&lt;String&gt; getAdmissionsList() throws IOException, InterruptedException {
-<span class="fc" id="L27">        HttpClient httpClient = HttpClient.newBuilder().build();</span>
+<span class="nc" id="L27">        HttpClient httpClient = HttpClient.newBuilder().build();</span>
 
         // Making Request &amp; Performing GET Req
-<span class="fc" id="L30">        HttpRequest request = HttpRequest.newBuilder()</span>
-<span class="fc" id="L31">                .uri(URI.create(&quot;https://web.socem.plymouth.ac.uk/COMP2005/api/Admissions&quot;))</span>
-<span class="fc" id="L32">                .GET()</span>
-<span class="fc" id="L33">                .build();</span>
+<span class="nc" id="L30">        HttpRequest request = HttpRequest.newBuilder()</span>
+<span class="nc" id="L31">                .uri(URI.create(&quot;https://web.socem.plymouth.ac.uk/COMP2005/api/Admissions&quot;))</span>
+<span class="nc" id="L32">                .GET()</span>
+<span class="nc" id="L33">                .build();</span>
 
         // Returning the HttpResponse: Contains Body + Header
-<span class="fc" id="L36">        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());</span>
+<span class="nc" id="L36">        return httpClient.send(request, HttpResponse.BodyHandlers.ofString());</span>
     }
 
     // Unit Test JsonProcessing Exception

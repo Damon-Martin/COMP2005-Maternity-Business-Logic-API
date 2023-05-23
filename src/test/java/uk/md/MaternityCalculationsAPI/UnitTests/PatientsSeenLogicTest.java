@@ -1,4 +1,4 @@
-package uk.md.MaternityCalculationsAPI.UnitTests.FunctionalTests;
+package uk.md.MaternityCalculationsAPI.UnitTests;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Assertions;
@@ -105,5 +105,48 @@ public class PatientsSeenLogicTest {
         result = logicObj.getNotFilteredPatientsByEmployeeID(employeeId, dummyDataAllocations, dummyDataAdmissions, dummyDataPatients);
 
         Assertions.assertEquals(1, result.size());
+    }
+
+    @Test
+    void test_filtering_duplicates() {
+        // Arrange: Passing in 3 Patient Objects
+        List<PatientCustom> unfiltered = new ArrayList<PatientCustom>();
+        // Expecting 2 Patients: PatientID 10 & PatientID 5
+        List<PatientCustom> expected = new ArrayList<PatientCustom>();
+
+        // Patients 1 & 3 are the same (Same ID)
+        PatientCustom patient1 = new PatientCustom();
+        PatientCustom patient2 = new PatientCustom();
+        PatientCustom patient3 = new PatientCustom();
+
+        patient1.setPatientID(10);
+        patient1.setForename("David");
+        patient1.setForename("Jackson");
+        patient1.setNhsNumber("111111");
+
+        patient3.setPatientID(10);
+        patient3.setForename("David");
+        patient3.setForename("Jackson");
+        patient3.setNhsNumber("111111");
+
+        patient2.setPatientID(5);
+        patient2.setForename("Sarah");
+        patient2.setForename("James");
+        patient2.setNhsNumber("222333");
+
+        unfiltered.add(patient1);
+        unfiltered.add(patient2);
+        unfiltered.add(patient3);
+
+        expected.add(patient1);
+        expected.add(patient2);
+
+
+        // Act
+        PatientsSeenLogic logicObj = new PatientsSeenLogic();
+        List<PatientCustom> filteredList = logicObj.filter(unfiltered);
+
+        // Assert
+        Assertions.assertEquals(expected, filteredList);
     }
 }
